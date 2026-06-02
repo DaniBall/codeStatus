@@ -1,468 +1,410 @@
-{
-    "1xx": {
-        "description": "Informational responses. The request was received and the process is continuing.",
-        "codes": [
-            {
-                "code": 100,
-                "name": "Continue",
-                "description": "The server has received the request headers and the client should continue with the request.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 101,
-                "name": "Switching Protocols",
-                "description": "The server is switching protocols as requested by the client.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 102,
-                "name": "Processing",
-                "description": "The server has received and is processing the request, but no response is available yet.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 103,
-                "name": "Early Hints",
-                "description": "The server is sending preliminary headers before the final response.",
-                "image": "",
-                "link": ""
-            }
-        ]
-    },
-    "2xx": {
-        "description": "Successful responses. The request was successfully received, understood, and accepted.",
-        "codes": [
-            {
-                "code": 200,
-                "name": "OK",
-                "description": "The request succeeded.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 201,
-                "name": "Created",
-                "description": "The request succeeded and a new resource was created.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 202,
-                "name": "Accepted",
-                "description": "The request has been accepted for processing but has not been completed yet.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 203,
-                "name": "Non-Authoritative Information",
-                "description": "The response contains modified information from a third-party source.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 204,
-                "name": "No Content",
-                "description": "The request succeeded but there is no content to return.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 205,
-                "name": "Reset Content",
-                "description": "The client should reset the document or view that sent the request.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 206,
-                "name": "Partial Content",
-                "description": "The server is returning only part of the requested resource.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 207,
-                "name": "Multi-Status",
-                "description": "The response contains multiple status results, usually for WebDAV operations.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 208,
-                "name": "Already Reported",
-                "description": "The members of a WebDAV binding have already been reported.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 226,
-                "name": "IM Used",
-                "description": "The server has fulfilled the request using instance manipulations.",
-                "image": "",
-                "link": ""
-            }
-        ]
-    },
-    "3xx": {
-        "description": "Redirection messages. Further action is needed to complete the request.",
-        "codes": [
-            {
-                "code": 300,
-                "name": "Multiple Choices",
-                "description": "There are multiple possible responses and the client should choose one.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 301,
-                "name": "Moved Permanently",
-                "description": "The requested resource has been permanently moved to a new URL.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 302,
-                "name": "Found",
-                "description": "The requested resource is temporarily located at a different URL.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 303,
-                "name": "See Other",
-                "description": "The client should retrieve the resource from another URL using GET.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 304,
-                "name": "Not Modified",
-                "description": "The cached version of the resource is still valid.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 305,
-                "name": "Use Proxy",
-                "description": "The requested resource must be accessed through a proxy.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 306,
-                "name": "Unused",
-                "description": "This status code is no longer used and is reserved.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 307,
-                "name": "Temporary Redirect",
-                "description": "The resource is temporarily available at another URL and the method must not change.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 308,
-                "name": "Permanent Redirect",
-                "description": "The resource has permanently moved and the method must not change.",
-                "image": "",
-                "link": ""
-            }
-        ]
-    },
-    "4xx": {
-        "description": "Client error responses. The request contains an error or cannot be completed by the client.",
-        "codes": [
-            {
-                "code": 400,
-                "name": "Bad Request",
-                "description": "The server could not understand the request due to invalid syntax.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 401,
-                "name": "Unauthorized",
-                "description": "Authentication is required or has failed.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 402,
-                "name": "Payment Required",
-                "description": "Reserved for future use, originally intended for digital payments.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 403,
-                "name": "Forbidden",
-                "description": "The client does not have permission to access the resource.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 404,
-                "name": "Not Found",
-                "description": "The requested resource could not be found.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 405,
-                "name": "Method Not Allowed",
-                "description": "The HTTP method is not supported for this resource.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 406,
-                "name": "Not Acceptable",
-                "description": "The server cannot produce a response matching the client's accepted formats.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 407,
-                "name": "Proxy Authentication Required",
-                "description": "Authentication with a proxy is required.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 408,
-                "name": "Request Timeout",
-                "description": "The server timed out waiting for the request.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 409,
-                "name": "Conflict",
-                "description": "The request conflicts with the current state of the resource.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 410,
-                "name": "Gone",
-                "description": "The requested resource is no longer available and will not be available again.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 411,
-                "name": "Length Required",
-                "description": "The request must include a valid Content-Length header.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 412,
-                "name": "Precondition Failed",
-                "description": "A condition in the request headers was not met.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 413,
-                "name": "Payload Too Large",
-                "description": "The request body is larger than the server is willing or able to process.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 414,
-                "name": "URI Too Long",
-                "description": "The requested URI is too long for the server to process.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 415,
-                "name": "Unsupported Media Type",
-                "description": "The media type of the request is not supported by the server.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 416,
-                "name": "Range Not Satisfiable",
-                "description": "The requested range cannot be fulfilled.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 417,
-                "name": "Expectation Failed",
-                "description": "The server cannot meet the expectation given in the request headers.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 418,
-                "name": "I'm a teapot",
-                "description": "An April Fools' joke status code indicating the server refuses to brew coffee because it is a teapot.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 421,
-                "name": "Misdirected Request",
-                "description": "The request was sent to a server that cannot produce a response for it.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 422,
-                "name": "Unprocessable Content",
-                "description": "The request was well-formed but could not be processed semantically.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 423,
-                "name": "Locked",
-                "description": "The requested resource is locked.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 424,
-                "name": "Failed Dependency",
-                "description": "The request failed because it depended on another request that failed.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 425,
-                "name": "Too Early",
-                "description": "The server is unwilling to risk processing a request that might be replayed.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 426,
-                "name": "Upgrade Required",
-                "description": "The client should switch to a different protocol.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 428,
-                "name": "Precondition Required",
-                "description": "The server requires the request to be conditional.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 429,
-                "name": "Too Many Requests",
-                "description": "The client has sent too many requests in a given amount of time.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 431,
-                "name": "Request Header Fields Too Large",
-                "description": "The request headers are too large for the server to process.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 451,
-                "name": "Unavailable For Legal Reasons",
-                "description": "The resource is unavailable due to legal reasons.",
-                "image": "",
-                "link": ""
-            }
-        ]
-    },
-    "5xx": {
-        "description": "Server error responses. The server failed to fulfill a valid request.",
-        "codes": [
-            {
-                "code": 500,
-                "name": "Internal Server Error",
-                "description": "The server encountered an unexpected condition.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 501,
-                "name": "Not Implemented",
-                "description": "The server does not support the functionality required to fulfill the request.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 502,
-                "name": "Bad Gateway",
-                "description": "The server received an invalid response from an upstream server.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 503,
-                "name": "Service Unavailable",
-                "description": "The server is currently unavailable, usually due to overload or maintenance.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 504,
-                "name": "Gateway Timeout",
-                "description": "The server did not receive a timely response from an upstream server.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 505,
-                "name": "HTTP Version Not Supported",
-                "description": "The server does not support the HTTP version used in the request.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 506,
-                "name": "Variant Also Negotiates",
-                "description": "The server has an internal configuration error related to content negotiation.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 507,
-                "name": "Insufficient Storage",
-                "description": "The server cannot store the representation needed to complete the request.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 508,
-                "name": "Loop Detected",
-                "description": "The server detected an infinite loop while processing the request.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 510,
-                "name": "Not Extended",
-                "description": "Further extensions to the request are required.",
-                "image": "",
-                "link": ""
-            },
-            {
-                "code": 511,
-                "name": "Network Authentication Required",
-                "description": "The client must authenticate to gain network access.",
-                "image": "",
-                "link": ""
-            }
-        ]
-    }
-}
+[
+  {
+    "category": "1xx",
+    "categoryDescription": "Informational responses. The request was received and the process is continuing.",
+    "codes": [
+      {
+        "code": 100,
+        "name": "Continue",
+        "description": "The server has received the request headers and the client should continue with the request.",
+        "image": ""
+      },
+      {
+        "code": 101,
+        "name": "Switching Protocols",
+        "description": "The server is switching protocols as requested by the client.",
+        "image": ""
+      },
+      {
+        "code": 102,
+        "name": "Processing",
+        "description": "The server has received and is processing the request, but no response is available yet.",
+        "image": ""
+      },
+      {
+        "code": 103,
+        "name": "Early Hints",
+        "description": "The server is sending preliminary headers before the final response.",
+        "image": ""
+      }
+    ]
+  },
+  {
+    "category": "2xx",
+    "categoryDescription": "Successful responses. The request was successfully received, understood, and accepted.",
+    "codes": [
+      {
+        "code": 200,
+        "name": "OK",
+        "description": "The request succeeded.",
+        "image": ""
+      },
+      {
+        "code": 201,
+        "name": "Created",
+        "description": "The request succeeded and a new resource was created.",
+        "image": ""
+      },
+      {
+        "code": 202,
+        "name": "Accepted",
+        "description": "The request has been accepted for processing but has not been completed yet.",
+        "image": ""
+      },
+      {
+        "code": 203,
+        "name": "Non-Authoritative Information",
+        "description": "The response contains modified information from a third-party source.",
+        "image": ""
+      },
+      {
+        "code": 204,
+        "name": "No Content",
+        "description": "The request succeeded but there is no content to return.",
+        "image": ""
+      },
+      {
+        "code": 205,
+        "name": "Reset Content",
+        "description": "The client should reset the document or view that sent the request.",
+        "image": ""
+      },
+      {
+        "code": 206,
+        "name": "Partial Content",
+        "description": "The server is returning only part of the requested resource.",
+        "image": ""
+      },
+      {
+        "code": 207,
+        "name": "Multi-Status",
+        "description": "The response contains multiple status results, usually for WebDAV operations.",
+        "image": ""
+      },
+      {
+        "code": 208,
+        "name": "Already Reported",
+        "description": "The members of a WebDAV binding have already been reported.",
+        "image": ""
+      },
+      {
+        "code": 226,
+        "name": "IM Used",
+        "description": "The server has fulfilled the request using instance manipulations.",
+        "image": ""
+      }
+    ]
+  },
+  {
+    "category": "3xx",
+    "categoryDescription": "Redirection messages. Further action is needed to complete the request.",
+    "codes": [
+      {
+        "code": 300,
+        "name": "Multiple Choices",
+        "description": "There are multiple possible responses and the client should choose one.",
+        "image": ""
+      },
+      {
+        "code": 301,
+        "name": "Moved Permanently",
+        "description": "The requested resource has been permanently moved to a new URL.",
+        "image": ""
+      },
+      {
+        "code": 302,
+        "name": "Found",
+        "description": "The requested resource is temporarily located at a different URL.",
+        "image": ""
+      },
+      {
+        "code": 303,
+        "name": "See Other",
+        "description": "The client should retrieve the resource from another URL using GET.",
+        "image": ""
+      },
+      {
+        "code": 304,
+        "name": "Not Modified",
+        "description": "The cached version of the resource is still valid.",
+        "image": ""
+      },
+      {
+        "code": 305,
+        "name": "Use Proxy",
+        "description": "The requested resource must be accessed through a proxy.",
+        "image": ""
+      },
+      {
+        "code": 306,
+        "name": "Unused",
+        "description": "This status code is no longer used and is reserved.",
+        "image": ""
+      },
+      {
+        "code": 307,
+        "name": "Temporary Redirect",
+        "description": "The resource is temporarily available at another URL and the method must not change.",
+        "image": ""
+      },
+      {
+        "code": 308,
+        "name": "Permanent Redirect",
+        "description": "The resource has permanently moved and the method must not change.",
+        "image": ""
+      }
+    ]
+  },
+  {
+    "category": "4xx",
+    "categoryDescription": "Client error responses. The request contains an error or cannot be completed by the client.",
+    "codes": [
+      {
+        "code": 400,
+        "name": "Bad Request",
+        "description": "The server could not understand the request due to invalid syntax.",
+        "image": ""
+      },
+      {
+        "code": 401,
+        "name": "Unauthorized",
+        "description": "Authentication is required or has failed.",
+        "image": ""
+      },
+      {
+        "code": 402,
+        "name": "Payment Required",
+        "description": "Reserved for future use, originally intended for digital payments.",
+        "image": ""
+      },
+      {
+        "code": 403,
+        "name": "Forbidden",
+        "description": "The client does not have permission to access the resource.",
+        "image": ""
+      },
+      {
+        "code": 404,
+        "name": "Not Found",
+        "description": "The requested resource could not be found.",
+        "image": ""
+      },
+      {
+        "code": 405,
+        "name": "Method Not Allowed",
+        "description": "The HTTP method is not supported for this resource.",
+        "image": ""
+      },
+      {
+        "code": 406,
+        "name": "Not Acceptable",
+        "description": "The server cannot produce a response matching the client's accepted formats.",
+        "image": ""
+      },
+      {
+        "code": 407,
+        "name": "Proxy Authentication Required",
+        "description": "Authentication with a proxy is required.",
+        "image": ""
+      },
+      {
+        "code": 408,
+        "name": "Request Timeout",
+        "description": "The server timed out waiting for the request.",
+        "image": ""
+      },
+      {
+        "code": 409,
+        "name": "Conflict",
+        "description": "The request conflicts with the current state of the resource.",
+        "image": ""
+      },
+      {
+        "code": 410,
+        "name": "Gone",
+        "description": "The requested resource is no longer available and will not be available again.",
+        "image": ""
+      },
+      {
+        "code": 411,
+        "name": "Length Required",
+        "description": "The request must include a valid Content-Length header.",
+        "image": ""
+      },
+      {
+        "code": 412,
+        "name": "Precondition Failed",
+        "description": "A condition in the request headers was not met.",
+        "image": ""
+      },
+      {
+        "code": 413,
+        "name": "Payload Too Large",
+        "description": "The request body is larger than the server is willing or able to process.",
+        "image": ""
+      },
+      {
+        "code": 414,
+        "name": "URI Too Long",
+        "description": "The requested URI is too long for the server to process.",
+        "image": ""
+      },
+      {
+        "code": 415,
+        "name": "Unsupported Media Type",
+        "description": "The media type of the request is not supported by the server.",
+        "image": ""
+      },
+      {
+        "code": 416,
+        "name": "Range Not Satisfiable",
+        "description": "The requested range cannot be fulfilled.",
+        "image": ""
+      },
+      {
+        "code": 417,
+        "name": "Expectation Failed",
+        "description": "The server cannot meet the expectation given in the request headers.",
+        "image": ""
+      },
+      {
+        "code": 418,
+        "name": "I'm a teapot",
+        "description": "An April Fools' joke status code indicating the server refuses to brew coffee because it is a teapot.",
+        "image": ""
+      },
+      {
+        "code": 421,
+        "name": "Misdirected Request",
+        "description": "The request was sent to a server that cannot produce a response for it.",
+        "image": ""
+      },
+      {
+        "code": 422,
+        "name": "Unprocessable Content",
+        "description": "The request was well-formed but could not be processed semantically.",
+        "image": ""
+      },
+      {
+        "code": 423,
+        "name": "Locked",
+        "description": "The requested resource is locked.",
+        "image": ""
+      },
+      {
+        "code": 424,
+        "name": "Failed Dependency",
+        "description": "The request failed because it depended on another request that failed.",
+        "image": ""
+      },
+      {
+        "code": 425,
+        "name": "Too Early",
+        "description": "The server is unwilling to risk processing a request that might be replayed.",
+        "image": ""
+      },
+      {
+        "code": 426,
+        "name": "Upgrade Required",
+        "description": "The client should switch to a different protocol.",
+        "image": ""
+      },
+      {
+        "code": 428,
+        "name": "Precondition Required",
+        "description": "The server requires the request to be conditional.",
+        "image": ""
+      },
+      {
+        "code": 429,
+        "name": "Too Many Requests",
+        "description": "The client has sent too many requests in a given amount of time.",
+        "image": ""
+      },
+      {
+        "code": 431,
+        "name": "Request Header Fields Too Large",
+        "description": "The request headers are too large for the server to process.",
+        "image": ""
+      },
+      {
+        "code": 451,
+        "name": "Unavailable For Legal Reasons",
+        "description": "The resource is unavailable due to legal reasons.",
+        "image": ""
+      }
+    ]
+  },
+  {
+    "category": "5xx",
+    "categoryDescription": "Server error responses. The server failed to fulfill a valid request.",
+    "codes": [
+      {
+        "code": 500,
+        "name": "Internal Server Error",
+        "description": "The server encountered an unexpected condition.",
+        "image": ""
+      },
+      {
+        "code": 501,
+        "name": "Not Implemented",
+        "description": "The server does not support the functionality required to fulfill the request.",
+        "image": ""
+      },
+      {
+        "code": 502,
+        "name": "Bad Gateway",
+        "description": "The server received an invalid response from an upstream server.",
+        "image": ""
+      },
+      {
+        "code": 503,
+        "name": "Service Unavailable",
+        "description": "The server is currently unavailable, usually due to overload or maintenance.",
+        "image": ""
+      },
+      {
+        "code": 504,
+        "name": "Gateway Timeout",
+        "description": "The server did not receive a timely response from an upstream server.",
+        "image": ""
+      },
+      {
+        "code": 505,
+        "name": "HTTP Version Not Supported",
+        "description": "The server does not support the HTTP version used in the request.",
+        "image": ""
+      },
+      {
+        "code": 506,
+        "name": "Variant Also Negotiates",
+        "description": "The server has an internal configuration error related to content negotiation.",
+        "image": ""
+      },
+      {
+        "code": 507,
+        "name": "Insufficient Storage",
+        "description": "The server cannot store the representation needed to complete the request.",
+        "image": ""
+      },
+      {
+        "code": 508,
+        "name": "Loop Detected",
+        "description": "The server detected an infinite loop while processing the request.",
+        "image": ""
+      },
+      {
+        "code": 510,
+        "name": "Not Extended",
+        "description": "Further extensions to the request are required.",
+        "image": ""
+      },
+      {
+        "code": 511,
+        "name": "Network Authentication Required",
+        "description": "The client must authenticate to gain network access.",
+        "image": ""
+      }
+    ]
+  }
+]
