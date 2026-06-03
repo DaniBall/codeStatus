@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/DaniBall/codeStatus/static/css/main.feaed40d.css",
-    "main.js": "/DaniBall/codeStatus/static/js/main.7985c07e.js",
+    "main.js": "/DaniBall/codeStatus/static/js/main.67092b18.js",
     "static/js/453.45177696.chunk.js": "/DaniBall/codeStatus/static/js/453.45177696.chunk.js",
     "static/media/logo.svg": "/DaniBall/codeStatus/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/DaniBall/codeStatus/index.html",
     "main.feaed40d.css.map": "/DaniBall/codeStatus/static/css/main.feaed40d.css.map",
-    "main.7985c07e.js.map": "/DaniBall/codeStatus/static/js/main.7985c07e.js.map",
+    "main.67092b18.js.map": "/DaniBall/codeStatus/static/js/main.67092b18.js.map",
     "453.45177696.chunk.js.map": "/DaniBall/codeStatus/static/js/453.45177696.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.feaed40d.css",
-    "static/js/main.7985c07e.js"
+    "static/js/main.67092b18.js"
   ]
 }
