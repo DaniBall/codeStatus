@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/DaniBall/codeStatus/static/css/main.feaed40d.css",
-    "main.js": "/DaniBall/codeStatus/static/js/main.67092b18.js",
+    "main.css": "/DaniBall/codeStatus/static/css/main.23cbc6e5.css",
+    "main.js": "/DaniBall/codeStatus/static/js/main.8ddcc3ab.js",
     "static/js/453.45177696.chunk.js": "/DaniBall/codeStatus/static/js/453.45177696.chunk.js",
     "static/media/logo.svg": "/DaniBall/codeStatus/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/DaniBall/codeStatus/index.html",
-    "main.feaed40d.css.map": "/DaniBall/codeStatus/static/css/main.feaed40d.css.map",
-    "main.67092b18.js.map": "/DaniBall/codeStatus/static/js/main.67092b18.js.map",
+    "main.23cbc6e5.css.map": "/DaniBall/codeStatus/static/css/main.23cbc6e5.css.map",
+    "main.8ddcc3ab.js.map": "/DaniBall/codeStatus/static/js/main.8ddcc3ab.js.map",
     "453.45177696.chunk.js.map": "/DaniBall/codeStatus/static/js/453.45177696.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.feaed40d.css",
-    "static/js/main.67092b18.js"
+    "static/css/main.23cbc6e5.css",
+    "static/js/main.8ddcc3ab.js"
   ]
 }
