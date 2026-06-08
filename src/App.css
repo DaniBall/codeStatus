@@ -27,12 +27,19 @@
 .App-link {
   color: #61dafb;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.codeStatusSpace{
+  background-color:beige;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 25em;
+}
+.codeStatusCard{
+  background-color: #61dafb;
+  width: 20em;
+  height: 20em;
+  margin: 1em;
+  padding: 0.5em;
 }
