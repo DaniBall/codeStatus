@@ -36,6 +36,10 @@
   flex-wrap: wrap;
   margin-bottom: 25em;
 }
+.cardLink{
+  text-decoration: none;
+  color: inherit;
+}
 .codeStatusCard{
   background-color: #61dafb;
   width: 20em;

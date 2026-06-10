@@ -15,13 +15,11 @@ function Home() {
           </div>
           <div className='codeStatusSpace'>
             {category.codes.map(item => (
-              <Link to={`/${item.code}`} key={item.code}> 
+              <Link to={`/${item.code}`} key={item.code} className='cardLink'> 
                 <div className='codeStatusCard'>
-                  <img src={item.image}></img>
+                  <img src={item.image} alt={item.name} />
                   <h2>{item.code}</h2>
                   <h3>{item.name}</h3>
-                  <p>{item.description}</p>
-                  <a href={"https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/" + item.code} target="_blank" rel="noopener noreferrer">Learn more</a>
                 </div>
               </Link>
             ))}
