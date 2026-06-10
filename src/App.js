@@ -17,7 +17,7 @@ function Home() {
             {category.codes.map(item => (
               <Link to={`/${item.code}`} key={item.code} className='cardLink'> 
                 <div className='codeStatusCard'>
-                  <img src={item.image} alt={item.name} />
+                  <div><img src={item.image} alt={item.name} /></div>
                   <h2>{item.code}</h2>
                   <h3>{item.name}</h3>
                 </div>
