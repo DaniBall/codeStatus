@@ -1,6 +1,6 @@
 import '../App.css'
 import codeStatus from '../status_codes.json'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 
 export default function StatusInfo() {
     const { code } = useParams();
@@ -19,6 +19,8 @@ export default function StatusInfo() {
             <p>{statusCode.description}</p>
             <a href={"https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/" + statusCode.code}
                 target="_blank" rel="noopener noreferrer">Learn more</a>
+            
+            <Link to={`/`}> 🏠</Link>
         </div>
-    )
+    );
 }
