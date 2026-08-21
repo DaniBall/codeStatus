@@ -13,9 +13,13 @@ La web no guarda 63 fotos: las **genera bajo demanda**.
   por sombrero...).
 - `src/duckImage.js` monta con esa escena el prompt de la imagen —añadiéndole el
   estilo *ultra realistic photograph*— y construye la URL del generador.
-- `src/elements/DuckImage.js` pinta la imagen. Mientras se genera, y también si
-  el generador falla o tarda más de 45 s, muestra un pato SVG dibujado en local,
-  así que **ninguna tarjeta se queda con una imagen rota**.
+- `src/elements/DuckImage.js` pinta la imagen. Sólo la pide cuando la tarjeta se
+  acerca a la ventana, y mientras tanto —o si el generador falla o tarda más de
+  45 s— muestra un pato SVG dibujado en local, así que **ninguna tarjeta se
+  queda con una imagen rota**. Un fallo se reintenta una vez.
+- `src/duckQueue.js` limita a 3 las imágenes que se generan a la vez. Sin esto,
+  la home lanzaría 61 peticiones de golpe y un generador gratuito respondería
+  con límites de uso: casi ninguna llegaría.
 
 La semilla de cada imagen se deriva del código, de modo que un mismo código
 enseña siempre el mismo pato (y el navegador lo cachea). En la página de detalle
@@ -30,6 +34,13 @@ API). Para apuntar a otro servicio basta con definir la variable de entorno:
 REACT_APP_DUCK_IMAGE_ENDPOINT=https://mi-generador/prompt/ npm start
 ```
 
+La URL lleva sólo `width`, `height` y `seed`, que es lo que entiende cualquier
+servicio. Si el tuyo admite más (modelo, marca de agua...), se añaden con:
+
+```bash
+REACT_APP_DUCK_IMAGE_PARAMS='model=flux&nologo=true' npm start
+```
+
 ### Fijar una foto a mano
 
 Si un código tiene el campo `image` relleno en `src/status_codes.json` (con un
@@ -39,16 +50,39 @@ fotos elegidas a mano para el 206 y el 207.
 ## Comprobaciones
 
 ```bash
-npm test    # 19 pruebas: cobertura de escenas, URLs, respaldo SVG y fotos fijadas
+npm test    # 20 pruebas: escenas, URLs, cola, respaldo SVG y fotos fijadas
 npm run build
 ```
 
 Las pruebas verifican, entre otras cosas, que todos los códigos tienen escena,
-que las URLs generadas son válidas y únicas, que el SVG de respaldo es XML
-correcto y sin dependencias de red, y que las fotos incrustadas en el JSON se
-decodifican y tienen cabecera de imagen válida.
+que las URLs generadas son válidas y únicas, que la cola nunca lanza más de tres
+generaciones a la vez, que el SVG de respaldo es XML correcto y sin dependencias
+de red, y que las fotos incrustadas en el JSON se decodifican y tienen cabecera
+de imagen válida.
+
+## Despliegue automático en GitHub Pages
+
+`.github/workflows/deploy.yml` compila y publica en cada push a `master`. Para
+activarlo hay que hacer **una cosa a mano, una sola vez**:
+
+> Settings → Pages → *Build and deployment* → **Source: GitHub Actions**
+
+A partir de ahí cada push a `master` instala, pasa las pruebas, compila con
+`CI=true` (los avisos cuentan como error, así no se publica una web rota) y
+despliega. También se puede lanzar a mano desde la pestaña *Actions*.
+
+El script `npm run deploy` (paquete `gh-pages`) sigue existiendo, pero ya no
+hace falta: publica en la rama `gh-pages`, que el modo *GitHub Actions* ignora.
+
+### Rutas directas
+
+`npm run build` copia `index.html` a `404.html` (script `postbuild`). GitHub
+Pages sirve ese fichero cuando la ruta no existe como fichero, así que entrar
+directamente en `/codeStatus/418` o recargar esa página funciona, en vez de dar
+un 404 en blanco.
 
 ---
+
 
 # Getting Started with Create React App
 

@@ -1,7 +1,10 @@
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import DuckImage from './DuckImage';
+import { MAX_CONCURRENT, queueStats, resetQueue } from '../duckQueue';
 
 const teapot = { code: 418, name: "I'm a teapot" };
+
+beforeEach(() => resetQueue());
 
 test('pide la imagen al generador y avisa mientras la crea', () => {
     render(<DuckImage statusCode={teapot} />);
@@ -10,30 +13,28 @@ test('pide la imagen al generador y avisa mientras la crea', () => {
     expect(screen.getByText(/generando pato/i)).toBeInTheDocument();
 });
 
-test('si el generador falla cae en el pato dibujado en local', () => {
-    render(<DuckImage statusCode={teapot} />);
-    const img = screen.getByRole('img');
+test('reintenta una vez y luego se queda con el pato local', () => {
+    jest.useFakeTimers();
+    try {
+        render(<DuckImage statusCode={teapot} />);
+        fireEvent.error(screen.getByRole('img'));
 
-    fireEvent.error(img);
+        act(() => { jest.advanceTimersByTime(5000); });
+        expect(screen.getByRole('img').getAttribute('src')).toMatch(/^https:\/\//);
 
-    expect(img.getAttribute('src')).toMatch(/^data:image\/svg\+xml/);
-    expect(screen.queryByText(/generando pato/i)).not.toBeInTheDocument();
-});
-
-test('una foto fijada a mano en el JSON tiene prioridad sobre el generador', () => {
-    const pinned = { code: 206, name: 'Partial Content', image: 'data:image/jpeg;base64,AAAA' };
-    render(<DuckImage statusCode={pinned} />);
-
-    expect(screen.getByRole('img').getAttribute('src')).toBe(pinned.image);
-    expect(screen.queryByText(/generando pato/i)).not.toBeInTheDocument();
+        fireEvent.error(screen.getByRole('img'));
+        expect(screen.getByRole('img').getAttribute('src')).toMatch(/^data:image\/svg\+xml/);
+        expect(screen.queryByText(/generando pato/i)).not.toBeInTheDocument();
+    } finally {
+        jest.useRealTimers();
+    }
 });
 
 test('si el generador no contesta a tiempo también cae en el pato local', () => {
     jest.useFakeTimers();
     try {
         render(<DuckImage statusCode={teapot} timeoutMs={1000} />);
-        const img = screen.getByRole('img');
-        expect(img.getAttribute('src')).toMatch(/^https:\/\//);
+        expect(screen.getByRole('img').getAttribute('src')).toMatch(/^https:\/\//);
 
         act(() => { jest.advanceTimersByTime(1001); });
 
@@ -43,28 +44,49 @@ test('si el generador no contesta a tiempo también cae en el pato local', () =>
     }
 });
 
-test('una imagen que ya falló antes de montar el componente se detecta igual', () => {
-    const descriptor = Object.getOwnPropertyDescriptor(window.HTMLImageElement.prototype, 'complete');
-    Object.defineProperty(window.HTMLImageElement.prototype, 'complete', { configurable: true, get: () => true });
-    Object.defineProperty(window.HTMLImageElement.prototype, 'naturalWidth', { configurable: true, get: () => 0 });
+test('el pato de respaldo no devuelve la tarjeta a la url rota al cargarse', () => {
+    jest.useFakeTimers();
     try {
-        render(<DuckImage statusCode={teapot} />);
+        render(<DuckImage statusCode={teapot} timeoutMs={1000} />);
+        act(() => { jest.advanceTimersByTime(1001); });
+        const img = screen.getByRole('img');
+        expect(img.getAttribute('src')).toMatch(/^data:image\/svg\+xml/);
+
+        // El respaldo carga bien y dispara su propio onLoad: debe quedarse puesto.
+        fireEvent.load(img);
         expect(screen.getByRole('img').getAttribute('src')).toMatch(/^data:image\/svg\+xml/);
     } finally {
-        delete window.HTMLImageElement.prototype.naturalWidth;
-        if (descriptor) Object.defineProperty(window.HTMLImageElement.prototype, 'complete', descriptor);
-        else delete window.HTMLImageElement.prototype.complete;
+        jest.useRealTimers();
     }
 });
 
-test('el pato de respaldo no devuelve la tarjeta a la url rota al cargarse', () => {
-    render(<DuckImage statusCode={teapot} />);
-    const img = screen.getByRole('img');
+test('una foto fijada a mano en el JSON tiene prioridad sobre el generador', () => {
+    const pinned = { code: 206, name: 'Partial Content', image: 'data:image/jpeg;base64,AAAA' };
+    render(<DuckImage statusCode={pinned} />);
 
-    fireEvent.error(img);
-    expect(img.getAttribute('src')).toMatch(/^data:image\/svg\+xml/);
+    expect(screen.getByRole('img').getAttribute('src')).toBe(pinned.image);
+    expect(screen.queryByText(/generando pato/i)).not.toBeInTheDocument();
+    expect(queueStats().running).toBe(0);
+});
 
-    // El respaldo carga bien y dispara su propio onLoad: debe quedarse puesto.
-    fireEvent.load(img);
-    expect(screen.getByRole('img').getAttribute('src')).toMatch(/^data:image\/svg\+xml/);
+test('no genera más imágenes a la vez de las que permite la cola', () => {
+    const codes = [400, 401, 402, 403, 404, 405, 408].map(code => ({ code, name: `Code ${code}` }));
+    render(<>{codes.map(c => <DuckImage key={c.code} statusCode={c} />)}</>);
+
+    const asking = screen.getAllByRole('img')
+        .filter(img => img.getAttribute('src').startsWith('https://'));
+
+    expect(asking).toHaveLength(MAX_CONCURRENT);
+    expect(queueStats()).toEqual({ running: MAX_CONCURRENT, waiting: codes.length - MAX_CONCURRENT });
+});
+
+test('al cargar una imagen deja el turno libre para la siguiente', () => {
+    const codes = [400, 401, 402, 403, 404].map(code => ({ code, name: `Code ${code}` }));
+    render(<>{codes.map(c => <DuckImage key={c.code} statusCode={c} />)}</>);
+
+    const first = screen.getAllByRole('img')
+        .find(img => img.getAttribute('src').startsWith('https://'));
+    fireEvent.load(first);
+
+    expect(queueStats()).toEqual({ running: MAX_CONCURRENT, waiting: codes.length - MAX_CONCURRENT - 1 });
 });

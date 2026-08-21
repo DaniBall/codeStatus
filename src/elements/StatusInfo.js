@@ -23,7 +23,6 @@ export default function StatusInfo() {
     return (
         <div className='App'>
             <DuckImage
-                key={`${statusCode.code}-${variant}`}
                 statusCode={statusCode}
                 variant={variant}
                 size={768}
