@@ -1,3 +1,55 @@
+# codeStatus
+
+Catálogo visual de los códigos de estado HTTP: cada código se explica con una
+foto ultrarrealista y absurda protagonizada por patos.
+
+## Las imágenes de patos
+
+La web no guarda 63 fotos: las **genera bajo demanda**.
+
+- `src/data/duckScenes.js` describe, para cada uno de los 63 códigos, la escena
+  de patos que ilustra su significado (el 404 busca un nido vacío con linterna,
+  el 429 acaba sepultado por cien patitos pidiendo pan, el 418 lleva una tetera
+  por sombrero...).
+- `src/duckImage.js` monta con esa escena el prompt de la imagen —añadiéndole el
+  estilo *ultra realistic photograph*— y construye la URL del generador.
+- `src/elements/DuckImage.js` pinta la imagen. Mientras se genera, y también si
+  el generador falla o tarda más de 45 s, muestra un pato SVG dibujado en local,
+  así que **ninguna tarjeta se queda con una imagen rota**.
+
+La semilla de cada imagen se deriva del código, de modo que un mismo código
+enseña siempre el mismo pato (y el navegador lo cachea). En la página de detalle
+el botón **🦆 Generar otro pato** cambia la semilla para pedir otra versión.
+
+### Cambiar de generador
+
+Por defecto se usa [Pollinations](https://pollinations.ai) (no necesita clave de
+API). Para apuntar a otro servicio basta con definir la variable de entorno:
+
+```bash
+REACT_APP_DUCK_IMAGE_ENDPOINT=https://mi-generador/prompt/ npm start
+```
+
+### Fijar una foto a mano
+
+Si un código tiene el campo `image` relleno en `src/status_codes.json` (con un
+`data:` URI), esa foto manda sobre la imagen generada. Así se conservan las
+fotos elegidas a mano para el 206 y el 207.
+
+## Comprobaciones
+
+```bash
+npm test    # 19 pruebas: cobertura de escenas, URLs, respaldo SVG y fotos fijadas
+npm run build
+```
+
+Las pruebas verifican, entre otras cosas, que todos los códigos tienen escena,
+que las URLs generadas son válidas y únicas, que el SVG de respaldo es XML
+correcto y sin dependencias de red, y que las fotos incrustadas en el JSON se
+decodifican y tienen cabecera de imagen válida.
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

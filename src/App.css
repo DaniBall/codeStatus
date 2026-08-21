@@ -43,12 +43,66 @@
 .codeStatusCard{
   background-color: #61dafb;
   width: 20em;
-  height: 20em;
   margin: 1em;
   padding: 0.5em;
-  img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  display: flex;
+  flex-direction: column;
+}
+.codeStatusCard h2,
+.codeStatusCard h3{
+  margin: 0.2em 0;
+}
+
+/* ---- Imágenes de patos generadas ---- */
+
+/* El fondo es el pato SVG local: se ve al instante y tapa cualquier hueco
+   mientras el generador trabaja o si la generación falla. */
+.duckImage{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 0.4em;
+  background-color: #cddb8c;
+  background-size: cover;
+  background-position: center;
+}
+.duckImage img{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s ease-in;
+}
+.duckImage[data-state="loading"] img{
+  opacity: 0;
+}
+.duckImage-badge{
+  position: absolute;
+  left: 0.5em;
+  bottom: 0.5em;
+  padding: 0.15em 0.6em;
+  border-radius: 1em;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 0.75rem;
+}
+.duckImage--detail{
+  max-width: 28em;
+  margin: 0 auto;
+}
+.duckImage-retry{
+  margin-top: 0.75em;
+  padding: 0.4em 1em;
+  border: none;
+  border-radius: 1em;
+  background-color: #61dafb;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.duckScene{
+  max-width: 40em;
+  margin: 0.5em auto 1em;
+  font-style: italic;
+  opacity: 0.8;
 }

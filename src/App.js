@@ -1,14 +1,14 @@
-import logo from './logo.svg';
 import './App.css';
 import codeStatus from './status_codes.json'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import StatusInfo from './elements/StatusInfo.js'
+import DuckImage from './elements/DuckImage.js'
 
 function Home() {
   return (
     <div className="App">
       {codeStatus.map(category => (
-        <span>
+        <span key={category.category}>
           <div className='App-header'>
             <h1>{category.category}</h1>
             <p>{category.categoryDescription}</p>
@@ -17,7 +17,7 @@ function Home() {
             {category.codes.map(item => (
               <Link to={`/${item.code}`} key={item.code} className='cardLink'> 
                 <div className='codeStatusCard'>
-                  <div><img src={item.image} alt={item.name} /></div>
+                  <DuckImage statusCode={item} size={512} />
                   <h2>{item.code}</h2>
                   <h3>{item.name}</h3>
                 </div>
