@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import './App.css';
 import codeStatus from './status_codes.json'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
@@ -8,7 +9,7 @@ function Home() {
   return (
     <div className="App">
       {codeStatus.map(category => (
-        <span key={category.category}>
+        <Fragment key={category.category}>
           <div className='App-header'>
             <h1>{category.category}</h1>
             <p>{category.categoryDescription}</p>
@@ -24,7 +25,7 @@ function Home() {
               </Link>
             ))}
           </div>
-        </span>
+        </Fragment>
       ))}
     </div>
   );

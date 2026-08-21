@@ -16,6 +16,13 @@ export const DEFAULT_ENDPOINT = 'https://image.pollinations.ai/prompt/'
 export const DUCK_IMAGE_ENDPOINT =
     process.env.REACT_APP_DUCK_IMAGE_ENDPOINT || DEFAULT_ENDPOINT
 
+/**
+ * Parámetros extra para el generador, en formato query (por ejemplo
+ * `model=flux&nologo=true`). Se dejan fuera por defecto porque cada servicio
+ * tiene los suyos y uno desconocido puede hacer que rechace la petición.
+ */
+export const DUCK_IMAGE_PARAMS = process.env.REACT_APP_DUCK_IMAGE_PARAMS || ''
+
 export const DEFAULT_SIZE = 768
 
 /** Colores por familia de código, usados en la imagen de respaldo. */
@@ -68,13 +75,11 @@ export function buildDuckImageUrl(code, name = '', options = {}) {
     } = options
 
     const base = endpoint.endsWith('/') ? endpoint : `${endpoint}/`
-    const params = new URLSearchParams({
-        width: String(width),
-        height: String(height),
-        seed: String(duckSeed(code, variant)),
-        model: 'flux',
-        nologo: 'true',
-    })
+    const params = new URLSearchParams(DUCK_IMAGE_PARAMS)
+    params.set('width', String(width))
+    params.set('height', String(height))
+    params.set('seed', String(duckSeed(code, variant)))
+
     return `${base}${encodeURIComponent(prompt)}?${params.toString()}`
 }
 
