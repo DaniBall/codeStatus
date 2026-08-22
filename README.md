@@ -21,12 +21,33 @@ se regenera sólo esa. Cuando convenzan, se suben al repositorio.
 ```bash
 npm run ducks                    # sólo las que falten
 npm run ducks -- 404 500         # regenera esos dos códigos
+npm run ducks -- 404 --reroll    # otra versión distinta de esa imagen
 npm run ducks -- --all           # rehace las 85
 npm run ducks -- --model turbo   # prueba otro modelo
 ```
 
-Variables de entorno: `DUCK_ENDPOINT`, `DUCK_MODEL`, `DUCK_SIZE`. Por defecto se
-usa [Pollinations](https://pollinations.ai), que no necesita clave de API.
+La semilla de cada imagen es su propio código, así que repetir la generación da
+**exactamente la misma foto**. Cuando una sale con defectos, lo que hace falta
+es `--reroll`, que cambia la semilla. `--seed N` fija una concreta.
+
+### Límite de uso
+
+El servicio es gratuito y limita por uso: pedirle muchas a la vez devuelve
+`429` en casi todas. Por eso el script va **de una en una y espaciando seis
+segundos** las peticiones, respeta la cabecera `Retry-After` cuando el servidor
+la manda y reintenta hasta cinco veces doblando la espera.
+
+Aun así puede fallar alguna. No importa: el script sólo genera lo que no
+existe, así que se vuelve a lanzar y sigue por donde iba. Si insiste en fallar,
+sube la espera:
+
+```bash
+DUCK_INTERVAL=15000 npm run ducks
+```
+
+Variables de entorno: `DUCK_ENDPOINT`, `DUCK_MODEL`, `DUCK_SIZE`,
+`DUCK_CONCURRENCY`, `DUCK_INTERVAL`, `DUCK_ATTEMPTS`. Por defecto se usa
+[Pollinations](https://pollinations.ai), que no necesita clave de API.
 
 ### De dónde sale cada escena
 
