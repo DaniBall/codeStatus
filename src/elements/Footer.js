@@ -4,7 +4,7 @@ export default function Footer() {
     return (
         <footer className='siteFooter'>
             <p className='siteFooter-line'>
-                © {AÑO} DaniBall · codeStatus. All rights reserved.
+                © {AÑO} Daniel Bola Martínez · codeStatus. All rights reserved.
             </p>
             <p className='siteFooter-line siteFooter-note'>
                 Status code definitions come from the IANA HTTP Status Code Registry
