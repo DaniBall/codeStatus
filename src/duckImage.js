@@ -12,17 +12,28 @@ import duckData from './data/duckScenes.json'
 export const DUCKS_DIR = 'ducks'
 
 /**
- * Colores por familia. Son exactamente los pares --accent-soft / --accent de
- * App.css, así que el respaldo continúa el color de su sección sin costura: el
- * fondo del hueco y el del dibujo son el mismo.
+ * Colores por familia y por modo. Son exactamente los pares --accent-soft y
+ * --accent de App.css: el fondo del dibujo y el del hueco de la tarjeta son el
+ * mismo color, así que no se ve costura entre la imagen y la tarjeta. Hay una
+ * prueba que comprueba que no se separen.
  */
 const CATEGORY_COLORS = {
-    '1': { bg: '#e4f0f9', mark: '#1f6ea8' },
-    '2': { bg: '#e3f4e9', mark: '#237a41' },
-    '3': { bg: '#faeed8', mark: '#8a5a12' },
-    '4': { bg: '#fbe7e4', mark: '#b03325' },
-    '5': { bg: '#eee8fa', mark: '#5b3f97' },
-    wild: { bg: '#e3f2f6', mark: '#0a5f77' },
+    light: {
+        '1': { bg: '#e4f0f9', mark: '#1f6ea8' },
+        '2': { bg: '#e3f4e9', mark: '#237a41' },
+        '3': { bg: '#faeed8', mark: '#8a5a12' },
+        '4': { bg: '#fbe7e4', mark: '#b03325' },
+        '5': { bg: '#eee8fa', mark: '#5b3f97' },
+        wild: { bg: '#e3f2f6', mark: '#0a5f77' },
+    },
+    dark: {
+        '1': { bg: '#16293a', mark: '#7cc0ec' },
+        '2': { bg: '#14301f', mark: '#6fd396' },
+        '3': { bg: '#33260f', mark: '#e5b264' },
+        '4': { bg: '#3a1c19', mark: '#f79287' },
+        '5': { bg: '#251d3d', mark: '#bfa6f2' },
+        wild: { bg: '#102c33', mark: '#5fc9dd' },
+    },
 }
 
 /** Naranja del pico. Es la única constante de marca entre todas las familias. */
@@ -59,8 +70,9 @@ function escapeXml(value) {
  * La familia va aparte del código porque los códigos de "In the wild" son
  * números 4xx y 5xx pero pertenecen a su propia sección.
  */
-export function buildDuckFallback(code, name = '', family = String(code).charAt(0)) {
-    const { bg, mark } = CATEGORY_COLORS[family] || CATEGORY_COLORS['2']
+export function buildDuckFallback(code, name = '', family = String(code).charAt(0), scheme = 'light') {
+    const familias = CATEGORY_COLORS[scheme] || CATEGORY_COLORS.light
+    const { bg, mark } = familias[family] || familias['2']
     const label = escapeXml(String(name).slice(0, 40))
 
     const svg = [
@@ -86,8 +98,8 @@ export function buildDuckFallback(code, name = '', family = String(code).charAt(
  * Imagen de un código: la foto pregenerada si el código tiene escena, y si no
  * el pato dibujado.
  */
-export function resolveDuckImage(statusCode, family) {
+export function resolveDuckImage(statusCode, family, scheme) {
     const { code, name = '' } = statusCode || {}
-    if (!getDuckScene(code)) return { src: buildDuckFallback(code, name, family), pregenerada: false }
+    if (!getDuckScene(code)) return { src: buildDuckFallback(code, name, family, scheme), pregenerada: false }
     return { src: duckImagePath(code), pregenerada: true }
 }

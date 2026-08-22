@@ -3,6 +3,7 @@ import codeStatus from './status_codes.json'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import StatusInfo from './elements/StatusInfo.js'
 import DuckImage from './elements/DuckImage.js'
+import { ThemeProvider, ThemeToggle } from './theme.js'
 
 function Home() {
   return (
@@ -21,6 +22,7 @@ function Home() {
             </a>
           ))}
         </nav>
+        <ThemeToggle />
       </header>
 
       {codeStatus.map(category => (
@@ -59,11 +61,13 @@ function Home() {
 
 export default function App() {
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/:code" element={<StatusInfo />} />
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/:code" element={<StatusInfo />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   )
 }

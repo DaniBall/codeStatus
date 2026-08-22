@@ -123,6 +123,35 @@ describe('pato de respaldo', () => {
         });
     });
 
+    test('los colores del SVG son los mismos que los del CSS, en ambos modos', () => {
+        const css = fs.readFileSync(path.join(__dirname, 'App.css'), 'utf8');
+        // El bloque claro es el primero; el oscuro, el de [data-theme="dark"].
+        const bloques = {
+            light: css.slice(css.indexOf(':root{'), css.indexOf('@media (prefers-color-scheme: dark)')),
+            dark: css.slice(css.indexOf(':root[data-theme="dark"]{')),
+        };
+        const familias = { '1': 'f1', '2': 'f2', '3': 'f3', '4': 'f4', '5': 'f5', wild: 'fw' };
+
+        Object.entries(bloques).forEach(([modo, bloque]) => {
+            Object.entries(familias).forEach(([familia, token]) => {
+                const acento = new RegExp(`--${token}: (#[0-9a-f]{6}); --${token}-soft: (#[0-9a-f]{6});`).exec(bloque);
+                expect(acento).not.toBeNull();
+
+                const svg = decodeURIComponent(
+                    buildDuckFallback(404, 'Not Found', familia, modo).split(',')[1]
+                );
+                expect(svg).toContain(acento[1]);
+                expect(svg).toContain(acento[2]);
+            });
+        });
+    });
+
+    test('cada modo pinta distinto', () => {
+        const claro = buildDuckFallback(404, 'Not Found', '4', 'light');
+        const oscuro = buildDuckFallback(404, 'Not Found', '4', 'dark');
+        expect(claro).not.toEqual(oscuro);
+    });
+
     test('usa el color de la familia, no el del primer dígito', () => {
         // El 521 es un número 5xx, pero vive en "In the wild" y va en su color.
         const wild = decodeURIComponent(buildDuckFallback(521, 'Web Server Is Down', 'wild').split(',')[1]);

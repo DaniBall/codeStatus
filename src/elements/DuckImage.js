@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { buildDuckFallback, resolveDuckImage } from '../duckImage'
+import { useTheme } from '../theme'
 
 /**
  * Imagen de pato de un código de estado.
@@ -10,9 +11,14 @@ import { buildDuckFallback, resolveDuckImage } from '../duckImage'
  */
 export default function DuckImage({ statusCode, family, className = '' }) {
     const { code, name = '' } = statusCode || {}
+    const { scheme } = useTheme()
 
     const { src } = useMemo(() => resolveDuckImage(statusCode, family), [statusCode, family])
-    const fallback = useMemo(() => buildDuckFallback(code, name, family), [code, name, family])
+    // El respaldo se redibuja al cambiar de modo: es un SVG, no un fichero.
+    const fallback = useMemo(
+        () => buildDuckFallback(code, name, family, scheme),
+        [code, name, family, scheme]
+    )
 
     const [failed, setFailed] = useState(false)
     useEffect(() => setFailed(false), [src])

@@ -2,29 +2,84 @@
  * Paleta
  *
  * Cada familia de códigos tiene su color, y ese mismo color manda en la
- * cabecera de la sección, en la tarjeta, en la ficha y en el pato dibujado
- * de respaldo. Así el color dice algo (de qué familia es el código) en vez
- * de ser decoración suelta.
+ * cabecera de la sección, en la tarjeta, en la ficha y en el dibujo de
+ * respaldo. Así el color dice de qué familia es un código en vez de ser
+ * decoración suelta.
+ *
+ * El fondo es deliberadamente neutro: si tuviera color propio competiría con
+ * los seis acentos y el color dejaría de significar nada.
+ *
+ * Dos modos. Sin elegir nada se sigue la preferencia del sistema; el botón de
+ * la barra fija uno y entonces manda data-theme sobre el sistema.
  * ------------------------------------------------------------------ */
 :root{
-  --bg: #fbf8f1;
+  --bg: #f1f3f5;
   --surface: #ffffff;
-  --ink: #1b1e1f;
-  --ink-soft: #56605f;
-  --line: #e7e1d5;
-  --radius: 14px;
+  --ink: #14181b;
+  --ink-soft: #586069;
+  --line: #dde2e6;
+  --bar: rgba(241, 243, 245, 0.92);
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 10px 24px rgba(0, 0, 0, 0.07);
   --shadow-hover: 0 2px 4px rgba(0, 0, 0, 0.08), 0 18px 36px rgba(0, 0, 0, 0.12);
-  --accent: #56605f;
-  --accent-soft: #eeeae1;
+  --on-accent: #ffffff;
+
+  --f1: #1f6ea8; --f1-soft: #e4f0f9;
+  --f2: #237a41; --f2-soft: #e3f4e9;
+  --f3: #8a5a12; --f3-soft: #faeed8;
+  --f4: #b03325; --f4-soft: #fbe7e4;
+  --f5: #5b3f97; --f5-soft: #eee8fa;
+  --fw: #0a5f77; --fw-soft: #e3f2f6;
+  --radius: 14px;
+  --accent: var(--ink-soft);
+  --accent-soft: var(--line);
 }
 
-[data-family="1"]{ --accent: #1f6ea8; --accent-soft: #e4f0f9; }  /* informativos */
-[data-family="2"]{ --accent: #237a41; --accent-soft: #e3f4e9; }  /* correctos    */
-[data-family="3"]{ --accent: #8a5a12; --accent-soft: #faeed8; }  /* redirecciones*/
-[data-family="4"]{ --accent: #b03325; --accent-soft: #fbe7e4; }  /* error cliente*/
-[data-family="5"]{ --accent: #5b3f97; --accent-soft: #eee8fa; }  /* error servidor*/
-[data-family="wild"]{ --accent: #0a5f77; --accent-soft: #e3f2f6; } /* no oficiales */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+  --bg: #14171a;
+  --surface: #1e2227;
+  --ink: #e9ecef;
+  --ink-soft: #9aa4ad;
+  --line: #2c3238;
+  --bar: rgba(20, 23, 26, 0.92);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 10px 24px rgba(0, 0, 0, 0.45);
+  --shadow-hover: 0 2px 4px rgba(0, 0, 0, 0.6), 0 18px 36px rgba(0, 0, 0, 0.55);
+  --on-accent: #14171a;
+
+  --f1: #7cc0ec; --f1-soft: #16293a;
+  --f2: #6fd396; --f2-soft: #14301f;
+  --f3: #e5b264; --f3-soft: #33260f;
+  --f4: #f79287; --f4-soft: #3a1c19;
+  --f5: #bfa6f2; --f5-soft: #251d3d;
+  --fw: #5fc9dd; --fw-soft: #102c33;
+  }
+}
+
+:root[data-theme="dark"]{
+  --bg: #14171a;
+  --surface: #1e2227;
+  --ink: #e9ecef;
+  --ink-soft: #9aa4ad;
+  --line: #2c3238;
+  --bar: rgba(20, 23, 26, 0.92);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 10px 24px rgba(0, 0, 0, 0.45);
+  --shadow-hover: 0 2px 4px rgba(0, 0, 0, 0.6), 0 18px 36px rgba(0, 0, 0, 0.55);
+  --on-accent: #14171a;
+
+  --f1: #7cc0ec; --f1-soft: #16293a;
+  --f2: #6fd396; --f2-soft: #14301f;
+  --f3: #e5b264; --f3-soft: #33260f;
+  --f4: #f79287; --f4-soft: #3a1c19;
+  --f5: #bfa6f2; --f5-soft: #251d3d;
+  --fw: #5fc9dd; --fw-soft: #102c33;
+}
+
+[data-family="1"]{ --accent: var(--f1); --accent-soft: var(--f1-soft); }
+[data-family="2"]{ --accent: var(--f2); --accent-soft: var(--f2-soft); }
+[data-family="3"]{ --accent: var(--f3); --accent-soft: var(--f3-soft); }
+[data-family="4"]{ --accent: var(--f4); --accent-soft: var(--f4-soft); }
+[data-family="5"]{ --accent: var(--f5); --accent-soft: var(--f5-soft); }
+[data-family="wild"]{ --accent: var(--fw); --accent-soft: var(--fw-soft); }
 
 .App{
   min-height: 100vh;
@@ -43,7 +98,7 @@
   align-items: center;
   gap: 0.5em 1.25em;
   padding: 0.7em clamp(1em, 4vw, 2.5em);
-  background-color: rgba(251, 248, 241, 0.92);
+  background-color: var(--bar);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line);
 }
@@ -58,6 +113,7 @@
   gap: 0.4em;
   margin-left: auto;
 }
+.topBar > .themeToggle{ flex: none; }
 .topBar-link{
   padding: 0.25em 0.8em;
   border-radius: 999px;
@@ -68,6 +124,30 @@
   text-decoration: none;
 }
 .topBar-link:hover{ filter: brightness(0.96); }
+.themeToggle{
+  display: grid;
+  place-items: center;
+  width: 2.2em;
+  height: 2.2em;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background-color: var(--surface);
+  font-size: 0.95rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.themeToggle:hover{ border-color: var(--ink-soft); }
+.visually-hidden{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
 
 /* ---- Secciones por familia ---- */
 
@@ -228,7 +308,7 @@
   padding: 0.6em 1.4em;
   border-radius: 999px;
   background-color: var(--accent);
-  color: #fff;
+  color: var(--on-accent);
   font-weight: 600;
   text-decoration: none;
 }

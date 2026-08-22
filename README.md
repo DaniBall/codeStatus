@@ -84,6 +84,19 @@ en el pato dibujado de respaldo:
 | `5xx` error de servidor| morado  |
 | `In the wild` no oficiales | verde azulado |
 
+Hay **dos modos, claro y oscuro**. Sin elegir nada se sigue la preferencia del
+sistema, y de eso se encarga el propio CSS con `prefers-color-scheme`, así que
+no hay parpadeo antes de que arranque React. El botón de la barra fija uno
+—marca `data-theme` en el `<html>`, que pesa más que la media query— y lo
+recuerda en `localStorage`.
+
+Los seis acentos se aclaran en oscuro para mantener el contraste. Las dos
+paletas pasan AA: en la clara el peor par queda en 4,7:1 y en la oscura, en
+6,9:1.
+
+El fondo es un gris neutro a propósito. Si tuviera color propio competiría con
+los seis acentos y el color dejaría de significar de qué familia es un código.
+
 Así el color dice de qué familia es un código, en vez de ser decoración suelta.
 Los cinco acentos pasan el contraste AA de WCAG sobre blanco (el peor está en
 5.3:1) y el texto principal sobre el fondo llega a 15.8:1.
@@ -91,7 +104,7 @@ Los cinco acentos pasan el contraste AA de WCAG sobre blanco (el peor está en
 ## Comprobaciones
 
 ```bash
-npm test    # 21 pruebas
+npm test    # 23 pruebas
 npm run build
 ```
 
