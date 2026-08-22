@@ -414,13 +414,23 @@
    si aun con la imagen al mínimo no cupiera, la página vuelve a desplazarse. */
 @media (max-width: 48em) and (orientation: portrait){
   /* Altura definida, no min-height: sin ella flex no tiene espacio libre que
-     repartir y la imagen se queda con su tamaño natural. Con dvh se descuenta
-     la barra del navegador móvil, que 100vh ignora. */
+     repartir y la imagen se queda con su tamaño natural.
+     svh y no dvh ni vh: es la altura garantizada, la que queda con la barra
+     del navegador desplegada. Con dvh la altura cambia según la barra esté o
+     no, y con vh se ignora la barra y la página acaba siendo más alta que lo
+     que se ve, dejando fuera el pie o el enlace de volver. */
   .statusInfo-page{
     display: flex;
     flex-direction: column;
     height: 100vh;
-    height: 100dvh;
+    height: 100svh;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    box-sizing: border-box;
+    /* Con la altura fija, lo que no cupiera se quedaba fuera y sin forma de
+       llegar hasta ello: con la letra del sistema grande, el botón de la
+       documentación era inalcanzable. Así la ficha cabe cuando cabe y se
+       desplaza cuando no, pero nunca esconde nada. */
+    overflow-y: auto;
   }
   .statusInfo{
     flex: 1;
@@ -429,19 +439,28 @@
     min-height: 0;
     padding-bottom: 0.6em;
   }
-  .statusInfo-back{ margin: 0.8em 0 0.6em; }
+  .statusInfo-back{ margin: 0.7em 0 0.5em; }
+  /* La tarjeta necesita min-height:0 para poder ceder altura a la imagen,
+     pero con el overflow:hidden que redondea las esquinas eso recortaba el
+     texto, y lo recortado no genera scroll: quedaba inalcanzable. Aquí el
+     redondeo se lo queda la imagen y la tarjeta deja pasar lo que desborde
+     hacia el contenedor, que sí se desplaza. */
   .statusInfo-card{
     flex: 1;
     display: flex;
     flex-direction: column;
     min-height: 0;
+    overflow: visible;
+  }
+  .statusInfo-card .duckImage{
+    border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0;
   }
   /* Base 0: la imagen no aporta su altura al reparto, así que se queda con
      lo que sobra después del texto en vez de empujarlo fuera de la pantalla. */
   .statusInfo-card .duckImage{
     flex: 1 1 0;
     aspect-ratio: auto;
-    min-height: 6em;
+    min-height: 4em;
   }
   .statusInfo-body{ padding: 1em 1.1em 1.2em; }
   .statusInfo-code{ font-size: 2.6rem; }
@@ -458,10 +477,14 @@
     margin-bottom: 1em;
     font-size: 1rem;
   }
+  /* El pie completo se comía 121px de una pantalla de 640, más que la propia
+     imagen. Aquí se queda en una línea; la nota de procedencia sigue entera
+     en la portada, que es donde hay sitio. */
   .statusInfo-page .siteFooter{
-    padding: 1em clamp(1em, 4vw, 2.5em);
-    font-size: 0.75rem;
+    padding: 0.7em clamp(1em, 4vw, 2.5em);
+    font-size: 0.72rem;
   }
+  .statusInfo-page .siteFooter-note{ display: none; }
 }
 
 /* ---- Imágenes de patos ---- */
