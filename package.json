@@ -16,6 +16,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "ducks": "node scripts/generate-ducks.js",
     "build": "react-scripts build",
     "postbuild": "node -e \"require('fs').copyFileSync('build/index.html','build/404.html')\"",
     "test": "react-scripts test",

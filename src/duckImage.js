@@ -1,29 +1,15 @@
 /**
- * Generación de las imágenes de patos de cada código de estado.
+ * Imágenes de patos de cada código de estado.
  *
- * La web no guarda 63 fotos: construye, para cada código, el prompt de una
- * escena ultrarrealista y graciosa protagonizada por patos y deja que el
- * servicio de generación de imágenes la cree bajo demanda. Si ese servicio
- * no responde (o no hay red) se usa un pato SVG dibujado localmente, de
- * modo que ninguna tarjeta se queda nunca con una imagen rota.
+ * Las fotos se generan una sola vez con `npm run ducks` y se guardan en
+ * `public/ducks/<código>.jpg`. La web se limita a cargar ese fichero, así que
+ * aparecen al instante. Si todavía no existe (o falla), se dibuja un pato SVG
+ * en local y la tarjeta nunca se queda con una imagen rota.
  */
-import duckScenes, { DUCK_STYLE } from './data/duckScenes'
+import duckData from './data/duckScenes.json'
 
-/** Servicio de generación por defecto (sin clave de API). */
-export const DEFAULT_ENDPOINT = 'https://image.pollinations.ai/prompt/'
-
-/** Permite apuntar a otro generador sin tocar el código. */
-export const DUCK_IMAGE_ENDPOINT =
-    process.env.REACT_APP_DUCK_IMAGE_ENDPOINT || DEFAULT_ENDPOINT
-
-/**
- * Parámetros extra para el generador, en formato query (por ejemplo
- * `model=flux&nologo=true`). Se dejan fuera por defecto porque cada servicio
- * tiene los suyos y uno desconocido puede hacer que rechace la petición.
- */
-export const DUCK_IMAGE_PARAMS = process.env.REACT_APP_DUCK_IMAGE_PARAMS || ''
-
-export const DEFAULT_SIZE = 768
+/** Carpeta, dentro de `public/`, donde viven las fotos pregeneradas. */
+export const DUCKS_DIR = 'ducks'
 
 /** Colores por familia de código, usados en la imagen de respaldo. */
 const CATEGORY_COLORS = {
@@ -36,51 +22,12 @@ const CATEGORY_COLORS = {
 
 /** Devuelve la escena descrita para un código, o `undefined` si no existe. */
 export function getDuckScene(code) {
-    return duckScenes[String(code)]
+    return duckData.scenes[String(code)]
 }
 
-/**
- * Construye el prompt completo con el que se genera la imagen del código.
- * Devuelve `null` si el código no tiene escena definida.
- */
-export function buildDuckPrompt(code, name = '') {
-    const scene = getDuckScene(code)
-    if (!scene) return null
-    const title = name ? `${code} ${name}` : String(code)
-    return `HTTP ${title}. ${scene}. ${DUCK_STYLE}`
-}
-
-/**
- * Semilla estable a partir del código y de la variante pedida: la misma
- * tarjeta enseña siempre el mismo pato (y el navegador puede cachearlo)
- * hasta que se pide otra variante.
- */
-export function duckSeed(code, variant = 0) {
-    return (Number(code) * 7919 + Number(variant) * 104729) % 1000000
-}
-
-/**
- * URL de la imagen generada para un código de estado.
- * Devuelve `null` si el código no tiene escena definida.
- */
-export function buildDuckImageUrl(code, name = '', options = {}) {
-    const prompt = buildDuckPrompt(code, name)
-    if (!prompt) return null
-
-    const {
-        variant = 0,
-        width = DEFAULT_SIZE,
-        height = DEFAULT_SIZE,
-        endpoint = DUCK_IMAGE_ENDPOINT,
-    } = options
-
-    const base = endpoint.endsWith('/') ? endpoint : `${endpoint}/`
-    const params = new URLSearchParams(DUCK_IMAGE_PARAMS)
-    params.set('width', String(width))
-    params.set('height', String(height))
-    params.set('seed', String(duckSeed(code, variant)))
-
-    return `${base}${encodeURIComponent(prompt)}?${params.toString()}`
+/** Ruta pública de la foto pregenerada de un código. */
+export function duckImagePath(code) {
+    return `${process.env.PUBLIC_URL || ''}/${DUCKS_DIR}/${code}.jpg`
 }
 
 /** Escapa el texto que se incrusta en el SVG de respaldo. */
@@ -94,8 +41,8 @@ function escapeXml(value) {
 }
 
 /**
- * Pato dibujado localmente en SVG. Se usa mientras la imagen se genera y
- * como respaldo si el generador falla: nunca depende de la red.
+ * Pato dibujado localmente en SVG, para cuando no hay foto pregenerada.
+ * No depende de la red ni de ningún fichero.
  */
 export function buildDuckFallback(code, name = '') {
     const family = Number(String(code).charAt(0))
@@ -122,15 +69,12 @@ export function buildDuckFallback(code, name = '') {
 }
 
 /**
- * Fuente definitiva de la imagen de un código: la foto fijada a mano en el
- * JSON manda; si no la hay, se genera a partir de la escena del pato.
+ * Imagen de un código: manda la foto fijada a mano en el JSON; si no la hay,
+ * la foto pregenerada; y si el código no tiene escena, el pato dibujado.
  */
-export function resolveDuckImage(statusCode, options = {}) {
+export function resolveDuckImage(statusCode) {
     const { code, name = '', image } = statusCode || {}
-    if (image) return { src: image, generated: false }
-
-    const src = buildDuckImageUrl(code, name, options)
-    return src
-        ? { src, generated: true }
-        : { src: buildDuckFallback(code, name), generated: false }
+    if (image) return { src: image, pregenerada: false }
+    if (!getDuckScene(code)) return { src: buildDuckFallback(code, name), pregenerada: false }
+    return { src: duckImagePath(code), pregenerada: true }
 }

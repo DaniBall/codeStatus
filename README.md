@@ -5,60 +5,68 @@ foto ultrarrealista y absurda protagonizada por patos.
 
 ## Las imágenes de patos
 
-La web no guarda 63 fotos: las **genera bajo demanda**.
-
-- `src/data/duckScenes.js` describe, para cada uno de los 63 códigos, la escena
-  de patos que ilustra su significado (el 404 busca un nido vacío con linterna,
-  el 429 acaba sepultado por cien patitos pidiendo pan, el 418 lleva una tetera
-  por sombrero...).
-- `src/duckImage.js` monta con esa escena el prompt de la imagen —añadiéndole el
-  estilo *ultra realistic photograph*— y construye la URL del generador.
-- `src/elements/DuckImage.js` pinta la imagen. Sólo la pide cuando la tarjeta se
-  acerca a la ventana, y mientras tanto —o si el generador falla o tarda más de
-  45 s— muestra un pato SVG dibujado en local, así que **ninguna tarjeta se
-  queda con una imagen rota**. Un fallo se reintenta una vez.
-- `src/duckQueue.js` limita a 3 las imágenes que se generan a la vez. Sin esto,
-  la home lanzaría 61 peticiones de golpe y un generador gratuito respondería
-  con límites de uso: casi ninguna llegaría.
-
-La semilla de cada imagen se deriva del código, de modo que un mismo código
-enseña siempre el mismo pato (y el navegador lo cachea). En la página de detalle
-el botón **🦆 Generar otro pato** cambia la semilla para pedir otra versión.
-
-### Cambiar de generador
-
-Por defecto se usa [Pollinations](https://pollinations.ai) (no necesita clave de
-API). Para apuntar a otro servicio basta con definir la variable de entorno:
+Las fotos **se generan una sola vez** y se guardan en el repositorio. La web no
+llama a ningún servicio: sólo carga `public/ducks/<código>.jpg`, así que
+aparecen al instante.
 
 ```bash
-REACT_APP_DUCK_IMAGE_ENDPOINT=https://mi-generador/prompt/ npm start
+npm run ducks
 ```
 
-La URL lleva sólo `width`, `height` y `seed`, que es lo que entiende cualquier
-servicio. Si el tuyo admite más (modelo, marca de agua...), se añaden con:
+Eso recorre los 63 códigos, pide cada foto al generador y la deja en
+`public/ducks/`. Tarda unos minutos la primera vez. Luego **se revisan a mano**:
+la que no se entienda o salga fea, se borra y se vuelve a ejecutar el script, o
+se regenera sólo esa. Cuando convenzan, se suben al repositorio.
 
 ```bash
-REACT_APP_DUCK_IMAGE_PARAMS='model=flux&nologo=true' npm start
+npm run ducks                    # sólo las que falten
+npm run ducks -- 404 500         # regenera esos dos códigos
+npm run ducks -- --all           # rehace las 63
+npm run ducks -- --model turbo   # prueba otro modelo
 ```
+
+Variables de entorno: `DUCK_ENDPOINT`, `DUCK_MODEL`, `DUCK_SIZE`. Por defecto se
+usa [Pollinations](https://pollinations.ai), que no necesita clave de API.
+
+### De dónde sale cada escena
+
+`src/data/duckScenes.json` guarda, para cada código, la escena que lo ilustra
+(el 404 alumbra un nido vacío con una linterna, el 429 acaba sepultado por un
+montón de patitos, el 418 lleva una tetera por sombrero). El script le añade el
+`style` del mismo fichero y con eso arma el prompt.
+
+Las escenas son deliberadamente **cortas**, de una docena de palabras: cuanto
+más se alarga un prompt, menos caso hace el modelo a la escena y menos se
+entiende de qué código habla. Hay una prueba que impide que crezcan de 20
+palabras.
+
+### Si todavía no hay foto
+
+Mientras un código no tenga su `.jpg` —recién clonado el repo, o porque esa foto
+se borró— la tarjeta enseña un pato SVG dibujado en local con el número del
+código. Nunca aparece una imagen rota, y la web funciona sin haber ejecutado el
+script.
 
 ### Fijar una foto a mano
 
 Si un código tiene el campo `image` relleno en `src/status_codes.json` (con un
-`data:` URI), esa foto manda sobre la imagen generada. Así se conservan las
-fotos elegidas a mano para el 206 y el 207.
+`data:` URI), esa foto manda sobre la generada. Así se conservan las fotos
+elegidas a mano para el 206 y el 207. También vale con dejar tu propio
+`public/ducks/<código>.jpg`: el script no lo pisa salvo que uses `--all`.
 
 ## Comprobaciones
 
 ```bash
-npm test    # 20 pruebas: escenas, URLs, cola, respaldo SVG y fotos fijadas
+npm test    # 17 pruebas
 npm run build
 ```
 
-Las pruebas verifican, entre otras cosas, que todos los códigos tienen escena,
-que las URLs generadas son válidas y únicas, que la cola nunca lanza más de tres
-generaciones a la vez, que el SVG de respaldo es XML correcto y sin dependencias
-de red, y que las fotos incrustadas en el JSON se decodifican y tienen cabecera
-de imagen válida.
+Las pruebas verifican que todos los códigos tienen escena y que ninguna se pasa
+de larga, que cada código apunta a su fichero, que el SVG de respaldo es XML
+correcto y sin dependencias de red, y que **las fotos que haya en
+`public/ducks/` son JPEG válidos** y corresponden a códigos reales: si una se
+descarga a medias o el generador devuelve una página de error disfrazada, la
+prueba lo caza antes de subirla.
 
 ## Despliegue automático en GitHub Pages
 

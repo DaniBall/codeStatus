@@ -19,6 +19,6 @@ test('ninguna imagen se queda sin src ni sin texto alternativo', () => {
   images.forEach(img => {
     expect(img.getAttribute('src')).toBeTruthy();
     expect(img.getAttribute('alt')).toBeTruthy();
-    expect(img.getAttribute('src')).toMatch(/^(https:|data:image\/)/);
+    expect(img.getAttribute('src')).toMatch(/^(\/ducks\/\d{3}\.jpg|data:image\/)/);
   });
 });
