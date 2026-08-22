@@ -78,9 +78,23 @@ describe('escenas de patos', () => {
         });
     });
 
-    test('las escenas son cortas: un prompt largo se entiende peor', () => {
+    test('las escenas son detalladas pero acotadas', () => {
+        // Detalle concreto (escenario, luz, qué se ve) sí; adjetivos apilados
+        // no. Pasado cierto largo el modelo empieza a ignorar la mitad, que es
+        // lo que hacía que no se entendiera de qué código hablaban.
         Object.entries(duckData.scenes).forEach(([code, scene]) => {
-            expect(scene.split(/\s+/).length).toBeLessThanOrEqual(20);
+            const palabras = scene.split(/\s+/).length;
+            expect(palabras).toBeGreaterThanOrEqual(12);
+            expect(palabras).toBeLessThanOrEqual(35);
+        });
+    });
+
+    test('ninguna escena pide que el pato manipule algo', () => {
+        // Un pato tiene alas, no manos: pedirle que sujete o pulse algo es de
+        // donde salen los picos torcidos y las patas de más.
+        const manos = /\b(holding|holds|carrying|handing|dialling|pressing|shining|inspecting)\b/i;
+        Object.entries(duckData.scenes).forEach(([code, scene]) => {
+            expect(scene).not.toMatch(manos);
         });
     });
 });

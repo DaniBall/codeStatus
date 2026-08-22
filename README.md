@@ -73,15 +73,19 @@ Variables de entorno: `DUCK_ENDPOINT`, `DUCK_MODEL`, `DUCK_SIZE`,
 montón de patitos, el 418 lleva una tetera por sombrero). El script le añade el
 `style` del mismo fichero y con eso arma el prompt.
 
-Las escenas son deliberadamente **cortas**, de una docena de palabras: cuanto
-más se alarga un prompt, menos caso hace el modelo a la escena y menos se
-entiende de qué código habla. Hay una prueba que impide que crezcan de 20
-palabras.
+Las escenas rondan las **25 palabras** y describen escenario, luz y qué se ve
+en el encuadre. La diferencia está en que el detalle sea **concreto**: "lit only
+by a narrow torch beam from off-frame" aporta, "beautiful, amazing, 8k" no.
+Los adjetivos apilados y los detalles decorativos compiten con el chiste y
+hacen que no se entienda de qué código habla. Una prueba las mantiene entre 12
+y 35 palabras.
 
 Y están escritas para que **el pato no tenga que manipular nada**. Un pato
 "sujetando" o "pulsando" algo obliga al modelo a inventarle manos, y de ahí
 salen los picos torcidos y las patas de más. El objeto va en la escena, no en
-las alas: *a duck standing on a big red reset button*, no *pressing it*.
+las alas: *a duck standing on a big red reset button*, no *pressing it*. Otra
+prueba comprueba que no vuelva a colarse ninguno de esos verbos.
+
 Por lo mismo se generan a 1024px, donde la anatomía sale bastante mejor que a
 768.
 
