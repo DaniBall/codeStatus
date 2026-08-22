@@ -1,6 +1,7 @@
 [
   {
     "category": "1xx",
+    "family": "1",
     "categoryDescription": "Informational responses. The request was received and the process is continuing.",
     "codes": [
       {
@@ -27,6 +28,7 @@
   },
   {
     "category": "2xx",
+    "family": "2",
     "categoryDescription": "Successful responses. The request was successfully received, understood, and accepted.",
     "codes": [
       {
@@ -83,6 +85,7 @@
   },
   {
     "category": "3xx",
+    "family": "3",
     "categoryDescription": "Redirection messages. Further action is needed to complete the request.",
     "codes": [
       {
@@ -134,6 +137,7 @@
   },
   {
     "category": "4xx",
+    "family": "4",
     "categoryDescription": "Client error responses. The request contains an error or cannot be completed by the client.",
     "codes": [
       {
@@ -285,6 +289,7 @@
   },
   {
     "category": "5xx",
+    "family": "5",
     "categoryDescription": "Server error responses. The server failed to fulfill a valid request.",
     "codes": [
       {
@@ -341,6 +346,189 @@
         "code": 511,
         "name": "Network Authentication Required",
         "description": "The client must authenticate to gain network access."
+      }
+    ]
+  },
+  {
+    "category": "In the wild",
+    "family": "wild",
+    "categoryDescription": "Not in the official registry. Each of these comes from one particular server, CDN or framework, and you only ever meet it behind that software.",
+    "codes": [
+      {
+        "code": 419,
+        "name": "Page Expired",
+        "description": "Laravel's answer when the CSRF token is missing or has expired. Reload the page and try again.",
+        "source": "Laravel",
+        "docs": "https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#Unofficial_codes",
+        "docsLabel": "More on Wikipedia"
+      },
+      {
+        "code": 420,
+        "name": "Enhance Your Calm",
+        "description": "The old Twitter API's way of saying you are being rate limited. Spring used the same number for Method Failure.",
+        "source": "Twitter API v1",
+        "docs": "https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#Unofficial_codes",
+        "docsLabel": "More on Wikipedia"
+      },
+      {
+        "code": 440,
+        "name": "Login Time-out",
+        "description": "The session expired and IIS wants you to sign in again.",
+        "source": "Microsoft IIS",
+        "docs": "https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#Unofficial_codes",
+        "docsLabel": "More on Wikipedia"
+      },
+      {
+        "code": 444,
+        "name": "No Response",
+        "description": "nginx closes the connection without sending anything back. Used to drop unwanted requests silently.",
+        "source": "nginx",
+        "docs": "https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#Unofficial_codes",
+        "docsLabel": "More on Wikipedia"
+      },
+      {
+        "code": 449,
+        "name": "Retry With",
+        "description": "IIS asks the client to send the request again with the information that was missing.",
+        "source": "Microsoft IIS",
+        "docs": "https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#Unofficial_codes",
+        "docsLabel": "More on Wikipedia"
+      },
+      {
+        "code": 450,
+        "name": "Blocked by Windows Parental Controls",
+        "description": "Windows Parental Controls blocked access to this page.",
+        "source": "Microsoft Windows",
+        "docs": "https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#Unofficial_codes",
+        "docsLabel": "More on Wikipedia"
+      },
+      {
+        "code": 494,
+        "name": "Request Header Too Large",
+        "description": "The request headers went over nginx's buffer before it could answer with a 431.",
+        "source": "nginx",
+        "docs": "https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#Unofficial_codes",
+        "docsLabel": "More on Wikipedia"
+      },
+      {
+        "code": 495,
+        "name": "SSL Certificate Error",
+        "description": "The client presented a TLS certificate that nginx could not verify.",
+        "source": "nginx",
+        "docs": "https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#Unofficial_codes",
+        "docsLabel": "More on Wikipedia"
+      },
+      {
+        "code": 496,
+        "name": "SSL Certificate Required",
+        "description": "nginx requires a client TLS certificate and none was presented.",
+        "source": "nginx",
+        "docs": "https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#Unofficial_codes",
+        "docsLabel": "More on Wikipedia"
+      },
+      {
+        "code": 497,
+        "name": "HTTP Request Sent to HTTPS Port",
+        "description": "A plain HTTP request arrived at a port that only speaks HTTPS.",
+        "source": "nginx",
+        "docs": "https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#Unofficial_codes",
+        "docsLabel": "More on Wikipedia"
+      },
+      {
+        "code": 499,
+        "name": "Client Closed Request",
+        "description": "The client gave up and closed the connection before nginx could answer. A regular sight in nginx logs.",
+        "source": "nginx",
+        "docs": "https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#Unofficial_codes",
+        "docsLabel": "More on Wikipedia"
+      },
+      {
+        "code": 509,
+        "name": "Bandwidth Limit Exceeded",
+        "description": "The hosting account went over its traffic allowance for the month.",
+        "source": "Apache / cPanel",
+        "docs": "https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#Unofficial_codes",
+        "docsLabel": "More on Wikipedia"
+      },
+      {
+        "code": 520,
+        "name": "Web Server Returned an Unknown Error",
+        "description": "The origin answered with something empty or malformed that Cloudflare could not make sense of.",
+        "source": "Cloudflare",
+        "docs": "https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/",
+        "docsLabel": "Cloudflare docs"
+      },
+      {
+        "code": 521,
+        "name": "Web Server Is Down",
+        "description": "The origin refused the connection. Usually it is switched off or blocking Cloudflare's addresses.",
+        "source": "Cloudflare",
+        "docs": "https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/",
+        "docsLabel": "Cloudflare docs"
+      },
+      {
+        "code": 522,
+        "name": "Connection Timed Out",
+        "description": "Cloudflare reached the origin but the connection was never established.",
+        "source": "Cloudflare",
+        "docs": "https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/",
+        "docsLabel": "Cloudflare docs"
+      },
+      {
+        "code": 523,
+        "name": "Origin Is Unreachable",
+        "description": "Cloudflare could not route to the origin at all, usually a DNS or routing problem.",
+        "source": "Cloudflare",
+        "docs": "https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/",
+        "docsLabel": "Cloudflare docs"
+      },
+      {
+        "code": 524,
+        "name": "A Timeout Occurred",
+        "description": "Cloudflare connected to the origin, but it took too long to answer.",
+        "source": "Cloudflare",
+        "docs": "https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/",
+        "docsLabel": "Cloudflare docs"
+      },
+      {
+        "code": 525,
+        "name": "SSL Handshake Failed",
+        "description": "The TLS handshake between Cloudflare and the origin did not succeed.",
+        "source": "Cloudflare",
+        "docs": "https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/",
+        "docsLabel": "Cloudflare docs"
+      },
+      {
+        "code": 526,
+        "name": "Invalid SSL Certificate",
+        "description": "The origin's TLS certificate could not be validated.",
+        "source": "Cloudflare",
+        "docs": "https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/",
+        "docsLabel": "Cloudflare docs"
+      },
+      {
+        "code": 530,
+        "name": "Site Frozen",
+        "description": "Always shown next to a Cloudflare 1xxx error, which is where the real cause is.",
+        "source": "Cloudflare",
+        "docs": "https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/",
+        "docsLabel": "Cloudflare docs"
+      },
+      {
+        "code": 598,
+        "name": "Network Read Timeout Error",
+        "description": "Used by some proxies when reading from the server upstream times out.",
+        "source": "Proxies (informal)",
+        "docs": "https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#Unofficial_codes",
+        "docsLabel": "More on Wikipedia"
+      },
+      {
+        "code": 599,
+        "name": "Network Connect Timeout Error",
+        "description": "Used by some proxies when they cannot connect to the server upstream.",
+        "source": "Proxies (informal)",
+        "docs": "https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#Unofficial_codes",
+        "docsLabel": "More on Wikipedia"
       }
     ]
   }

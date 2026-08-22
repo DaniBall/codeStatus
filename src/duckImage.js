@@ -17,11 +17,12 @@ export const DUCKS_DIR = 'ducks'
  * encaja con el color de su familia en vez de desentonar.
  */
 const CATEGORY_COLORS = {
-    1: { sky: '#cfe4f4', ground: '#1f6ea8' },
-    2: { sky: '#cfe9d8', ground: '#237a41' },
-    3: { sky: '#f4e3c4', ground: '#8a5a12' },
-    4: { sky: '#f6d8d3', ground: '#b03325' },
-    5: { sky: '#e0d6f2', ground: '#5b3f97' },
+    '1': { sky: '#cfe4f4', ground: '#1f6ea8' },
+    '2': { sky: '#cfe9d8', ground: '#237a41' },
+    '3': { sky: '#f4e3c4', ground: '#8a5a12' },
+    '4': { sky: '#f6d8d3', ground: '#b03325' },
+    '5': { sky: '#e0d6f2', ground: '#5b3f97' },
+    wild: { sky: '#d6ebf0', ground: '#0a5f77' },
 }
 
 /** Devuelve la escena descrita para un código, o `undefined` si no existe. */
@@ -47,10 +48,12 @@ function escapeXml(value) {
 /**
  * Pato dibujado localmente en SVG, para cuando no hay foto pregenerada.
  * No depende de la red ni de ningún fichero.
+ *
+ * La familia va aparte del código porque los códigos de "In the wild" son
+ * números 4xx y 5xx pero pertenecen a su propia sección.
  */
-export function buildDuckFallback(code, name = '') {
-    const family = Number(String(code).charAt(0))
-    const { sky, ground } = CATEGORY_COLORS[family] || CATEGORY_COLORS[2]
+export function buildDuckFallback(code, name = '', family = String(code).charAt(0)) {
+    const { sky, ground } = CATEGORY_COLORS[family] || CATEGORY_COLORS['2']
     const label = escapeXml(String(name).slice(0, 40))
 
     const svg = [
@@ -75,8 +78,8 @@ export function buildDuckFallback(code, name = '') {
  * Imagen de un código: la foto pregenerada si el código tiene escena, y si no
  * el pato dibujado.
  */
-export function resolveDuckImage(statusCode) {
+export function resolveDuckImage(statusCode, family) {
     const { code, name = '' } = statusCode || {}
-    if (!getDuckScene(code)) return { src: buildDuckFallback(code, name), pregenerada: false }
+    if (!getDuckScene(code)) return { src: buildDuckFallback(code, name, family), pregenerada: false }
     return { src: duckImagePath(code), pregenerada: true }
 }

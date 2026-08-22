@@ -4,11 +4,6 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import StatusInfo from './elements/StatusInfo.js'
 import DuckImage from './elements/DuckImage.js'
 
-/** Familia del código (1 para los 1xx, 2 para los 2xx...), que elige el color. */
-export function familyOf(category) {
-  return String(category).charAt(0)
-}
-
 function Home() {
   return (
     <div className="App">
@@ -19,8 +14,8 @@ function Home() {
             <a
               key={category.category}
               className='topBar-link'
-              href={`#c${category.category}`}
-              data-family={familyOf(category.category)}
+              href={`#c${category.family}`}
+              data-family={category.family}
             >
               {category.category}
             </a>
@@ -31,9 +26,9 @@ function Home() {
       {codeStatus.map(category => (
         <section
           key={category.category}
-          id={`c${category.category}`}
+          id={`c${category.family}`}
           className='category'
-          data-family={familyOf(category.category)}
+          data-family={category.family}
         >
           <div className='category-header'>
             <h2 className='category-title'>{category.category}</h2>
@@ -43,10 +38,14 @@ function Home() {
             {category.codes.map(item => (
               <Link to={`/${item.code}`} key={item.code} className='cardLink'>
                 <article className='codeStatusCard'>
-                  <DuckImage statusCode={item} />
+                  <DuckImage statusCode={item} family={category.family} />
                   <div className='codeStatusCard-body'>
                     <h3 className='codeStatusCard-code'>{item.code}</h3>
                     <p className='codeStatusCard-name'>{item.name}</p>
+                    {/* De dónde sale: sin esto, un 521 parece tan estándar como un 404. */}
+                    {item.source && (
+                      <p className='codeStatusCard-source'>{item.source}</p>
+                    )}
                   </div>
                 </article>
               </Link>

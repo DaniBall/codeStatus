@@ -13,7 +13,7 @@ aparecen al instante.
 npm run ducks
 ```
 
-Eso recorre los 63 códigos, pide cada foto al generador y la deja en
+Eso recorre los 85 códigos, pide cada foto al generador y la deja en
 `public/ducks/`. Tarda unos minutos la primera vez. Luego **se revisan a mano**:
 la que no se entienda o salga fea, se borra y se vuelve a ejecutar el script, o
 se regenera sólo esa. Cuando convenzan, se suben al repositorio.
@@ -21,7 +21,7 @@ se regenera sólo esa. Cuando convenzan, se suben al repositorio.
 ```bash
 npm run ducks                    # sólo las que falten
 npm run ducks -- 404 500         # regenera esos dos códigos
-npm run ducks -- --all           # rehace las 63
+npm run ducks -- --all           # rehace las 85
 npm run ducks -- --model turbo   # prueba otro modelo
 ```
 
@@ -30,7 +30,7 @@ usa [Pollinations](https://pollinations.ai), que no necesita clave de API.
 
 ### De dónde sale cada escena
 
-`src/data/duckScenes.json` guarda, para cada código, la escena que lo ilustra
+`src/data/duckScenes.json` guarda, para cada uno de los 85 códigos, la escena que lo ilustra
 (el 404 alumbra un nido vacío con una linterna, el 429 acaba sepultado por un
 montón de patitos, el 418 lleva una tetera por sombrero). El script le añade el
 `style` del mismo fichero y con eso arma el prompt.
@@ -52,6 +52,23 @@ script.
 Basta con dejar tu propio `public/ducks/<código>.jpg`: el script sólo genera
 las que faltan, así que no lo pisa salvo que uses `--all`.
 
+## Códigos
+
+Las cinco familias oficiales están completas: los 63 códigos del registro de
+IANA, ni uno más ni uno menos. Hay una prueba que lo comprueba código a código,
+para que nadie cuele uno inventado entre los estándar.
+
+Aparte va **In the wild**: 22 códigos que no están en ningún estándar pero que
+te encuentras trabajando, cada uno de un servidor, un CDN o un framework
+concreto. Cloudflare (520-526, 530), nginx (444, 494-497, 499), Laravel (419),
+la API vieja de Twitter (420), Microsoft (440, 449, 450), Apache/cPanel (509) y
+un par de convenios informales de proxies (598, 599).
+
+Como confundirlos con los estándar sería un problema, cada uno lleva **de dónde
+sale**: una insignia en la tarjeta, un aviso en su ficha y un enlace a la
+documentación de quien lo inventó en vez de a MDN, que no los recoge. Tienen
+además su propio color, distinto de las cinco familias.
+
 ## Colores
 
 Cada familia de códigos tiene su color, y ese mismo color manda en la cabecera
@@ -65,6 +82,7 @@ en el pato dibujado de respaldo:
 | `3xx` redirecciones   | ámbar    |
 | `4xx` error de cliente| rojo     |
 | `5xx` error de servidor| morado  |
+| `In the wild` no oficiales | verde azulado |
 
 Así el color dice de qué familia es un código, en vez de ser decoración suelta.
 Los cinco acentos pasan el contraste AA de WCAG sobre blanco (el peor está en
@@ -73,7 +91,7 @@ Los cinco acentos pasan el contraste AA de WCAG sobre blanco (el peor está en
 ## Comprobaciones
 
 ```bash
-npm test    # 14 pruebas
+npm test    # 21 pruebas
 npm run build
 ```
 

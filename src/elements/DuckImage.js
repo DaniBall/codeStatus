@@ -8,11 +8,11 @@ import { buildDuckFallback, resolveDuckImage } from '../duckImage'
  * existe —porque nadie ha ejecutado `npm run ducks`— se queda con un pato SVG
  * dibujado en local, de modo que la tarjeta nunca muestra una imagen rota.
  */
-export default function DuckImage({ statusCode, className = '' }) {
+export default function DuckImage({ statusCode, family, className = '' }) {
     const { code, name = '' } = statusCode || {}
 
-    const { src } = useMemo(() => resolveDuckImage(statusCode), [statusCode])
-    const fallback = useMemo(() => buildDuckFallback(code, name), [code, name])
+    const { src } = useMemo(() => resolveDuckImage(statusCode, family), [statusCode, family])
+    const fallback = useMemo(() => buildDuckFallback(code, name, family), [code, name, family])
 
     const [failed, setFailed] = useState(false)
     useEffect(() => setFailed(false), [src])

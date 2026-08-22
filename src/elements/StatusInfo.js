@@ -25,26 +25,38 @@ export default function StatusInfo() {
     }
 
     const scene = getDuckScene(statusCode.code)
+    // Los códigos no oficiales no están en MDN: cada uno apunta a su fuente.
+    const docs = statusCode.docs
+        || `https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/${statusCode.code}`
+    const docsLabel = statusCode.docsLabel || 'Read the docs on MDN'
 
     return (
-        <div className='App' data-family={String(statusCode.code).charAt(0)}>
+        <div className='App' data-family={category.family}>
             <div className='statusInfo'>
                 <Link className='statusInfo-back' to='/'>← All status codes</Link>
 
                 <article className='statusInfo-card'>
-                    <DuckImage statusCode={statusCode} />
+                    <DuckImage statusCode={statusCode} family={category.family} />
                     <div className='statusInfo-body'>
                         <h1 className='statusInfo-code'>{statusCode.code}</h1>
                         <p className='statusInfo-name'>{statusCode.name}</p>
+
+                        {statusCode.source && (
+                            <p className='statusInfo-source'>
+                                <strong>Not a standard code.</strong> You will only
+                                see it coming from <strong>{statusCode.source}</strong>.
+                            </p>
+                        )}
+
                         <p className='statusInfo-description'>{statusCode.description}</p>
                         {scene && <p className='statusInfo-scene'>🦆 {scene}</p>}
                         <a
                             className='statusInfo-link'
-                            href={`https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/${statusCode.code}`}
+                            href={docs}
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            Read the docs on MDN ↗
+                            {docsLabel} ↗
                         </a>
                     </div>
                 </article>

@@ -24,6 +24,7 @@
 [data-family="3"]{ --accent: #8a5a12; --accent-soft: #faeed8; }  /* redirecciones*/
 [data-family="4"]{ --accent: #b03325; --accent-soft: #fbe7e4; }  /* error cliente*/
 [data-family="5"]{ --accent: #5b3f97; --accent-soft: #eee8fa; }  /* error servidor*/
+[data-family="wild"]{ --accent: #0a5f77; --accent-soft: #e3f2f6; } /* no oficiales */
 
 .App{
   min-height: 100vh;
@@ -138,6 +139,11 @@
   box-shadow: var(--shadow-hover);
 }
 .codeStatusCard-body{
+  /* Crece para ocupar la tarjeta, y así la insignia queda pegada abajo
+     aunque el nombre ocupe una línea o dos. */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   padding: 0.9em 1em 1.1em;
 }
 .codeStatusCard-code{
@@ -147,10 +153,24 @@
   color: var(--accent);
 }
 .codeStatusCard-name{
-  margin: 0.15em 0 0;
+  margin: 0.15em 0 0.7em;
   font-size: 0.95rem;
   font-weight: 500;
   color: var(--ink-soft);
+}
+/* Procedencia de los códigos no oficiales: sin esto, un 521 parece tan
+   estándar como un 404. */
+.codeStatusCard-source{
+  align-self: flex-start;
+  margin: auto 0 0;
+  padding: 0.15em 0.6em;
+  border-radius: 999px;
+  background-color: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 /* ---- Ficha de un código ---- */
@@ -189,6 +209,14 @@
 .statusInfo-name{
   margin: 0.15em 0 1em;
   font-size: 1.25rem;
+}
+.statusInfo-source{
+  margin: 0 0 1.25em;
+  padding: 0.8em 1em;
+  border-left: 4px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  background-color: var(--accent-soft);
+  font-size: 0.95rem;
 }
 .statusInfo-description{
   margin: 0 0 1.25em;

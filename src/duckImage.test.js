@@ -6,6 +6,63 @@ import { buildDuckFallback, duckImagePath, getDuckScene, resolveDuckImage } from
 
 const allCodes = codeStatus.flatMap(category => category.codes);
 
+describe('catálogo de códigos', () => {
+    test('las familias oficiales están completas según el registro de IANA', () => {
+        const oficiales = {
+            '1xx': [100, 101, 102, 103],
+            '2xx': [200, 201, 202, 203, 204, 205, 206, 207, 208, 226],
+            '3xx': [300, 301, 302, 303, 304, 305, 306, 307, 308],
+            '4xx': [400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412,
+                413, 414, 415, 416, 417, 418, 421, 422, 423, 424, 425, 426, 428, 429, 431, 451],
+            '5xx': [500, 501, 502, 503, 504, 505, 506, 507, 508, 510, 511],
+        };
+        Object.entries(oficiales).forEach(([nombre, esperados]) => {
+            const familia = codeStatus.find(cat => cat.category === nombre);
+            expect(familia.codes.map(item => item.code)).toEqual(esperados);
+        });
+    });
+
+    test('cada familia declara la suya, sin repetirse', () => {
+        const familias = codeStatus.map(cat => cat.family);
+        expect(familias).toEqual(['1', '2', '3', '4', '5', 'wild']);
+    });
+
+    test('no hay códigos repetidos entre secciones', () => {
+        const codigos = allCodes.map(item => item.code);
+        expect(new Set(codigos).size).toBe(codigos.length);
+    });
+});
+
+describe('códigos no oficiales', () => {
+    const wild = codeStatus.find(cat => cat.family === 'wild').codes;
+
+    test('todos dicen de dónde salen y adónde ir a leer más', () => {
+        expect(wild.length).toBeGreaterThan(0);
+        wild.forEach(item => {
+            expect(item.source).toBeTruthy();
+            expect(item.docsLabel).toBeTruthy();
+            expect(() => new URL(item.docs)).not.toThrow();
+            expect(new URL(item.docs).protocol).toBe('https:');
+        });
+    });
+
+    test('ninguno apunta a MDN, que no los documenta', () => {
+        wild.forEach(item => {
+            expect(item.docs).not.toMatch(/developer\.mozilla\.org/);
+        });
+    });
+
+    test('los oficiales no llevan procedencia: la suya es el estándar', () => {
+        codeStatus
+            .filter(cat => cat.family !== 'wild')
+            .flatMap(cat => cat.codes)
+            .forEach(item => {
+                expect(item.source).toBeUndefined();
+                expect(item.docs).toBeUndefined();
+            });
+    });
+});
+
 describe('escenas de patos', () => {
     test('todos los códigos tienen escena, sin sobrantes ni repetidas', () => {
         const codigos = allCodes.map(item => String(item.code));
@@ -64,6 +121,14 @@ describe('pato de respaldo', () => {
             expect(doc.documentElement.tagName).toBe('svg');
             expect(svg).not.toMatch(/https?:\/\/(?!www\.w3\.org)/);
         });
+    });
+
+    test('usa el color de la familia, no el del primer dígito', () => {
+        // El 521 es un número 5xx, pero vive en "In the wild" y va en su color.
+        const wild = decodeURIComponent(buildDuckFallback(521, 'Web Server Is Down', 'wild').split(',')[1]);
+        const quinientos = decodeURIComponent(buildDuckFallback(521, 'Web Server Is Down', '5').split(',')[1]);
+        expect(wild).toContain('#0a5f77');
+        expect(wild).not.toEqual(quinientos);
     });
 
     test('escapa los nombres con caracteres especiales', () => {
