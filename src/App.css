@@ -111,9 +111,22 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.4em;
+}
+/* El índice se queda junto al título y el botón se va al borde derecho: así
+   no se confunde con una pestaña más del índice. */
+.topBar > .themeToggle{
+  flex: none;
   margin-left: auto;
 }
-.topBar > .themeToggle{ flex: none; }
+/* Estrecho: el índice baja a su propia línea y el botón se queda arriba con
+   el título, en vez de caerse solo a una tercera fila. */
+@media (max-width: 40em){
+  .topBar-nav{
+    order: 3;
+    flex-basis: 100%;
+  }
+  .topBar > .themeToggle{ order: 2; }
+}
 .topBar-link{
   padding: 0.25em 0.8em;
   border-radius: 999px;
