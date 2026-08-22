@@ -31,7 +31,7 @@ export default function StatusInfo() {
     const docsLabel = statusCode.docsLabel || 'Read the docs on MDN'
 
     return (
-        <div className='App' data-family={category.family}>
+        <div className='App statusInfo-page' data-family={category.family}>
             <div className='statusInfo'>
                 <Link className='statusInfo-back' to='/'>← All status codes</Link>
 

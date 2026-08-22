@@ -408,6 +408,62 @@
   text-align: center;
 }
 
+/* En el móvil en vertical, la ficha de un código cabe de una vez: la imagen
+   se estira o se encoge para ocupar justo lo que sobra después del texto, así
+   que no hay que hacer scroll para leerla entera. El texto nunca se recorta;
+   si aun con la imagen al mínimo no cupiera, la página vuelve a desplazarse. */
+@media (max-width: 48em) and (orientation: portrait){
+  /* Altura definida, no min-height: sin ella flex no tiene espacio libre que
+     repartir y la imagen se queda con su tamaño natural. Con dvh se descuenta
+     la barra del navegador móvil, que 100vh ignora. */
+  .statusInfo-page{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    height: 100dvh;
+  }
+  .statusInfo{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding-bottom: 0.6em;
+  }
+  .statusInfo-back{ margin: 0.8em 0 0.6em; }
+  .statusInfo-card{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  /* Base 0: la imagen no aporta su altura al reparto, así que se queda con
+     lo que sobra después del texto en vez de empujarlo fuera de la pantalla. */
+  .statusInfo-card .duckImage{
+    flex: 1 1 0;
+    aspect-ratio: auto;
+    min-height: 6em;
+  }
+  .statusInfo-body{ padding: 1em 1.1em 1.2em; }
+  .statusInfo-code{ font-size: 2.6rem; }
+  .statusInfo-name{
+    margin-bottom: 0.6em;
+    font-size: 1.1rem;
+  }
+  .statusInfo-source{
+    margin-bottom: 0.9em;
+    padding: 0.6em 0.85em;
+    font-size: 0.88rem;
+  }
+  .statusInfo-description{
+    margin-bottom: 1em;
+    font-size: 1rem;
+  }
+  .statusInfo-page .siteFooter{
+    padding: 1em clamp(1em, 4vw, 2.5em);
+    font-size: 0.75rem;
+  }
+}
+
 /* ---- Imágenes de patos ---- */
 
 .duckImage{
@@ -421,6 +477,13 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+/* Una foto recortada sigue siendo una foto, pero el dibujo de respaldo es una
+   composición: si se recorta se ve un trozo de interrogante. Cuando el hueco
+   deja de ser cuadrado, como en la ficha en móvil, se enseña entero sobre su
+   propio color de fondo. */
+.duckImage[data-state="failed"] img{
+  object-fit: contain;
 }
 
 :focus-visible{
