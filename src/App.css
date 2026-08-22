@@ -192,6 +192,12 @@
   text-align: center;
 }
 .siteFooter-line{ margin: 0; }
+.siteFooter-link{
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.siteFooter-link:hover{ color: var(--ink); }
 .siteFooter-note{
   margin-top: 0.5em;
   opacity: 0.85;
