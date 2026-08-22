@@ -37,19 +37,11 @@ describe('rutas de las fotos pregeneradas', () => {
     });
 
     test('los códigos con escena se resuelven a la foto pregenerada', () => {
-        allCodes
-            .filter(item => !item.image)
-            .forEach(item => {
-                expect(resolveDuckImage(item)).toEqual({
-                    src: `/ducks/${item.code}.jpg`,
-                    pregenerada: true,
-                });
+        allCodes.forEach(item => {
+            expect(resolveDuckImage(item)).toEqual({
+                src: `/ducks/${item.code}.jpg`,
+                pregenerada: true,
             });
-    });
-
-    test('una foto fijada a mano en el JSON manda sobre la pregenerada', () => {
-        allCodes.filter(item => item.image).forEach(item => {
-            expect(resolveDuckImage(item)).toEqual({ src: item.image, pregenerada: false });
         });
     });
 
@@ -79,24 +71,6 @@ describe('pato de respaldo', () => {
         expect(svg).toContain('&apos;');
         expect(svg).toContain('&lt;teapot&gt;');
         expect(new DOMParser().parseFromString(svg, 'image/svg+xml').querySelector('parsererror')).toBeNull();
-    });
-});
-
-describe('fotos incrustadas a mano en el JSON', () => {
-    test('se decodifican y son imágenes reales', () => {
-        const pinned = allCodes.filter(item => item.image);
-        expect(pinned.length).toBeGreaterThan(0);
-
-        pinned.forEach(item => {
-            const match = /^data:image\/(jpeg|jpg|png|webp|gif);base64,([A-Za-z0-9+/=]+)$/.exec(item.image);
-            expect(match).not.toBeNull();
-
-            const bytes = Buffer.from(match[2], 'base64');
-            expect(bytes.length).toBeGreaterThan(1024);
-
-            const magic = { jpeg: [0xff, 0xd8, 0xff], jpg: [0xff, 0xd8, 0xff], png: [0x89, 0x50, 0x4e, 0x47], gif: [0x47, 0x49, 0x46] }[match[1]];
-            if (magic) expect([...bytes.subarray(0, magic.length)]).toEqual(magic);
-        });
     });
 });
 

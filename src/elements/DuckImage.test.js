@@ -18,7 +18,7 @@ test('si la foto no existe todavía, cae en el pato dibujado', () => {
     fireEvent.error(img);
 
     expect(img.getAttribute('src')).toMatch(/^data:image\/svg\+xml/);
-    expect(img.getAttribute('alt')).toMatch(/respaldo/i);
+    expect(img.getAttribute('alt')).toMatch(/placeholder/i);
 });
 
 test('el pato de respaldo se queda puesto al cargarse', () => {
@@ -29,11 +29,4 @@ test('el pato de respaldo se queda puesto al cargarse', () => {
     fireEvent.load(img);
 
     expect(screen.getByRole('img').getAttribute('src')).toMatch(/^data:image\/svg\+xml/);
-});
-
-test('una foto fijada a mano en el JSON tiene prioridad', () => {
-    const pinned = { code: 206, name: 'Partial Content', image: 'data:image/jpeg;base64,AAAA' };
-    render(<DuckImage statusCode={pinned} />);
-
-    expect(screen.getByRole('img').getAttribute('src')).toBe(pinned.image);
 });

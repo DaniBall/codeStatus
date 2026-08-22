@@ -11,13 +11,17 @@ import duckData from './data/duckScenes.json'
 /** Carpeta, dentro de `public/`, donde viven las fotos pregeneradas. */
 export const DUCKS_DIR = 'ducks'
 
-/** Colores por familia de código, usados en la imagen de respaldo. */
+/**
+ * Colores por familia de código. Son los mismos acentos que usa App.css para
+ * la cabecera de la sección y la tarjeta, de modo que el pato de respaldo
+ * encaja con el color de su familia en vez de desentonar.
+ */
 const CATEGORY_COLORS = {
-    1: { sky: '#9ad0f5', ground: '#5fa8d3' },
-    2: { sky: '#a8e6a1', ground: '#4caf50' },
-    3: { sky: '#ffd98e', ground: '#f0a202' },
-    4: { sky: '#ffb3a7', ground: '#e5534b' },
-    5: { sky: '#c9b6e4', ground: '#7b5ea7' },
+    1: { sky: '#cfe4f4', ground: '#1f6ea8' },
+    2: { sky: '#cfe9d8', ground: '#237a41' },
+    3: { sky: '#f4e3c4', ground: '#8a5a12' },
+    4: { sky: '#f6d8d3', ground: '#b03325' },
+    5: { sky: '#e0d6f2', ground: '#5b3f97' },
 }
 
 /** Devuelve la escena descrita para un código, o `undefined` si no existe. */
@@ -53,7 +57,7 @@ export function buildDuckFallback(code, name = '') {
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" role="img">',
         `<title>HTTP ${escapeXml(code)} ${label}</title>`,
         `<rect width="400" height="400" fill="${sky}"/>`,
-        `<path d="M0 300 Q 50 285 100 300 T 200 300 T 300 300 T 400 300 L400 400 L0 400 Z" fill="${ground}" opacity="0.85"/>`,
+        `<path d="M0 315 Q 50 300 100 315 T 200 315 T 300 315 T 400 315 L400 400 L0 400 Z" fill="${ground}" opacity="0.85"/>`,
         '<ellipse cx="190" cy="232" rx="106" ry="72" fill="#ffd23f"/>',
         '<path d="M96 210 Q 40 180 60 232 Q 74 258 108 252 Z" fill="#f7b801"/>',
         '<circle cx="262" cy="150" r="52" fill="#ffd23f"/>',
@@ -61,7 +65,6 @@ export function buildDuckFallback(code, name = '') {
         '<circle cx="276" cy="136" r="8" fill="#1b1b1b"/>',
         '<circle cx="279" cy="133" r="3" fill="#ffffff"/>',
         '<ellipse cx="176" cy="236" rx="54" ry="35" fill="#f7b801" opacity="0.9"/>',
-        `<text x="200" y="372" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="62" font-weight="700" fill="#1b1b1b" opacity="0.75">${escapeXml(code)}</text>`,
         '</svg>',
     ].join('')
 
@@ -69,12 +72,11 @@ export function buildDuckFallback(code, name = '') {
 }
 
 /**
- * Imagen de un código: manda la foto fijada a mano en el JSON; si no la hay,
- * la foto pregenerada; y si el código no tiene escena, el pato dibujado.
+ * Imagen de un código: la foto pregenerada si el código tiene escena, y si no
+ * el pato dibujado.
  */
 export function resolveDuckImage(statusCode) {
-    const { code, name = '', image } = statusCode || {}
-    if (image) return { src: image, pregenerada: false }
+    const { code, name = '' } = statusCode || {}
     if (!getDuckScene(code)) return { src: buildDuckFallback(code, name), pregenerada: false }
     return { src: duckImagePath(code), pregenerada: true }
 }

@@ -47,17 +47,33 @@ se borró— la tarjeta enseña un pato SVG dibujado en local con el número del
 código. Nunca aparece una imagen rota, y la web funciona sin haber ejecutado el
 script.
 
-### Fijar una foto a mano
+### Poner una foto a mano
 
-Si un código tiene el campo `image` relleno en `src/status_codes.json` (con un
-`data:` URI), esa foto manda sobre la generada. Así se conservan las fotos
-elegidas a mano para el 206 y el 207. También vale con dejar tu propio
-`public/ducks/<código>.jpg`: el script no lo pisa salvo que uses `--all`.
+Basta con dejar tu propio `public/ducks/<código>.jpg`: el script sólo genera
+las que faltan, así que no lo pisa salvo que uses `--all`.
+
+## Colores
+
+Cada familia de códigos tiene su color, y ese mismo color manda en la cabecera
+de la sección, en el borde y el número de la tarjeta, en la ficha del código y
+en el pato dibujado de respaldo:
+
+| Familia | Color |
+|---------|-------|
+| `1xx` informativos    | azul     |
+| `2xx` correctos       | verde    |
+| `3xx` redirecciones   | ámbar    |
+| `4xx` error de cliente| rojo     |
+| `5xx` error de servidor| morado  |
+
+Así el color dice de qué familia es un código, en vez de ser decoración suelta.
+Los cinco acentos pasan el contraste AA de WCAG sobre blanco (el peor está en
+5.3:1) y el texto principal sobre el fondo llega a 15.8:1.
 
 ## Comprobaciones
 
 ```bash
-npm test    # 17 pruebas
+npm test    # 14 pruebas
 npm run build
 ```
 

@@ -22,8 +22,8 @@ export default function DuckImage({ statusCode, className = '' }) {
             <img
                 src={failed ? fallback : src}
                 alt={failed
-                    ? `Ilustración de respaldo del código HTTP ${code} ${name}`
-                    : `Foto de patos que ilustra el código HTTP ${code} ${name}`}
+                    ? `Placeholder duck illustration for HTTP ${code} ${name}`
+                    : `Duck photo illustrating HTTP ${code} ${name}`}
                 loading="lazy"
                 decoding="async"
                 // Sólo la foto puede fallar; el respaldo es un data: URI que
