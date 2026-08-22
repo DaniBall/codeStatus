@@ -223,15 +223,6 @@
   font-size: 1.05rem;
   line-height: 1.55;
 }
-.statusInfo-scene{
-  margin: 0 0 1.75em;
-  padding: 0.8em 1em;
-  border-radius: 10px;
-  background-color: var(--accent-soft);
-  color: var(--ink);
-  font-size: 0.95rem;
-  font-style: italic;
-}
 .statusInfo-link{
   display: inline-block;
   padding: 0.6em 1.4em;

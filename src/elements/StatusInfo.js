@@ -2,7 +2,6 @@ import '../App.css'
 import codeStatus from '../status_codes.json'
 import { useParams, Link } from 'react-router-dom'
 import DuckImage from './DuckImage.js'
-import { getDuckScene } from '../duckImage'
 
 export default function StatusInfo() {
     const { code } = useParams();
@@ -24,7 +23,6 @@ export default function StatusInfo() {
         )
     }
 
-    const scene = getDuckScene(statusCode.code)
     // Los códigos no oficiales no están en MDN: cada uno apunta a su fuente.
     const docs = statusCode.docs
         || `https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/${statusCode.code}`
@@ -49,7 +47,6 @@ export default function StatusInfo() {
                         )}
 
                         <p className='statusInfo-description'>{statusCode.description}</p>
-                        {scene && <p className='statusInfo-scene'>🦆 {scene}</p>}
                         <a
                             className='statusInfo-link'
                             href={docs}
