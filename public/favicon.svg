@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" fill="#ffd23f"/>
+  <!-- El gancho, a trazo grueso: es lo único que tiene que sobrevivir a 16px.
+       El trazo acaba en y=278, y con el remate redondo llega a 318: por debajo
+       queda hueco limpio para que el punto se lea como punto y no se pegue. -->
+  <path d="M 152 164 a 104 104 0 1 1 104 104 v 10"
+        fill="none" stroke="#1b1e1f" stroke-width="80"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- El punto del interrogante es la cabeza del pato -->
+  <circle cx="256" cy="424" r="68" fill="#1b1e1f"/>
+  <path d="M 316 400 L 428 424 L 316 448 Z" fill="#f4801f"/>
+  <circle cx="276" cy="406" r="14" fill="#ffd23f"/>
+  <circle cx="281" cy="401" r="5" fill="#ffffff"/>
+</svg>
