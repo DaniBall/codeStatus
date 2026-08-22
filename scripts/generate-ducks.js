@@ -11,6 +11,8 @@
  *   npm run ducks -- 404 --reroll    otra versión distinta de esa imagen
  *   npm run ducks -- --all           regenera todas, incluso las que ya existen
  *   npm run ducks -- --model turbo   prueba otro modelo
+ *   npm run ducks -- --models        qué modelos ofrece el servicio hoy
+ *   npm run ducks -- 404 --compare flux,turbo   el mismo código con varios
  *
  * El servicio gratuito limita por uso, así que por defecto va de una en una y
  * espaciando las peticiones. Se puede ajustar con DUCK_CONCURRENCY, DUCK_INTERVAL
@@ -26,6 +28,10 @@ const ROOT = path.join(__dirname, '..')
 const OUT_DIR = path.join(ROOT, 'public', 'ducks')
 
 const ENDPOINT = process.env.DUCK_ENDPOINT || 'https://image.pollinations.ai/prompt/'
+/** Lista de modelos del servicio. Por defecto, /models junto al endpoint. */
+const MODELS_URL = process.env.DUCK_MODELS_URL || ENDPOINT.replace(/\/prompt\/?$/, '/models')
+/** Las pruebas de comparación van fuera de public/, para no colarse en la web. */
+const SAMPLES_DIR = path.join(ROOT, 'duck-samples')
 // 1024 y no 768: a más resolución el modelo resuelve mucho mejor la anatomía,
 // que es de donde salían los patos deformes. Se baja con DUCK_SIZE si va lento.
 const SIZE = Number(process.env.DUCK_SIZE || 1024)
@@ -183,17 +189,55 @@ function parseArgs(args) {
     }
     const modelo = valor('--model')
     if (modelo) MODEL = modelo
+    const comparar = valor('--compare')
     const semilla = valor('--seed')
     if (semilla) SEED = Number(semilla)
     REROLL = args.includes('--reroll')
 
     // Los valores de los flags se saltan, para que un modelo o una semilla de
     // tres cifras no se confundan con un código.
-    const valores = ['--model', '--seed'].map(f => args.indexOf(f) + 1).filter(i => i > 0)
+    const valores = ['--model', '--seed', '--compare'].map(f => args.indexOf(f) + 1).filter(i => i > 0)
     return {
         all: args.includes('--all'),
+        listar: args.includes('--models'),
+        comparar: comparar ? comparar.split(',').map(m => m.trim()).filter(Boolean) : null,
         only: args.filter((arg, i) => !valores.includes(i) && /^\d{3}$/.test(arg)).map(Number),
     }
+}
+
+/** Qué modelos ofrece el servicio ahora mismo. */
+async function listarModelos() {
+    const response = await fetch(MODELS_URL)
+    if (!response.ok) throw new Error(`HTTP ${response.status} al pedir ${MODELS_URL}`)
+    const cuerpo = await response.json()
+    const nombres = Array.isArray(cuerpo)
+        ? cuerpo.map(m => (typeof m === 'string' ? m : m.name || m.id || JSON.stringify(m)))
+        : Object.keys(cuerpo)
+    console.log(`Modelos disponibles en ${MODELS_URL}:\n`)
+    nombres.forEach(nombre => console.log('  ' + nombre))
+    console.log('\nPara probar uno:  npm run ducks -- 404 --model <nombre>')
+    console.log('Para compararlos: npm run ducks -- 404 --compare ' + nombres.slice(0, 3).join(','))
+}
+
+/** La misma escena con varios modelos, para poder elegir mirándolos. */
+async function compararModelos(duck, modelos) {
+    fs.mkdirSync(SAMPLES_DIR, { recursive: true })
+    console.log(`Generando el ${duck.code} con ${modelos.length} modelos, a ${SIZE}px.\n`)
+    const original = MODEL
+    for (const modelo of modelos) {
+        MODEL = modelo
+        try {
+            const bytes = await download(duck)
+            const destino = path.join(SAMPLES_DIR, `${duck.code}-${modelo}.jpg`)
+            fs.writeFileSync(destino, bytes)
+            console.log(`  ✓ ${modelo.padEnd(14)} ${(bytes.length / 1024).toFixed(0)} KB  -> duck-samples/${duck.code}-${modelo}.jpg`)
+        } catch (error) {
+            console.log(`  ✗ ${modelo.padEnd(14)} ${error.message}`)
+        }
+    }
+    MODEL = original
+    console.log('\nCompáralas en duck-samples/ y quédate con el modelo que mejor salga:')
+    console.log('  npm run ducks -- --all --model <el que ganase>')
 }
 
 function duracion(ms) {
@@ -202,7 +246,14 @@ function duracion(ms) {
 }
 
 async function main() {
-    const { all, only } = parseArgs(process.argv.slice(2))
+    const { all, only, listar, comparar } = parseArgs(process.argv.slice(2))
+
+    if (listar) return listarModelos()
+
+    if (comparar) {
+        const duck = loadDucks().find(d => only.includes(d.code)) || loadDucks()[0]
+        return compararModelos(duck, comparar)
+    }
 
     fs.mkdirSync(OUT_DIR, { recursive: true })
 

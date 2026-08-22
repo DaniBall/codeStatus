@@ -11,6 +11,9 @@
 # production
 /build
 
+# pruebas de comparación de modelos del generador de patos
+/duck-samples
+
 # misc
 .DS_Store
 .env.local

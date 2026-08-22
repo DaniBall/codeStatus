@@ -30,6 +30,23 @@ La semilla de cada imagen es su propio código, así que repetir la generación 
 **exactamente la misma foto**. Cuando una sale con defectos, lo que hace falta
 es `--reroll`, que cambia la semilla. `--seed N` fija una concreta.
 
+### Elegir modelo
+
+Desde la propia terminal se puede ver qué ofrece el servicio y comparar sin
+tocar las imágenes buenas:
+
+```bash
+npm run ducks -- --models                    # qué modelos hay disponibles hoy
+npm run ducks -- 404 --compare flux,turbo    # el mismo código con cada uno
+```
+
+Las comparaciones se guardan en `duck-samples/`, que no se versiona ni entra en
+la web. Cuando uno convenza:
+
+```bash
+npm run ducks -- --all --model <el que ganase>
+```
+
 ### Límite de uso
 
 El servicio es gratuito y limita por uso: pedirle muchas a la vez devuelve
