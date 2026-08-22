@@ -20,8 +20,10 @@ const ROOT = path.join(__dirname, '..')
 const OUT_DIR = path.join(ROOT, 'public', 'ducks')
 
 const ENDPOINT = process.env.DUCK_ENDPOINT || 'https://image.pollinations.ai/prompt/'
-const MODEL = process.env.DUCK_MODEL || 'flux'
 const SIZE = Number(process.env.DUCK_SIZE || 768)
+
+// El flag --model lo cambia, así que no puede ser una constante.
+let MODEL = process.env.DUCK_MODEL || 'flux'
 
 const CONCURRENCY = 3
 const ATTEMPTS = 3
@@ -112,9 +114,15 @@ async function runAll(ducks, onDone) {
 async function main() {
     const args = process.argv.slice(2)
     const all = args.includes('--all')
+
     const modelFlag = args.indexOf('--model')
-    if (modelFlag >= 0 && args[modelFlag + 1]) process.env.DUCK_MODEL = args[modelFlag + 1]
-    const only = args.filter(arg => /^\d{3}$/.test(arg)).map(Number)
+    if (modelFlag >= 0 && args[modelFlag + 1]) MODEL = args[modelFlag + 1]
+
+    // El valor de --model se salta, para que un modelo llamado "404" no se
+    // confunda con el código 404.
+    const only = args
+        .filter((arg, i) => i !== modelFlag + 1 && /^\d{3}$/.test(arg))
+        .map(Number)
 
     fs.mkdirSync(OUT_DIR, { recursive: true })
 
