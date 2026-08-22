@@ -61,6 +61,13 @@ más se alarga un prompt, menos caso hace el modelo a la escena y menos se
 entiende de qué código habla. Hay una prueba que impide que crezcan de 20
 palabras.
 
+Y están escritas para que **el pato no tenga que manipular nada**. Un pato
+"sujetando" o "pulsando" algo obliga al modelo a inventarle manos, y de ahí
+salen los picos torcidos y las patas de más. El objeto va en la escena, no en
+las alas: *a duck standing on a big red reset button*, no *pressing it*.
+Por lo mismo se generan a 1024px, donde la anatomía sale bastante mejor que a
+768.
+
 ### Si todavía no hay foto
 
 Mientras un código no tenga su `.jpg` —recién clonado el repo, o porque esa foto

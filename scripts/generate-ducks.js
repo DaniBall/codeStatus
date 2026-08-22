@@ -26,7 +26,9 @@ const ROOT = path.join(__dirname, '..')
 const OUT_DIR = path.join(ROOT, 'public', 'ducks')
 
 const ENDPOINT = process.env.DUCK_ENDPOINT || 'https://image.pollinations.ai/prompt/'
-const SIZE = Number(process.env.DUCK_SIZE || 768)
+// 1024 y no 768: a más resolución el modelo resuelve mucho mejor la anatomía,
+// que es de donde salían los patos deformes. Se baja con DUCK_SIZE si va lento.
+const SIZE = Number(process.env.DUCK_SIZE || 1024)
 
 // Los flags los cambian, así que no pueden ser constantes.
 let MODEL = process.env.DUCK_MODEL || 'flux'
