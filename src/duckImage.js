@@ -12,18 +12,21 @@ import duckData from './data/duckScenes.json'
 export const DUCKS_DIR = 'ducks'
 
 /**
- * Colores por familia de código. Son los mismos acentos que usa App.css para
- * la cabecera de la sección y la tarjeta, de modo que el pato de respaldo
- * encaja con el color de su familia en vez de desentonar.
+ * Colores por familia. Son exactamente los pares --accent-soft / --accent de
+ * App.css, así que el respaldo continúa el color de su sección sin costura: el
+ * fondo del hueco y el del dibujo son el mismo.
  */
 const CATEGORY_COLORS = {
-    '1': { sky: '#cfe4f4', ground: '#1f6ea8' },
-    '2': { sky: '#cfe9d8', ground: '#237a41' },
-    '3': { sky: '#f4e3c4', ground: '#8a5a12' },
-    '4': { sky: '#f6d8d3', ground: '#b03325' },
-    '5': { sky: '#e0d6f2', ground: '#5b3f97' },
-    wild: { sky: '#d6ebf0', ground: '#0a5f77' },
+    '1': { bg: '#e4f0f9', mark: '#1f6ea8' },
+    '2': { bg: '#e3f4e9', mark: '#237a41' },
+    '3': { bg: '#faeed8', mark: '#8a5a12' },
+    '4': { bg: '#fbe7e4', mark: '#b03325' },
+    '5': { bg: '#eee8fa', mark: '#5b3f97' },
+    wild: { bg: '#e3f2f6', mark: '#0a5f77' },
 }
+
+/** Naranja del pico. Es la única constante de marca entre todas las familias. */
+const BEAK = '#f4801f'
 
 /** Devuelve la escena descrita para un código, o `undefined` si no existe. */
 export function getDuckScene(code) {
@@ -46,28 +49,33 @@ function escapeXml(value) {
 }
 
 /**
- * Pato dibujado localmente en SVG, para cuando no hay foto pregenerada.
+ * Marca dibujada localmente en SVG, para cuando no hay foto pregenerada.
  * No depende de la red ni de ningún fichero.
+ *
+ * Es el mismo interrogante-pato del favicon y de la previsualización, pintado
+ * con el color de su familia: un hueco sin foto se reconoce al instante como
+ * parte de la web y no como una imagen rota.
  *
  * La familia va aparte del código porque los códigos de "In the wild" son
  * números 4xx y 5xx pero pertenecen a su propia sección.
  */
 export function buildDuckFallback(code, name = '', family = String(code).charAt(0)) {
-    const { sky, ground } = CATEGORY_COLORS[family] || CATEGORY_COLORS['2']
+    const { bg, mark } = CATEGORY_COLORS[family] || CATEGORY_COLORS['2']
     const label = escapeXml(String(name).slice(0, 40))
 
     const svg = [
-        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" role="img">',
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img">',
         `<title>HTTP ${escapeXml(code)} ${label}</title>`,
-        `<rect width="400" height="400" fill="${sky}"/>`,
-        `<path d="M0 315 Q 50 300 100 315 T 200 315 T 300 315 T 400 315 L400 400 L0 400 Z" fill="${ground}" opacity="0.85"/>`,
-        '<ellipse cx="190" cy="232" rx="106" ry="72" fill="#ffd23f"/>',
-        '<path d="M96 210 Q 40 180 60 232 Q 74 258 108 252 Z" fill="#f7b801"/>',
-        '<circle cx="262" cy="150" r="52" fill="#ffd23f"/>',
-        '<path d="M307 146 L376 164 L307 184 Z" fill="#f4801f"/>',
-        '<circle cx="276" cy="136" r="8" fill="#1b1b1b"/>',
-        '<circle cx="279" cy="133" r="3" fill="#ffffff"/>',
-        '<ellipse cx="176" cy="236" rx="54" ry="35" fill="#f7b801" opacity="0.9"/>',
+        `<rect width="512" height="512" fill="${bg}"/>`,
+        // Encogido dentro del cuadro: así se lee como marca de sitio y no como
+        // un signo gigante recortado.
+        '<g transform="translate(256 256) scale(0.86) translate(-256 -256)">',
+        `<path d="M 152 164 a 104 104 0 1 1 104 104 v 10" fill="none" stroke="${mark}" stroke-width="80" stroke-linecap="round" stroke-linejoin="round"/>`,
+        `<circle cx="256" cy="424" r="68" fill="${mark}"/>`,
+        `<path d="M 316 400 L 428 424 L 316 448 Z" fill="${BEAK}"/>`,
+        `<circle cx="276" cy="406" r="14" fill="${bg}"/>`,
+        '<circle cx="281" cy="401" r="5" fill="#ffffff"/>',
+        '</g>',
         '</svg>',
     ].join('')
 
