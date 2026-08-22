@@ -107,25 +107,94 @@
   font-size: 1.15rem;
   letter-spacing: -0.01em;
 }
+/* El índice ocupa su propia fila, debajo del buscador: en la de arriba ya no
+   cabía sin apelotonarse contra el título. */
 .topBar-nav{
+  order: 4;
+  flex-basis: 100%;
   display: flex;
   flex-wrap: wrap;
   gap: 0.4em;
 }
-/* El índice se queda junto al título y el botón se va al borde derecho: así
-   no se confunde con una pestaña más del índice. */
-.topBar > .themeToggle{
-  flex: none;
-  margin-left: auto;
+.topBar > .themeToggle{ flex: none; }
+
+/* ---- Buscador ---- */
+
+.search{
+  flex: 1 1 12em;
+  max-width: 26em;
+  margin: 0 auto;
 }
-/* Estrecho: el índice baja a su propia línea y el botón se queda arriba con
-   el título, en vez de caerse solo a una tercera fila. */
+.search-input{
+  width: 100%;
+  padding: 0.45em 0.9em;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background-color: var(--surface);
+  color: inherit;
+  font: inherit;
+  font-size: 0.95rem;
+}
+.search-input::placeholder{ color: var(--ink-soft); }
+.search-input:focus-visible{
+  outline: 2px solid var(--ink-soft);
+  outline-offset: 1px;
+}
+/* Estrecho: el buscador se lleva su propia fila entera y el botón sube con el
+   título, en vez de quedarse solo en una línea. */
 @media (max-width: 40em){
-  .topBar-nav{
+  .search{
     order: 3;
     flex-basis: 100%;
+    max-width: none;
+    margin: 0;
   }
-  .topBar > .themeToggle{ order: 2; }
+  .topBar > .themeToggle{
+    order: 2;
+    margin-left: auto;
+  }
+}
+
+.search-count{
+  max-width: 78em;
+  margin: 1.5em auto -0.5em;
+  padding: 0 clamp(1em, 4vw, 2.5em);
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+.emptyState{
+  max-width: 30em;
+  margin: 4em auto;
+  padding: 0 1.5em;
+  text-align: center;
+  color: var(--ink-soft);
+}
+.emptyState-clear{
+  margin-top: 1em;
+  padding: 0.5em 1.2em;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background-color: var(--surface);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* ---- Pie ---- */
+
+.siteFooter{
+  max-width: 78em;
+  margin: 0 auto;
+  padding: 3em clamp(1em, 4vw, 2.5em) 3em;
+  border-top: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  text-align: center;
+}
+.siteFooter-line{ margin: 0; }
+.siteFooter-note{
+  margin-top: 0.5em;
+  opacity: 0.85;
 }
 .topBar-link{
   padding: 0.25em 0.8em;
@@ -167,7 +236,7 @@
 .category{
   padding: 0 clamp(1em, 4vw, 2.5em) 2.5em;
   /* Deja sitio a la barra pegajosa al saltar desde el índice. */
-  scroll-margin-top: 4.5em;
+  scroll-margin-top: 8em;
 }
 .category-header{
   display: flex;

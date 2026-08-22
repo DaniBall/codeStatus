@@ -2,6 +2,7 @@
   "name": "code.status",
   "homepage": "https://DaniBall.github.io/codeStatus",
   "version": "0.1.0",
+  "license": "UNLICENSED",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.1",

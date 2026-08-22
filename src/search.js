@@ -1,0 +1,50 @@
+/**
+ * Filtrado del catálogo.
+ *
+ * Se busca contra el número, el nombre, la procedencia y la descripción, así
+ * que valen tanto "404" como "timeout" o "nginx". Con varias palabras tienen
+ * que aparecer todas, que es lo que espera cualquiera al ir afinando.
+ */
+
+/**
+ * Minúsculas y fuera la puntuación, para que "timeout" encuentre
+ * "Login Time-out" y "im a teapot" encuentre "I'm a teapot".
+ */
+function normalize(text) {
+    return String(text)
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/g, '')
+}
+
+/** Texto sobre el que se busca en un código. */
+function haystack(item) {
+    return normalize(
+        [item.code, item.name, item.source, item.description].filter(Boolean).join(' ')
+    )
+}
+
+export function matchesQuery(item, query) {
+    const clean = normalize(query).trim()
+    if (!clean) return true
+    const texto = haystack(item)
+    return clean.split(/\s+/).every(palabra => texto.includes(palabra))
+}
+
+/**
+ * Devuelve el catálogo con sólo los códigos que encajan, quitando las
+ * secciones que se quedan vacías.
+ */
+export function filterCatalogue(catalogue, query) {
+    if (!query.trim()) return catalogue
+    return catalogue
+        .map(category => ({
+            ...category,
+            codes: category.codes.filter(item => matchesQuery(item, query)),
+        }))
+        .filter(category => category.codes.length > 0)
+}
+
+/** Cuántos códigos hay en un catálogo ya filtrado. */
+export function countCodes(catalogue) {
+    return catalogue.reduce((total, category) => total + category.codes.length, 0)
+}

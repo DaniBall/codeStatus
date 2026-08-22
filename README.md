@@ -69,6 +69,20 @@ sale**: una insignia en la tarjeta, un aviso en su ficha y un enlace a la
 documentación de quien lo inventó en vez de a MDN, que no los recoge. Tienen
 además su propio color, distinto de las cinco familias.
 
+## Buscador
+
+La barra lleva un buscador que filtra según escribes. Busca contra el número,
+el nombre, la procedencia y la descripción, así que valen `404`, `timeout`,
+`nginx` o `csrf`. Con varias palabras tienen que aparecer todas.
+
+La puntuación se ignora a los dos lados: `timeout` encuentra `Login Time-out`
+y `im a teapot` encuentra `I'm a teapot`.
+
+## Licencia
+
+Proyecto privado: ver `LICENSE`. Las definiciones de los códigos vienen del
+registro de IANA y de los RFC correspondientes, y no las cubre esa licencia.
+
 ## Colores
 
 Cada familia de códigos tiene su color, y ese mismo color manda en la cabecera
@@ -104,7 +118,7 @@ Los cinco acentos pasan el contraste AA de WCAG sobre blanco (el peor está en
 ## Comprobaciones
 
 ```bash
-npm test    # 23 pruebas
+npm test    # 39 pruebas
 npm run build
 ```
 

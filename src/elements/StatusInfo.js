@@ -2,6 +2,7 @@ import '../App.css'
 import codeStatus from '../status_codes.json'
 import { useParams, Link } from 'react-router-dom'
 import DuckImage from './DuckImage.js'
+import Footer from './Footer.js'
 
 export default function StatusInfo() {
     const { code } = useParams();
@@ -19,6 +20,7 @@ export default function StatusInfo() {
                     <p>There is no HTTP status code <strong>{code}</strong>.</p>
                     <Link className='statusInfo-back' to='/'>← All status codes</Link>
                 </div>
+                <Footer />
             </div>
         )
     }
@@ -58,6 +60,7 @@ export default function StatusInfo() {
                     </div>
                 </article>
             </div>
+            <Footer />
         </div>
     );
 }

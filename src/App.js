@@ -1,17 +1,44 @@
+import { useMemo, useState } from 'react';
 import './App.css';
 import codeStatus from './status_codes.json'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import StatusInfo from './elements/StatusInfo.js'
 import DuckImage from './elements/DuckImage.js'
+import Footer from './elements/Footer.js'
 import { ThemeProvider, ThemeToggle } from './theme.js'
+import { countCodes, filterCatalogue } from './search.js'
+
+const TOTAL = countCodes(codeStatus)
 
 function Home() {
+  const [query, setQuery] = useState('')
+  const visible = useMemo(() => filterCatalogue(codeStatus, query), [query])
+  const encontrados = countCodes(visible)
+  const buscando = query.trim().length > 0
+
   return (
     <div className="App">
       <header className='topBar'>
         <h1 className='topBar-title'>🦆 codeStatus</h1>
-        <nav className='topBar-nav' aria-label="Status code families">
-          {codeStatus.map(category => (
+
+        <form className='search' role='search' onSubmit={event => event.preventDefault()}>
+          <label className='visually-hidden' htmlFor='search'>Search status codes</label>
+          <input
+            id='search'
+            className='search-input'
+            type='search'
+            value={query}
+            onChange={event => setQuery(event.target.value)}
+            placeholder='Search: 404, timeout, nginx…'
+            autoComplete='off'
+            aria-describedby='search-count'
+          />
+        </form>
+
+        <ThemeToggle />
+
+        <nav className='topBar-nav' aria-label='Status code families'>
+          {visible.map(category => (
             <a
               key={category.category}
               className='topBar-link'
@@ -22,10 +49,16 @@ function Home() {
             </a>
           ))}
         </nav>
-        <ThemeToggle />
       </header>
 
-      {codeStatus.map(category => (
+      {/* El recuento se anuncia solo, para quien no ve desaparecer las tarjetas. */}
+      <p id='search-count' className='search-count' role='status'>
+        {buscando
+          ? `${encontrados} of ${TOTAL} status codes match “${query.trim()}”`
+          : `${TOTAL} status codes`}
+      </p>
+
+      {visible.map(category => (
         <section
           key={category.category}
           id={`c${category.family}`}
@@ -55,6 +88,17 @@ function Home() {
           </div>
         </section>
       ))}
+
+      {encontrados === 0 && (
+        <div className='emptyState'>
+          <p>No status code matches <strong>{query.trim()}</strong>.</p>
+          <button type='button' className='emptyState-clear' onClick={() => setQuery('')}>
+            Clear search
+          </button>
+        </div>
+      )}
+
+      <Footer />
     </div>
   );
 }
