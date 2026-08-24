@@ -7,14 +7,14 @@ export default function Footer() {
     return (
         <footer className='siteFooter'>
             <p className='siteFooter-line'>
-                © {AÑO} Daniel Bola Martínez · All rights reserved ·{' '}
+                © {AÑO} Daniel Bola Martínez. All rights reserved.{' '}
                 <a
                     className='siteFooter-link'
                     href={REPO}
                     target='_blank'
                     rel='noopener noreferrer'
                 >
-                    Source on GitHub ↗
+                    Source on GitHub
                 </a>
             </p>
             <p className='siteFooter-line siteFooter-note'>

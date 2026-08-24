@@ -55,7 +55,7 @@ export default function StatusInfo() {
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            {docsLabel} ↗
+                            {docsLabel}
                         </a>
                     </div>
                 </article>

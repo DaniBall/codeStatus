@@ -4,6 +4,7 @@ import codeStatus from './status_codes.json'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import StatusInfo from './elements/StatusInfo.js'
 import DuckImage from './elements/DuckImage.js'
+import Mark from './elements/Mark.js'
 import Footer from './elements/Footer.js'
 import { ThemeProvider, ThemeToggle } from './theme.js'
 import { countCodes, filterCatalogue } from './search.js'
@@ -20,7 +21,10 @@ function Home() {
   return (
     <div className="App">
       <header className='topBar'>
-        <h1 className='topBar-title'>🦆 codeStatus</h1>
+        <h1 className='topBar-title'>
+          <Mark />
+          codeStatus
+        </h1>
 
         <form className='search' role='search' onSubmit={event => event.preventDefault()}>
           <label className='visually-hidden' htmlFor='search'>Search status codes</label>
@@ -55,7 +59,7 @@ function Home() {
       {/* El recuento se anuncia solo, para quien no ve desaparecer las tarjetas. */}
       <p id='search-count' className='search-count' role='status'>
         {buscando
-          ? `${encontrados} of ${TOTAL} status codes match “${query.trim()}”`
+          ? `Showing ${encontrados} of ${TOTAL} status codes for ${query.trim()}`
           : `${TOTAL} status codes`}
       </p>
 

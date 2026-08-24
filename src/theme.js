@@ -65,21 +65,45 @@ export function ThemeProvider({ children }) {
 
 export const useTheme = () => useContext(ThemeContext)
 
+/** Luna y sol dibujados. Con emoji cada sistema pinta el suyo y desentona. */
+function Luna() {
+    return (
+        <svg width='16' height='16' viewBox='0 0 24 24' aria-hidden='true' focusable='false'>
+            <path
+                d='M21 13.2A9 9 0 1 1 10.8 3a7 7 0 0 0 10.2 10.2z'
+                fill='none'
+                stroke='currentColor'
+                strokeWidth='2'
+                strokeLinejoin='round'
+            />
+        </svg>
+    )
+}
+
+function Sol() {
+    return (
+        <svg width='16' height='16' viewBox='0 0 24 24' aria-hidden='true' focusable='false'
+            fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round'>
+            <circle cx='12' cy='12' r='4' />
+            <path d='M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4' />
+        </svg>
+    )
+}
+
 export function ThemeToggle() {
     const { scheme, toggle } = useTheme()
     const aOscuro = scheme === 'light'
+    const etiqueta = aOscuro ? 'Switch to dark mode' : 'Switch to light mode'
     return (
         <button
             type='button'
             className='themeToggle'
             onClick={toggle}
             aria-pressed={scheme === 'dark'}
-            title={aOscuro ? 'Switch to dark mode' : 'Switch to light mode'}
+            title={etiqueta}
         >
-            <span aria-hidden='true'>{aOscuro ? '🌙' : '☀️'}</span>
-            <span className='visually-hidden'>
-                {aOscuro ? 'Switch to dark mode' : 'Switch to light mode'}
-            </span>
+            {aOscuro ? <Luna /> : <Sol />}
+            <span className='visually-hidden'>{etiqueta}</span>
         </button>
     )
 }
