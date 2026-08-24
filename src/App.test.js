@@ -61,3 +61,14 @@ describe('buscador', () => {
     expect(screen.getAllByRole('img')).toHaveLength(allCodes.length);
   });
 });
+
+describe('analítica', () => {
+  test('sin configurar no carga ningún script externo ni lo promete en el pie', () => {
+    render(<App />);
+
+    const externos = [...document.querySelectorAll('script[src]')]
+      .filter(s => /^https?:/.test(s.getAttribute('src')));
+    expect(externos).toHaveLength(0);
+    expect(screen.queryByText(/goatcounter/i)).not.toBeInTheDocument();
+  });
+});

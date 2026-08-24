@@ -1,3 +1,5 @@
+import { ENDPOINT as ANALITICA } from '../analytics'
+
 const AÑO = new Date().getFullYear()
 const REPO = 'https://github.com/DaniBall/codeStatus'
 
@@ -18,6 +20,8 @@ export default function Footer() {
             <p className='siteFooter-line siteFooter-note'>
                 Status code definitions come from the IANA HTTP Status Code Registry
                 and the relevant RFCs. Duck photos are AI-generated.
+                {/* Sólo se promete si de verdad hay analítica configurada. */}
+                {ANALITICA && ' Visits are counted anonymously with GoatCounter. No cookies.'}
             </p>
         </footer>
     )

@@ -127,6 +127,37 @@ el nombre, la procedencia y la descripción, así que valen `404`, `timeout`,
 La puntuación se ignora a los dos lados: `timeout` encuentra `Login Time-out`
 y `im a teapot` encuentra `I'm a teapot`.
 
+## Visitas
+
+GitHub Pages no da estadísticas, y el *Traffic* de GitHub cuenta visitas al
+**repositorio**, no a la web. Para medir la web hay un contador opcional con
+[GoatCounter](https://www.goatcounter.com): sin cookies y sin datos personales,
+así que no hace falta banner de consentimiento.
+
+**Viene apagado.** Mientras `REACT_APP_GOATCOUNTER` esté vacío no se carga
+nada, no sale ni una petición y el pie no promete nada. Para encenderlo:
+
+1. Crea un sitio gratuito en GoatCounter (uso personal).
+2. Pon su URL de conteo en `.env.production` y haz push. El despliegue la
+   recoge sola.
+
+```
+REACT_APP_GOATCOUNTER=https://tu-sitio.goatcounter.com/count
+```
+
+No es un secreto: aparece en el código fuente de la página.
+
+Tampoco se cuenta en desarrollo ni en las pruebas, ni a quien lleve activado el
+*Do Not Track* del navegador.
+
+### Por qué no basta con pegar el script
+
+La web es un SPA: al pinchar en un código **no se recarga la página**, sólo
+cambia la URL. El script de GoatCounter sólo vería la carga inicial, así que se
+contarían las visitas a la portada y **cero en las 85 fichas**, que es justo lo
+interesante. Por eso se le pasa `no_onload` y cuenta `src/analytics.js` desde
+el router, en cada cambio de ruta y también en la primera.
+
 ## Licencia
 
 Proyecto privado: ver `LICENSE`. Las definiciones de los códigos vienen del
@@ -167,7 +198,7 @@ Los cinco acentos pasan el contraste AA de WCAG sobre blanco (el peor está en
 ## Comprobaciones
 
 ```bash
-npm test    # 39 pruebas
+npm test    # 50 pruebas
 npm run build
 ```
 

@@ -7,6 +7,7 @@ import DuckImage from './elements/DuckImage.js'
 import Footer from './elements/Footer.js'
 import { ThemeProvider, ThemeToggle } from './theme.js'
 import { countCodes, filterCatalogue } from './search.js'
+import Analytics from './analytics.js'
 
 const TOTAL = countCodes(codeStatus)
 
@@ -107,6 +108,8 @@ export default function App() {
   return (
     <ThemeProvider>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
+        {/* Dentro del router: es quien sabe cuándo cambia la ruta sin recargar. */}
+        <Analytics />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/:code" element={<StatusInfo />} />
