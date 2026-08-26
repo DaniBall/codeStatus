@@ -3,6 +3,7 @@ import codeStatus from '../status_codes.json'
 import { useParams, Link } from 'react-router-dom'
 import DuckImage from './DuckImage.js'
 import Footer from './Footer.js'
+import { specUrl } from '../spec.js'
 
 export default function StatusInfo() {
     const { code } = useParams();
@@ -29,6 +30,7 @@ export default function StatusInfo() {
     const docs = statusCode.docs
         || `https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/${statusCode.code}`
     const docsLabel = statusCode.docsLabel || 'Read the docs on MDN'
+    const rfc = specUrl(statusCode.spec)
 
     return (
         <div className='App statusInfo-page' data-family={category.family}>
@@ -41,6 +43,14 @@ export default function StatusInfo() {
                         <h1 className='statusInfo-code'>{statusCode.code}</h1>
                         <p className='statusInfo-name'>{statusCode.name}</p>
 
+                        {statusCode.tags && (
+                            <ul className='tagList'>
+                                {statusCode.tags.map(tag => (
+                                    <li className='tag' key={tag} data-tag={tag}>{tag}</li>
+                                ))}
+                            </ul>
+                        )}
+
                         {statusCode.source && (
                             <p className='statusInfo-source'>
                                 <strong>Not a standard code.</strong> You will only
@@ -49,6 +59,13 @@ export default function StatusInfo() {
                         )}
 
                         <p className='statusInfo-description'>{statusCode.description}</p>
+
+                        {/* Una insignia sola deja al lector sabiendo que algo pasa
+                            pero no qué: la nota es la mitad que importa. */}
+                        {statusCode.note && (
+                            <p className='statusInfo-note'>{statusCode.note}</p>
+                        )}
+
                         <a
                             className='statusInfo-link'
                             href={docs}
@@ -57,6 +74,15 @@ export default function StatusInfo() {
                         >
                             {docsLabel}
                         </a>
+
+                        {rfc && (
+                            <p className='statusInfo-spec'>
+                                Defined in{' '}
+                                <a href={rfc} target="_blank" rel="noopener noreferrer">
+                                    {statusCode.spec}
+                                </a>
+                            </p>
+                        )}
                     </div>
                 </article>
             </div>

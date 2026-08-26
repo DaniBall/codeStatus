@@ -7,22 +7,40 @@
       {
         "code": 100,
         "name": "Continue",
-        "description": "The server has received the request headers and the client should continue with the request."
+        "description": "The server has received the request headers and the client should continue with the request.",
+        "tags": [
+          "No body"
+        ],
+        "spec": "RFC 9110"
       },
       {
         "code": 101,
         "name": "Switching Protocols",
-        "description": "The server is switching protocols as requested by the client."
+        "description": "The server is switching protocols as requested by the client.",
+        "tags": [
+          "No body"
+        ],
+        "spec": "RFC 9110"
       },
       {
         "code": 102,
         "name": "Processing",
-        "description": "The server has received and is processing the request, but no response is available yet."
+        "description": "The server has received and is processing the request, but no response is available yet.",
+        "tags": [
+          "Deprecated",
+          "No body"
+        ],
+        "note": "Came from WebDAV and was dropped in RFC 4918. Long jobs are handled other ways now.",
+        "spec": "RFC 2518"
       },
       {
         "code": 103,
         "name": "Early Hints",
-        "description": "The server is sending preliminary headers before the final response."
+        "description": "The server is sending preliminary headers before the final response.",
+        "tags": [
+          "No body"
+        ],
+        "spec": "RFC 8297"
       }
     ]
   },
@@ -34,52 +52,68 @@
       {
         "code": 200,
         "name": "OK",
-        "description": "The request succeeded."
+        "description": "The request succeeded.",
+        "spec": "RFC 9110"
       },
       {
         "code": 201,
         "name": "Created",
-        "description": "The request succeeded and a new resource was created."
+        "description": "The request succeeded and a new resource was created.",
+        "spec": "RFC 9110"
       },
       {
         "code": 202,
         "name": "Accepted",
-        "description": "The request has been accepted for processing but has not been completed yet."
+        "description": "The request has been accepted for processing but has not been completed yet.",
+        "spec": "RFC 9110"
       },
       {
         "code": 203,
         "name": "Non-Authoritative Information",
-        "description": "The response contains modified information from a third-party source."
+        "description": "The response contains modified information from a third-party source.",
+        "spec": "RFC 9110"
       },
       {
         "code": 204,
         "name": "No Content",
-        "description": "The request succeeded but there is no content to return."
+        "description": "The request succeeded but there is no content to return.",
+        "tags": [
+          "No body"
+        ],
+        "spec": "RFC 9110"
       },
       {
         "code": 205,
         "name": "Reset Content",
-        "description": "The client should reset the document or view that sent the request."
+        "description": "The client should reset the document or view that sent the request.",
+        "tags": [
+          "No body"
+        ],
+        "spec": "RFC 9110"
       },
       {
         "code": 206,
         "name": "Partial Content",
-        "description": "The server is returning only part of the requested resource."
+        "description": "The server is returning only part of the requested resource.",
+        "spec": "RFC 9110"
       },
       {
         "code": 207,
         "name": "Multi-Status",
-        "description": "The response contains multiple status results, usually for WebDAV operations."
+        "description": "The response contains multiple status results, usually for WebDAV operations.",
+        "spec": "RFC 4918"
       },
       {
         "code": 208,
         "name": "Already Reported",
-        "description": "The members of a WebDAV binding have already been reported."
+        "description": "The members of a WebDAV binding have already been reported.",
+        "spec": "RFC 5842"
       },
       {
         "code": 226,
         "name": "IM Used",
-        "description": "The server has fulfilled the request using instance manipulations."
+        "description": "The server has fulfilled the request using instance manipulations.",
+        "spec": "RFC 3229"
       }
     ]
   },
@@ -91,47 +125,67 @@
       {
         "code": 300,
         "name": "Multiple Choices",
-        "description": "There are multiple possible responses and the client should choose one."
+        "description": "There are multiple possible responses and the client should choose one.",
+        "spec": "RFC 9110"
       },
       {
         "code": 301,
         "name": "Moved Permanently",
-        "description": "The requested resource has been permanently moved to a new URL."
+        "description": "The requested resource has been permanently moved to a new URL.",
+        "spec": "RFC 9110"
       },
       {
         "code": 302,
         "name": "Found",
-        "description": "The requested resource is temporarily located at a different URL."
+        "description": "The requested resource is temporarily located at a different URL.",
+        "spec": "RFC 9110"
       },
       {
         "code": 303,
         "name": "See Other",
-        "description": "The client should retrieve the resource from another URL using GET."
+        "description": "The client should retrieve the resource from another URL using GET.",
+        "spec": "RFC 9110"
       },
       {
         "code": 304,
         "name": "Not Modified",
-        "description": "The cached version of the resource is still valid."
+        "description": "The cached version of the resource is still valid.",
+        "tags": [
+          "No body"
+        ],
+        "spec": "RFC 9110"
       },
       {
         "code": 305,
         "name": "Use Proxy",
-        "description": "The requested resource must be accessed through a proxy."
+        "description": "The requested resource must be accessed through a proxy.",
+        "tags": [
+          "Deprecated"
+        ],
+        "note": "Dropped for security reasons: it let the server pick which proxy your client went through.",
+        "spec": "RFC 9110"
       },
       {
         "code": 306,
         "name": "Unused",
-        "description": "This status code is no longer used and is reserved."
+        "description": "This status code is no longer used and is reserved.",
+        "tags": [
+          "Reserved"
+        ],
+        "note": "Never shipped. It was going to be Switch Proxy, and the number stays reserved.",
+        "spec": "RFC 9110"
       },
       {
         "code": 307,
         "name": "Temporary Redirect",
-        "description": "The resource is temporarily available at another URL and the method must not change."
+        "description": "The resource is temporarily available at another URL and the method must not change.",
+        "spec": "RFC 9110"
       },
       {
         "code": 308,
         "name": "Permanent Redirect",
-        "description": "The resource has permanently moved and the method must not change."
+        "description": "The resource has permanently moved and the method must not change.",
+        "spec": "RFC 9110"
       }
     ]
   },
@@ -143,147 +197,186 @@
       {
         "code": 400,
         "name": "Bad Request",
-        "description": "The server could not understand the request due to invalid syntax."
+        "description": "The server could not understand the request due to invalid syntax.",
+        "spec": "RFC 9110"
       },
       {
         "code": 401,
         "name": "Unauthorized",
-        "description": "Authentication is required or has failed."
+        "description": "Authentication is required or has failed.",
+        "spec": "RFC 9110"
       },
       {
         "code": 402,
         "name": "Payment Required",
-        "description": "Reserved for future use, originally intended for digital payments."
+        "description": "Reserved for future use, originally intended for digital payments.",
+        "spec": "RFC 9110"
       },
       {
         "code": 403,
         "name": "Forbidden",
-        "description": "The client does not have permission to access the resource."
+        "description": "The client does not have permission to access the resource.",
+        "spec": "RFC 9110"
       },
       {
         "code": 404,
         "name": "Not Found",
-        "description": "The requested resource could not be found."
+        "description": "The requested resource could not be found.",
+        "spec": "RFC 9110"
       },
       {
         "code": 405,
         "name": "Method Not Allowed",
-        "description": "The HTTP method is not supported for this resource."
+        "description": "The HTTP method is not supported for this resource.",
+        "spec": "RFC 9110"
       },
       {
         "code": 406,
         "name": "Not Acceptable",
-        "description": "The server cannot produce a response matching the client's accepted formats."
+        "description": "The server cannot produce a response matching the client's accepted formats.",
+        "spec": "RFC 9110"
       },
       {
         "code": 407,
         "name": "Proxy Authentication Required",
-        "description": "Authentication with a proxy is required."
+        "description": "Authentication with a proxy is required.",
+        "spec": "RFC 9110"
       },
       {
         "code": 408,
         "name": "Request Timeout",
-        "description": "The server timed out waiting for the request."
+        "description": "The server timed out waiting for the request.",
+        "spec": "RFC 9110"
       },
       {
         "code": 409,
         "name": "Conflict",
-        "description": "The request conflicts with the current state of the resource."
+        "description": "The request conflicts with the current state of the resource.",
+        "spec": "RFC 9110"
       },
       {
         "code": 410,
         "name": "Gone",
-        "description": "The requested resource is no longer available and will not be available again."
+        "description": "The requested resource is no longer available and will not be available again.",
+        "spec": "RFC 9110"
       },
       {
         "code": 411,
         "name": "Length Required",
-        "description": "The request must include a valid Content-Length header."
+        "description": "The request must include a valid Content-Length header.",
+        "spec": "RFC 9110"
       },
       {
         "code": 412,
         "name": "Precondition Failed",
-        "description": "A condition in the request headers was not met."
+        "description": "A condition in the request headers was not met.",
+        "spec": "RFC 9110"
       },
       {
         "code": 413,
-        "name": "Payload Too Large",
-        "description": "The request body is larger than the server is willing or able to process."
+        "name": "Content Too Large",
+        "description": "The request body is larger than the server is willing or able to process.",
+        "note": "RFC 9110 renamed it from Payload Too Large, the name most servers still use.",
+        "spec": "RFC 9110"
       },
       {
         "code": 414,
         "name": "URI Too Long",
-        "description": "The requested URI is too long for the server to process."
+        "description": "The requested URI is too long for the server to process.",
+        "spec": "RFC 9110"
       },
       {
         "code": 415,
         "name": "Unsupported Media Type",
-        "description": "The media type of the request is not supported by the server."
+        "description": "The media type of the request is not supported by the server.",
+        "spec": "RFC 9110"
       },
       {
         "code": 416,
         "name": "Range Not Satisfiable",
-        "description": "The requested range cannot be fulfilled."
+        "description": "The requested range cannot be fulfilled.",
+        "spec": "RFC 9110"
       },
       {
         "code": 417,
         "name": "Expectation Failed",
-        "description": "The server cannot meet the expectation given in the request headers."
+        "description": "The server cannot meet the expectation given in the request headers.",
+        "spec": "RFC 9110"
       },
       {
         "code": 418,
         "name": "I'm a teapot",
-        "description": "An April Fools' joke status code indicating the server refuses to brew coffee because it is a teapot."
+        "description": "An April Fools' joke status code indicating the server refuses to brew coffee because it is a teapot.",
+        "tags": [
+          "Joke"
+        ],
+        "note": "An April Fools RFC from 1998 that stuck. Reserved so nobody reuses the number.",
+        "spec": "RFC 2324"
       },
       {
         "code": 421,
         "name": "Misdirected Request",
-        "description": "The request was sent to a server that cannot produce a response for it."
+        "description": "The request was sent to a server that cannot produce a response for it.",
+        "spec": "RFC 9110"
       },
       {
         "code": 422,
         "name": "Unprocessable Content",
-        "description": "The request was well-formed but could not be processed semantically."
+        "description": "The request was well-formed but could not be processed semantically.",
+        "note": "RFC 9110 renamed it from Unprocessable Entity, the name most frameworks still use.",
+        "spec": "RFC 9110"
       },
       {
         "code": 423,
         "name": "Locked",
-        "description": "The requested resource is locked."
+        "description": "The requested resource is locked.",
+        "spec": "RFC 4918"
       },
       {
         "code": 424,
         "name": "Failed Dependency",
-        "description": "The request failed because it depended on another request that failed."
+        "description": "The request failed because it depended on another request that failed.",
+        "spec": "RFC 4918"
       },
       {
         "code": 425,
         "name": "Too Early",
-        "description": "The server is unwilling to risk processing a request that might be replayed."
+        "description": "The server is unwilling to risk processing a request that might be replayed.",
+        "tags": [
+          "Experimental"
+        ],
+        "note": "For TLS 1.3 early data, where a replayed request would be a risk.",
+        "spec": "RFC 8470"
       },
       {
         "code": 426,
         "name": "Upgrade Required",
-        "description": "The client should switch to a different protocol."
+        "description": "The client should switch to a different protocol.",
+        "spec": "RFC 9110"
       },
       {
         "code": 428,
         "name": "Precondition Required",
-        "description": "The server requires the request to be conditional."
+        "description": "The server requires the request to be conditional.",
+        "spec": "RFC 6585"
       },
       {
         "code": 429,
         "name": "Too Many Requests",
-        "description": "The client has sent too many requests in a given amount of time."
+        "description": "The client has sent too many requests in a given amount of time.",
+        "spec": "RFC 6585"
       },
       {
         "code": 431,
         "name": "Request Header Fields Too Large",
-        "description": "The request headers are too large for the server to process."
+        "description": "The request headers are too large for the server to process.",
+        "spec": "RFC 6585"
       },
       {
         "code": 451,
         "name": "Unavailable For Legal Reasons",
-        "description": "The resource is unavailable due to legal reasons."
+        "description": "The resource is unavailable due to legal reasons.",
+        "spec": "RFC 7725"
       }
     ]
   },
@@ -295,57 +388,72 @@
       {
         "code": 500,
         "name": "Internal Server Error",
-        "description": "The server encountered an unexpected condition."
+        "description": "The server encountered an unexpected condition.",
+        "spec": "RFC 9110"
       },
       {
         "code": 501,
         "name": "Not Implemented",
-        "description": "The server does not support the functionality required to fulfill the request."
+        "description": "The server does not support the functionality required to fulfill the request.",
+        "spec": "RFC 9110"
       },
       {
         "code": 502,
         "name": "Bad Gateway",
-        "description": "The server received an invalid response from an upstream server."
+        "description": "The server received an invalid response from an upstream server.",
+        "spec": "RFC 9110"
       },
       {
         "code": 503,
         "name": "Service Unavailable",
-        "description": "The server is currently unavailable, usually due to overload or maintenance."
+        "description": "The server is currently unavailable, usually due to overload or maintenance.",
+        "spec": "RFC 9110"
       },
       {
         "code": 504,
         "name": "Gateway Timeout",
-        "description": "The server did not receive a timely response from an upstream server."
+        "description": "The server did not receive a timely response from an upstream server.",
+        "spec": "RFC 9110"
       },
       {
         "code": 505,
         "name": "HTTP Version Not Supported",
-        "description": "The server does not support the HTTP version used in the request."
+        "description": "The server does not support the HTTP version used in the request.",
+        "spec": "RFC 9110"
       },
       {
         "code": 506,
         "name": "Variant Also Negotiates",
-        "description": "The server has an internal configuration error related to content negotiation."
+        "description": "The server has an internal configuration error related to content negotiation.",
+        "spec": "RFC 2295"
       },
       {
         "code": 507,
         "name": "Insufficient Storage",
-        "description": "The server cannot store the representation needed to complete the request."
+        "description": "The server cannot store the representation needed to complete the request.",
+        "spec": "RFC 4918"
       },
       {
         "code": 508,
         "name": "Loop Detected",
-        "description": "The server detected an infinite loop while processing the request."
+        "description": "The server detected an infinite loop while processing the request.",
+        "spec": "RFC 5842"
       },
       {
         "code": 510,
         "name": "Not Extended",
-        "description": "Further extensions to the request are required."
+        "description": "Further extensions to the request are required.",
+        "tags": [
+          "Deprecated"
+        ],
+        "note": "RFC 2774 was reclassified as historic, and IANA marks the code obsoleted.",
+        "spec": "RFC 2774"
       },
       {
         "code": 511,
         "name": "Network Authentication Required",
-        "description": "The client must authenticate to gain network access."
+        "description": "The client must authenticate to gain network access.",
+        "spec": "RFC 6585"
       }
     ]
   },

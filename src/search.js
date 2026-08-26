@@ -1,9 +1,10 @@
 /**
  * Filtrado del catálogo.
  *
- * Se busca contra el número, el nombre, la procedencia y la descripción, así
- * que valen tanto "404" como "timeout" o "nginx". Con varias palabras tienen
- * que aparecer todas, que es lo que espera cualquiera al ir afinando.
+ * Se busca contra el número, el nombre, la procedencia, el estado y la
+ * descripción, así que valen tanto "404" como "timeout", "nginx" o
+ * "deprecated". Con varias palabras tienen que aparecer todas, que es lo que
+ * espera cualquiera al ir afinando.
  */
 
 /**
@@ -19,7 +20,9 @@ function normalize(text) {
 /** Texto sobre el que se busca en un código. */
 function haystack(item) {
     return normalize(
-        [item.code, item.name, item.source, item.description].filter(Boolean).join(' ')
+        [item.code, item.name, item.source, item.spec, ...(item.tags || []), item.description]
+            .filter(Boolean)
+            .join(' ')
     )
 }
 

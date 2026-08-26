@@ -118,14 +118,62 @@ sale**: una insignia en la tarjeta, un aviso en su ficha y un enlace a la
 documentación de quien lo inventó en vez de a MDN, que no los recoge. Tienen
 además su propio color, distinto de las cinco familias.
 
+### Estado de cada código
+
+No todos los códigos siguen vigentes, y un catálogo que no lo diga engaña: el
+`102` lleva años deprecado y a simple vista parecía tan normal como el `200`.
+Cada código puede llevar insignias, y salen tanto en la tarjeta como en la
+ficha:
+
+| Insignia | Qué significa |
+| --- | --- |
+| `Deprecated` | Retirado. `102`, `305` y `510` |
+| `Reserved` | Nunca llegó a usarse. `306` |
+| `Experimental` | Todavía no es estable. `425` |
+| `Joke` | El de la tetera, `418` |
+| `No body` | La respuesta no lleva cuerpo. Los `1xx`, `204`, `205` y `304` |
+
+Las cuatro primeras son avisos y van en color de aviso, que no es el de ninguna
+familia a propósito: con el color de su sección se leerían como decoración. `No
+body` es un dato, no una advertencia, y va discreta.
+
+Una insignia sola deja al lector sabiendo que pasa algo pero no qué, así que
+todas las de aviso llevan una **nota** que lo explica en la ficha, y hay una
+prueba que lo exige. También la llevan el `413` y el `422`, que no están
+deprecados pero sí **renombrados** por RFC 9110 (`Payload Too Large` pasó a
+`Content Too Large`, y `Unprocessable Entity` a `Unprocessable Content`): aquí
+salen con el nombre nuevo, avisando del viejo, que es el que sigue devolviendo
+casi todo el mundo.
+
+Los 63 oficiales dicen además **qué RFC los define**, con enlace. La URL se
+deriva del número en `src/spec.js` en vez de escribirse a mano en el JSON:
+63 enlaces copiados uno a uno son una errata esperando a pasar. En móvil esa
+línea se oculta, porque el botón de MDN queda justo encima y lleva a lo mismo,
+y así la ficha sigue cabiendo entera sin scroll.
+
+> Los estados se han contrastado contra lo que documentan MDN e IANA, pero **no
+> se han releído en vivo**: el entorno donde se editó esto no tiene salida a
+> internet. Si algún día MDN cambia una etiqueta, esto no se entera solo.
+
 ## Buscador
 
 La barra lleva un buscador que filtra según escribes. Busca contra el número,
-el nombre, la procedencia y la descripción, así que valen `404`, `timeout`,
-`nginx` o `csrf`. Con varias palabras tienen que aparecer todas.
+el nombre, la procedencia, el estado, el RFC y la descripción, así que valen
+`404`, `timeout`, `nginx`, `csrf`, `deprecated` o `rfc 6585`. Con varias
+palabras tienen que aparecer todas.
 
 La puntuación se ignora a los dos lados: `timeout` encuentra `Login Time-out`
 y `im a teapot` encuentra `I'm a teapot`.
+
+## Volver arriba
+
+La portada son 85 tarjetas en seis secciones, así que desde el final hay un buen
+trecho hasta el buscador. Un botón fijo abajo a la derecha sube del todo, y sólo
+aparece pasados 600px de scroll: antes de eso estorbaría más de lo que ayuda.
+Respeta `prefers-reduced-motion`, subiendo de golpe en vez de animado.
+
+En la ficha de un código no hace falta: el enlace de arriba ya vuelve a la
+portada.
 
 ## Visitas
 
@@ -198,7 +246,7 @@ Los cinco acentos pasan el contraste AA de WCAG sobre blanco (el peor está en
 ## Comprobaciones
 
 ```bash
-npm test    # 50 pruebas
+npm test    # 61 pruebas
 npm run build
 ```
 

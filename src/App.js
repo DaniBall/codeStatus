@@ -6,6 +6,7 @@ import StatusInfo from './elements/StatusInfo.js'
 import DuckImage from './elements/DuckImage.js'
 import Mark from './elements/Mark.js'
 import Footer from './elements/Footer.js'
+import BackToTop from './elements/BackToTop.js'
 import { ThemeProvider, ThemeToggle } from './theme.js'
 import { countCodes, filterCatalogue } from './search.js'
 import Analytics from './analytics.js'
@@ -82,9 +83,17 @@ function Home() {
                   <div className='codeStatusCard-body'>
                     <h3 className='codeStatusCard-code'>{item.code}</h3>
                     <p className='codeStatusCard-name'>{item.name}</p>
-                    {/* De dónde sale: sin esto, un 521 parece tan estándar como un 404. */}
-                    {item.source && (
-                      <p className='codeStatusCard-source'>{item.source}</p>
+                    {/* De dónde sale, y en qué estado está: sin esto un 521
+                        parece tan estándar como un 404, y un 102 tan vigente. */}
+                    {(item.source || item.tags) && (
+                      <div className='codeStatusCard-marks'>
+                        {item.source && (
+                          <span className='codeStatusCard-source'>{item.source}</span>
+                        )}
+                        {item.tags?.map(tag => (
+                          <span className='tag' key={tag} data-tag={tag}>{tag}</span>
+                        ))}
+                      </div>
                     )}
                   </div>
                 </article>
@@ -104,6 +113,7 @@ function Home() {
       )}
 
       <Footer />
+      <BackToTop />
     </div>
   );
 }

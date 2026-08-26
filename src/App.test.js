@@ -62,6 +62,57 @@ describe('buscador', () => {
   });
 });
 
+describe('volver arriba', () => {
+  const scrollA = y => {
+    window.scrollY = y;
+    fireEvent.scroll(window);
+  };
+
+  afterEach(() => { window.scrollY = 0; });
+
+  test('no aparece hasta haber bajado un buen tramo', () => {
+    render(<App />);
+    expect(screen.queryByRole('button', { name: /back to top/i })).not.toBeInTheDocument();
+
+    scrollA(1200);
+    expect(screen.getByRole('button', { name: /back to top/i })).toBeInTheDocument();
+  });
+
+  test('al pulsarlo sube del todo, y se esconde al volver arriba', () => {
+    const subir = jest.fn();
+    window.scrollTo = subir;
+
+    render(<App />);
+    scrollA(1200);
+    fireEvent.click(screen.getByRole('button', { name: /back to top/i }));
+    expect(subir).toHaveBeenCalledWith(expect.objectContaining({ top: 0 }));
+
+    scrollA(0);
+    expect(screen.queryByRole('button', { name: /back to top/i })).not.toBeInTheDocument();
+  });
+});
+
+describe('estado de los códigos', () => {
+  test('un código retirado lo dice en su tarjeta', () => {
+    render(<App />);
+    const tarjeta = screen.getByRole('heading', { name: '102' }).closest('article');
+    expect(within(tarjeta).getByText('Deprecated')).toBeInTheDocument();
+  });
+
+  test('se puede buscar por estado', () => {
+    render(<App />);
+    fireEvent.change(screen.getByLabelText(/search status codes/i), {
+      target: { value: 'deprecated' },
+    });
+
+    const codigos = screen.getAllByRole('img').map(img => img.getAttribute('src'));
+    expect(codigos).toHaveLength(3);
+    expect(screen.getByRole('heading', { name: '102' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: '305' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: '510' })).toBeInTheDocument();
+  });
+});
+
 describe('analítica', () => {
   test('sin configurar no carga ningún script externo ni lo promete en el pie', () => {
     render(<App />);

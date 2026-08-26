@@ -26,6 +26,10 @@
   --f4: #b03325; --f4-soft: #fbe7e4;
   --f5: #5b3f97; --f5-soft: #eee8fa;
   --fw: #0a5f77; --fw-soft: #e3f2f6;
+  /* Avisos (deprecado, reservado, experimental). Fuera de la paleta de
+     familias a propósito: si un aviso se pintara con el color de su familia
+     se leería como decoración de la sección y no como una advertencia. */
+  --warn: #8a4b0a; --warn-soft: #fbeed8;
   --radius: 3px;
   /* Monoespaciada para los códigos: es una web de códigos HTTP, no un blog. */
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
@@ -48,6 +52,7 @@
   --f4: #f79287; --f4-soft: #3a1c19;
   --f5: #bfa6f2; --f5-soft: #251d3d;
   --fw: #5fc9dd; --fw-soft: #102c33;
+  --warn: #e8b06a; --warn-soft: #33260f;
   }
 }
 
@@ -65,6 +70,7 @@
   --f4: #f79287; --f4-soft: #3a1c19;
   --f5: #bfa6f2; --f5-soft: #251d3d;
   --fw: #5fc9dd; --fw-soft: #102c33;
+  --warn: #e8b06a; --warn-soft: #33260f;
 }
 
 [data-family="1"]{ --accent: var(--f1); --accent-soft: var(--f1-soft); }
@@ -239,6 +245,27 @@
   white-space: nowrap;
 }
 
+.backToTop{
+  position: fixed;
+  right: clamp(1em, 4vw, 2.5em);
+  bottom: 1.5em;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  width: 2.4em;
+  height: 2.4em;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background-color: var(--surface);
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.backToTop:hover{
+  border-color: var(--ink-soft);
+  color: var(--ink);
+}
+
 /* ---- Secciones por familia ---- */
 
 .category{
@@ -328,12 +355,17 @@
   font-weight: 500;
   color: var(--ink-soft);
 }
-/* Procedencia de los códigos no oficiales: sin esto, un 521 parece tan
-   estándar como un 404. */
-.codeStatusCard-source{
-  align-self: flex-start;
-  font-family: var(--mono);
+/* Procedencia y estado. Van pegados abajo para que las insignias queden
+   alineadas entre tarjetas aunque el nombre ocupe una línea o dos. */
+.codeStatusCard-marks{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35em;
   margin: auto 0 0;
+  padding-top: 0.5em;
+}
+.codeStatusCard-source{
+  font-family: var(--mono);
   padding: 0.15em 0.6em;
   border-radius: var(--radius);
   background-color: var(--accent-soft);
@@ -342,6 +374,42 @@
   font-weight: 700;
   letter-spacing: 0.02em;
   text-transform: uppercase;
+}
+
+/* ---- Insignias de estado ---- *
+ *
+ * Dos pesos. "No body" es un dato, y va discreta. Deprecated, Reserved,
+ * Experimental y Joke son avisos de "no cuentes con esto" y van en el color
+ * de aviso, que no es de ninguna familia: si un aviso llevara el color de su
+ * sección se leería como decoración.
+ */
+
+.tagList{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em;
+  margin: 0 0 1.25em;
+  padding: 0;
+  list-style: none;
+}
+.tag{
+  padding: 0.15em 0.6em;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--ink-soft);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.tag[data-tag="Deprecated"],
+.tag[data-tag="Reserved"],
+.tag[data-tag="Experimental"],
+.tag[data-tag="Joke"]{
+  border-color: var(--warn);
+  background-color: var(--warn-soft);
+  color: var(--warn);
 }
 
 /* ---- Ficha de un código ---- */
@@ -404,6 +472,23 @@
   text-decoration: none;
 }
 .statusInfo-link:hover{ filter: brightness(1.1); }
+.statusInfo-note{
+  margin: -0.5em 0 1.25em;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.statusInfo-spec{
+  margin: 1.25em 0 0;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  font-family: var(--mono);
+}
+.statusInfo-spec a{
+  color: inherit;
+  text-underline-offset: 0.2em;
+}
+.statusInfo-spec a:hover{ color: var(--ink); }
 .statusInfo-missing{
   max-width: 34em;
   margin: 0 auto;
@@ -480,6 +565,15 @@
     margin-bottom: 1em;
     font-size: 1rem;
   }
+  .tagList{ margin-bottom: 0.9em; }
+  .statusInfo-note{
+    margin-bottom: 1em;
+    font-size: 0.9rem;
+  }
+  /* El RFC se va: es el dato menos urgente de la ficha y el botón de MDN, que
+     queda justo encima, lleva a la misma información y a más. Lo que ganamos
+     es que la ficha siga cabiendo entera sin scroll, que es de lo que iba. */
+  .statusInfo-spec{ display: none; }
   /* El pie completo se comía 121px de una pantalla de 640, más que la propia
      imagen. Aquí se queda en una línea; la nota de procedencia sigue entera
      en la portada, que es donde hay sitio. */

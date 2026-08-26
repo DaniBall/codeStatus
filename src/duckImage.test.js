@@ -3,6 +3,7 @@ import path from 'path';
 import codeStatus from './status_codes.json';
 import duckData from './data/duckScenes.json';
 import { buildDuckFallback, duckImagePath, getDuckScene, resolveDuckImage } from './duckImage';
+import { specUrl } from './spec';
 
 const allCodes = codeStatus.flatMap(category => category.codes);
 
@@ -60,6 +61,73 @@ describe('códigos no oficiales', () => {
                 expect(item.source).toBeUndefined();
                 expect(item.docs).toBeUndefined();
             });
+    });
+});
+
+describe('estado y especificación de cada código', () => {
+    const oficiales = codeStatus
+        .filter(cat => cat.family !== 'wild')
+        .flatMap(cat => cat.codes);
+
+    test('todos los oficiales dicen qué RFC los define', () => {
+        oficiales.forEach(item => {
+            expect(item.spec).toMatch(/^RFC \d+$/);
+            expect(specUrl(item.spec)).toBe(
+                `https://www.rfc-editor.org/rfc/rfc${item.spec.slice(4)}`
+            );
+        });
+    });
+
+    test('los no oficiales no inventan un RFC: no lo tienen', () => {
+        codeStatus
+            .find(cat => cat.family === 'wild')
+            .codes.forEach(item => expect(item.spec).toBeUndefined());
+    });
+
+    test('las insignias salen de una lista corta y conocida', () => {
+        // Abierta a mano: una etiqueta suelta y mal escrita se quedaría sin
+        // estilo y sin significar nada.
+        const validas = ['Deprecated', 'Experimental', 'Reserved', 'Joke', 'No body'];
+        allCodes.forEach(item => {
+            if (!item.tags) return;
+            expect(Array.isArray(item.tags)).toBe(true);
+            expect(new Set(item.tags).size).toBe(item.tags.length);
+            item.tags.forEach(tag => expect(validas).toContain(tag));
+        });
+    });
+
+    test('los códigos retirados están marcados', () => {
+        const porCodigo = new Map(allCodes.map(item => [item.code, item]));
+        expect(porCodigo.get(102).tags).toContain('Deprecated');
+        expect(porCodigo.get(305).tags).toContain('Deprecated');
+        expect(porCodigo.get(510).tags).toContain('Deprecated');
+        expect(porCodigo.get(306).tags).toContain('Reserved');
+        expect(porCodigo.get(418).tags).toContain('Joke');
+        expect(porCodigo.get(425).tags).toContain('Experimental');
+    });
+
+    test('las respuestas sin cuerpo son exactamente esas', () => {
+        const sinCuerpo = allCodes
+            .filter(item => item.tags?.includes('No body'))
+            .map(item => item.code);
+        expect(sinCuerpo).toEqual([100, 101, 102, 103, 204, 205, 304]);
+    });
+
+    test('toda insignia de aviso viene explicada', () => {
+        // La insignia dice que pasa algo; sin la nota, el lector no sabe qué.
+        const avisos = ['Deprecated', 'Experimental', 'Reserved', 'Joke'];
+        allCodes
+            .filter(item => item.tags?.some(tag => avisos.includes(tag)))
+            .forEach(item => expect(item.note).toBeTruthy());
+    });
+
+    test('usa los nombres de RFC 9110, no los antiguos', () => {
+        const porCodigo = new Map(allCodes.map(item => [item.code, item]));
+        expect(porCodigo.get(413).name).toBe('Content Too Large');
+        expect(porCodigo.get(422).name).toBe('Unprocessable Content');
+        // Y se avisa del nombre viejo, que es el que sigue saliendo por ahí.
+        expect(porCodigo.get(413).note).toMatch(/Payload Too Large/);
+        expect(porCodigo.get(422).note).toMatch(/Unprocessable Entity/);
     });
 });
 
