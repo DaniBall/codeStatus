@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { subirArriba } from '../scroll.js'
+import { useLang } from '../i18n.js'
 
 const UMBRAL = 600
 
@@ -14,6 +15,7 @@ function Arriba() {
 
 /** Solo aparece tras bajar un buen tramo: en poco scroll estorbaría más de lo que ayuda. */
 export default function BackToTop() {
+    const { t } = useLang()
     const [visible, setVisible] = useState(false)
 
     useEffect(() => {
@@ -30,10 +32,10 @@ export default function BackToTop() {
             type='button'
             className='backToTop'
             onClick={subirArriba}
-            title='Back to top'
+            title={t('arriba')}
         >
             <Arriba />
-            <span className='visually-hidden'>Back to top</span>
+            <span className='visually-hidden'>{t('arriba')}</span>
         </button>
     )
 }

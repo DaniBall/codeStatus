@@ -1,0 +1,49 @@
+{
+  "ui": {
+    "buscar": "Search status codes",
+    "buscarPista": "Search: 404, timeout, nginx…",
+    "familias": "Status code families",
+    "filtrar": "Filter by badge",
+    "total": "{n} status codes",
+    "encontrados": "Showing {n} of {total} status codes for {criterios}",
+    "yCriterios": "and",
+    "criterioInsignia": "the {tag} badge",
+    "limpiarFiltro": "Clear filter",
+    "sinResultados": "No status code matches",
+    "limpiarBusqueda": "Clear search",
+    "arriba": "Back to top",
+    "volver": "← All status codes",
+    "noExiste": "Status code not found",
+    "noExisteDetalle": "There is no HTTP status code",
+    "docsMDN": "Read the docs on MDN",
+    "definidoEn": "Defined in",
+    "noEstandar": "Not a standard code.",
+    "soloDe": "You will only see it coming from",
+    "aOscuro": "Switch to dark mode",
+    "aClaro": "Switch to light mode",
+    "idioma": "Ver en español",
+    "idiomaCodigo": "ES",
+    "altFoto": "Duck photo illustrating HTTP {code} {name}",
+    "altRespaldo": "Placeholder duck illustration for HTTP {code} {name}",
+    "pieDerechos": "All rights reserved.",
+    "pieRepo": "Source on GitHub",
+    "pieFuentes": "Status code definitions come from the IANA HTTP Status Code Registry and the relevant RFCs. Duck photos are AI-generated.",
+    "pieAnalitica": "Visits are counted anonymously with GoatCounter. No cookies.",
+    "titulo": "codeStatus: HTTP status codes explained by ducks"
+  },
+  "categorias": {
+    "1": { "nombre": "1xx", "descripcion": "Informational responses. The request was received and the process is continuing." },
+    "2": { "nombre": "2xx", "descripcion": "Successful responses. The request was successfully received, understood, and accepted." },
+    "3": { "nombre": "3xx", "descripcion": "Redirection messages. Further action is needed to complete the request." },
+    "4": { "nombre": "4xx", "descripcion": "Client error responses. The request contains an error or cannot be completed by the client." },
+    "5": { "nombre": "5xx", "descripcion": "Server error responses. The server failed to fulfill a valid request." },
+    "wild": { "nombre": "In the wild", "descripcion": "Not in the official registry. Each of these comes from one particular server, CDN or framework, and you only ever meet it behind that software." }
+  },
+  "insignias": {
+    "Deprecated": { "etiqueta": "Deprecated", "significado": "Retired from the standard. Nothing new should use it." },
+    "Reserved": { "etiqueta": "Reserved", "significado": "The number is taken, but no server sends it." },
+    "Experimental": { "etiqueta": "Experimental", "significado": "Not settled yet: support is patchy and details may change." },
+    "Joke": { "etiqueta": "Joke", "significado": "Never meant seriously. The number stays reserved anyway." },
+    "No body": { "etiqueta": "No body", "significado": "Headers only. There is no content to read or parse." }
+  }
+}

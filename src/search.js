@@ -8,12 +8,19 @@
  */
 
 /**
- * Minúsculas y fuera la puntuación, para que "timeout" encuentre
+ * Minúsculas, sin tildes y sin puntuación, para que "timeout" encuentre
  * "Login Time-out" y "im a teapot" encuentre "I'm a teapot".
+ *
+ * Las tildes se quitan separando la letra de su acento y tirando el acento. Si
+ * en vez de eso se borrara la letra entera, "Código" quedaría en "cdigo" y
+ * escribir "codigo" sin tilde —que es lo que hace medio mundo— no lo
+ * encontraría. La ñ pasa por lo mismo y queda en n.
  */
 function normalize(text) {
     return String(text)
         .toLowerCase()
+        .normalize('NFD')
+        .replace(/[̀-ͯ]/g, '')
         .replace(/[^a-z0-9\s]/g, '')
 }
 

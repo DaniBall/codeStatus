@@ -1,4 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { useLang } from './i18n.js'
 
 /**
  * Modo claro y oscuro.
@@ -92,8 +93,9 @@ function Sol() {
 
 export function ThemeToggle() {
     const { scheme, toggle } = useTheme()
+    const { t } = useLang()
     const aOscuro = scheme === 'light'
-    const etiqueta = aOscuro ? 'Switch to dark mode' : 'Switch to light mode'
+    const etiqueta = aOscuro ? t('aOscuro') : t('aClaro')
     return (
         <button
             type='button'

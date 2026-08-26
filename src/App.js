@@ -8,24 +8,30 @@ import Mark from './elements/Mark.js'
 import Footer from './elements/Footer.js'
 import BackToTop from './elements/BackToTop.js'
 import { ThemeProvider, ThemeToggle } from './theme.js'
+import { LanguageProvider, LanguageToggle, useLang } from './i18n.js'
 import { countCodes, filterCatalogue } from './search.js'
-import { TAG_MEANINGS, tagKind, tagMeaning } from './tags.js'
+import { TAGS, tagKind } from './tags.js'
 import { subirArriba } from './scroll.js'
 import Analytics from './analytics.js'
 
 const TOTAL = countCodes(codeStatus)
 
 function Home() {
+  const { t, textos, catalogo } = useLang()
   const [query, setQuery] = useState('')
   const [tag, setTag] = useState(null)
-  const visible = useMemo(() => filterCatalogue(codeStatus, query, tag), [query, tag])
+  const visible = useMemo(() => filterCatalogue(catalogo, query, tag), [catalogo, query, tag])
   const encontrados = countCodes(visible)
   const buscando = query.trim().length > 0
+  const insignia = nombre => textos.insignias[nombre]
 
   // Qué se está filtrando, para el recuento y para el aviso de "nada encaja".
-  const criterios = [buscando ? query.trim() : null, tag ? `the ${tag} badge` : null]
+  const criterios = [
+    buscando ? query.trim() : null,
+    tag ? t('criterioInsignia', { tag: insignia(tag).etiqueta }) : null,
+  ]
     .filter(Boolean)
-    .join(' and ')
+    .join(` ${t('yCriterios')} `)
 
   // La leyenda vive al final y los resultados están arriba: pulsar y quedarse
   // abajo sería filtrar a ciegas.
@@ -67,25 +73,28 @@ function Home() {
         </h1>
 
         <form className='search' role='search' onSubmit={event => event.preventDefault()}>
-          <label className='visually-hidden' htmlFor='search'>Search status codes</label>
+          <label className='visually-hidden' htmlFor='search'>{t('buscar')}</label>
           <input
             id='search'
             className='search-input'
             type='search'
             value={query}
             onChange={event => setQuery(event.target.value)}
-            placeholder='Search: 404, timeout, nginx…'
+            placeholder={t('buscarPista')}
             autoComplete='off'
             aria-describedby='search-count'
           />
         </form>
 
-        <ThemeToggle />
+        <div className='topBar-controls'>
+          <LanguageToggle />
+          <ThemeToggle />
+        </div>
 
-        <nav className='topBar-nav' aria-label='Status code families'>
+        <nav className='topBar-nav' aria-label={t('familias')}>
           {visible.map(category => (
             <a
-              key={category.category}
+              key={category.family}
               className='topBar-link'
               href={`#c${category.family}`}
               data-family={category.family}
@@ -98,18 +107,18 @@ function Home() {
         {/* Filtran, así que van con el resto de lo que filtra y no en un
             glosario aparte. Los de arriba saltan a una sección; estos quitan
             códigos de en medio, y por eso son botones y no enlaces. */}
-        <div className='topBar-filters' role='group' aria-label='Filter by badge'>
-          {Object.keys(TAG_MEANINGS).map(nombre => (
+        <div className='topBar-filters' role='group' aria-label={t('filtrar')}>
+          {TAGS.map(nombre => (
             <button
               type='button'
               className='tag'
               key={nombre}
               data-kind={tagKind(nombre)}
               aria-pressed={tag === nombre}
-              title={tagMeaning(nombre)}
+              title={insignia(nombre).significado}
               onClick={() => alternarTag(nombre)}
             >
-              {nombre}
+              {insignia(nombre).etiqueta}
             </button>
           ))}
         </div>
@@ -119,21 +128,21 @@ function Home() {
         {/* El recuento se anuncia solo, para quien no ve desaparecer las tarjetas. */}
         <p id='search-count' className='search-count' role='status'>
           {criterios
-            ? `Showing ${encontrados} of ${TOTAL} status codes for ${criterios}`
-            : `${TOTAL} status codes`}
+            ? t('encontrados', { n: encontrados, total: TOTAL, criterios })
+            : t('total', { n: TOTAL })}
         </p>
         {/* El filtro se pulsa al final de la página; quitarlo tiene que poder
             hacerse desde aquí arriba, que es donde se ve el resultado. */}
         {tag && (
           <button type='button' className='searchStatus-clear' onClick={() => setTag(null)}>
-            Clear filter
+            {t('limpiarFiltro')}
           </button>
         )}
       </div>
 
       {visible.map(category => (
         <section
-          key={category.category}
+          key={category.family}
           id={`c${category.family}`}
           className='category'
           data-family={category.family}
@@ -164,9 +173,9 @@ function Home() {
                             className='tag'
                             key={nombre}
                             data-kind={tagKind(nombre)}
-                            title={tagMeaning(nombre)}
+                            title={insignia(nombre).significado}
                           >
-                            {nombre}
+                            {insignia(nombre).etiqueta}
                           </span>
                         ))}
                       </div>
@@ -181,9 +190,9 @@ function Home() {
 
       {encontrados === 0 && (
         <div className='emptyState'>
-          <p>No status code matches <strong>{criterios}</strong>.</p>
+          <p>{t('sinResultados')} <strong>{criterios}</strong>.</p>
           <button type='button' className='emptyState-clear' onClick={limpiar}>
-            Clear search
+            {t('limpiarBusqueda')}
           </button>
         </div>
       )}
@@ -196,15 +205,17 @@ function Home() {
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
-        {/* Dentro del router: es quien sabe cuándo cambia la ruta sin recargar. */}
-        <Analytics />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/:code" element={<StatusInfo />} />
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
+    <LanguageProvider>
+      <ThemeProvider>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
+          {/* Dentro del router: es quien sabe cuándo cambia la ruta sin recargar. */}
+          <Analytics />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/:code" element={<StatusInfo />} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
+    </LanguageProvider>
   )
 }

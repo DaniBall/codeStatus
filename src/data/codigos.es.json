@@ -1,0 +1,116 @@
+{
+  "100": { "description": "El servidor ha recibido las cabeceras y el cliente puede seguir con el resto de la petición." },
+  "101": { "description": "El servidor cambia de protocolo, tal y como le ha pedido el cliente." },
+  "102": {
+    "description": "El servidor ha recibido la petición y la está procesando, pero todavía no tiene respuesta.",
+    "note": "Venía de WebDAV y se cayó en el RFC 4918. Los trabajos largos hoy van por otro camino."
+  },
+  "103": { "description": "El servidor manda unas cabeceras por adelantado, antes de la respuesta definitiva." },
+
+  "200": { "description": "La petición ha salido bien." },
+  "201": { "description": "La petición ha salido bien y se ha creado un recurso nuevo." },
+  "202": { "description": "La petición se ha aceptado para procesarla, pero todavía no ha terminado." },
+  "203": { "description": "La respuesta trae información modificada por un tercero por el camino." },
+  "204": { "description": "La petición ha salido bien, pero no hay contenido que devolver." },
+  "205": { "description": "El cliente debería limpiar el formulario o la vista desde la que se envió la petición." },
+  "206": { "description": "El servidor devuelve sólo un trozo del recurso pedido." },
+  "207": { "description": "La respuesta trae varios resultados a la vez, normalmente en operaciones WebDAV." },
+  "208": { "description": "Los miembros de un enlace WebDAV ya se habían listado antes." },
+  "226": { "description": "El servidor ha resuelto la petición aplicando manipulaciones de instancia." },
+
+  "300": { "description": "Hay varias respuestas posibles y el cliente tiene que elegir una." },
+  "301": { "description": "El recurso se ha mudado para siempre a otra dirección." },
+  "302": { "description": "El recurso está temporalmente en otra dirección." },
+  "303": { "description": "El cliente debería pedir el recurso en otra dirección, y hacerlo con GET." },
+  "304": { "description": "La copia que tienes en caché sigue siendo válida." },
+  "305": {
+    "description": "Al recurso hay que llegar a través de un proxy.",
+    "note": "Se retiró por seguridad: dejaba que el servidor eligiera por qué proxy pasaba tu cliente."
+  },
+  "306": {
+    "description": "Este código ya no se usa y el número queda reservado.",
+    "note": "Nunca llegó a existir. Iba a ser Switch Proxy, y el número se queda apartado."
+  },
+  "307": { "description": "El recurso está temporalmente en otra dirección, y el método no debe cambiar." },
+  "308": { "description": "El recurso se ha mudado para siempre, y el método no debe cambiar." },
+
+  "400": { "description": "El servidor no ha entendido la petición porque venía mal formada." },
+  "401": { "description": "Hace falta identificarse, o el intento ha fallado." },
+  "402": { "description": "Reservado para el futuro. La idea original eran los pagos digitales." },
+  "403": { "description": "El cliente no tiene permiso para acceder al recurso." },
+  "404": { "description": "No se encuentra el recurso pedido." },
+  "405": { "description": "Ese método HTTP no está permitido para este recurso." },
+  "406": { "description": "El servidor no puede dar una respuesta en ninguno de los formatos que acepta el cliente." },
+  "407": { "description": "Hay que identificarse ante el proxy." },
+  "408": { "description": "El servidor se ha cansado de esperar a que llegara la petición." },
+  "409": { "description": "La petición choca con el estado en el que está ahora mismo el recurso." },
+  "410": { "description": "El recurso ya no existe, y no va a volver." },
+  "411": { "description": "La petición tiene que traer una cabecera Content-Length válida." },
+  "412": { "description": "No se cumple una de las condiciones que traían las cabeceras." },
+  "413": {
+    "description": "El cuerpo de la petición es más grande de lo que el servidor quiere o puede procesar.",
+    "note": "El RFC 9110 lo renombró: antes era Payload Too Large, que es como lo sigue llamando casi todo el mundo."
+  },
+  "414": { "description": "La dirección pedida es demasiado larga para el servidor." },
+  "415": { "description": "El servidor no admite el tipo de contenido que le mandas." },
+  "416": { "description": "El rango que has pedido no se puede servir." },
+  "417": { "description": "El servidor no puede cumplir lo que anunciaba la cabecera Expect." },
+  "418": {
+    "description": "Código de broma: el servidor se niega a hacer café porque es una tetera.",
+    "note": "De un RFC del Día de los Inocentes de 1998 que se quedó. Reservado para que nadie lo reutilice."
+  },
+  "421": { "description": "La petición ha llegado a un servidor que no puede responderla." },
+  "422": {
+    "description": "La petición está bien formada, pero su contenido no tiene sentido y no se puede procesar.",
+    "note": "El RFC 9110 lo renombró: antes era Unprocessable Entity, que es como lo siguen llamando casi todos los frameworks."
+  },
+  "423": { "description": "El recurso está bloqueado." },
+  "424": { "description": "La petición ha fallado porque dependía de otra que ya había fallado." },
+  "425": {
+    "description": "El servidor no quiere arriesgarse a procesar una petición que podría ser un reenvío.",
+    "note": "Para los datos anticipados de TLS 1.3, donde reenviar una petición sería un riesgo."
+  },
+  "426": { "description": "El cliente tiene que cambiar a otro protocolo." },
+  "428": { "description": "El servidor exige que la petición venga con condiciones." },
+  "429": { "description": "El cliente ha hecho demasiadas peticiones en muy poco tiempo." },
+  "431": { "description": "Las cabeceras de la petición son demasiado grandes para el servidor." },
+  "451": { "description": "El recurso no está disponible por motivos legales." },
+
+  "500": { "description": "El servidor se ha encontrado con algo que no esperaba." },
+  "501": { "description": "El servidor no sabe hacer lo que le pides." },
+  "502": { "description": "El servidor recibió una respuesta inválida de otro servidor por detrás." },
+  "503": { "description": "El servidor no está disponible ahora mismo, normalmente por saturación o mantenimiento." },
+  "504": { "description": "El servidor de detrás tardó demasiado en contestar." },
+  "505": { "description": "El servidor no admite la versión de HTTP que has usado." },
+  "506": { "description": "El servidor tiene mal configurada la negociación de contenido." },
+  "507": { "description": "El servidor no tiene sitio para guardar lo que hace falta para completar la petición." },
+  "508": { "description": "El servidor ha detectado un bucle infinito mientras procesaba la petición." },
+  "510": {
+    "description": "La petición necesita extensiones adicionales.",
+    "note": "El RFC 2774 pasó a histórico, y la IANA marca el código como obsoleto."
+  },
+  "511": { "description": "Hay que identificarse para poder salir a la red." },
+
+  "419": { "description": "La respuesta de Laravel cuando falta el token CSRF o ha caducado. Recarga la página y vuelve a intentarlo." },
+  "420": { "description": "La forma que tenía la vieja API de Twitter de decirte que te estabas pasando. Spring usó el mismo número para Method Failure." },
+  "440": { "description": "La sesión ha caducado e IIS quiere que vuelvas a entrar." },
+  "444": { "description": "nginx cierra la conexión sin devolver nada. Se usa para descartar peticiones en silencio." },
+  "449": { "description": "IIS te pide que repitas la petición, esta vez con la información que faltaba." },
+  "450": { "description": "El control parental de Windows ha bloqueado el acceso a esta página." },
+  "494": { "description": "Las cabeceras se pasaron del buffer de nginx antes de que pudiera contestar con un 431." },
+  "495": { "description": "El cliente presentó un certificado TLS que nginx no pudo verificar." },
+  "496": { "description": "nginx exige un certificado TLS de cliente y no se presentó ninguno." },
+  "497": { "description": "Ha llegado una petición HTTP normal a un puerto que sólo habla HTTPS." },
+  "499": { "description": "El cliente se cansó y cerró la conexión antes de que nginx contestara. Un clásico de los logs de nginx." },
+  "509": { "description": "La cuenta de alojamiento se ha pasado del tráfico que tenía contratado para el mes." },
+  "520": { "description": "El origen contestó con algo vacío o malformado que Cloudflare no supo interpretar." },
+  "521": { "description": "El origen rechazó la conexión. Suele estar apagado o bloqueando las direcciones de Cloudflare." },
+  "522": { "description": "Cloudflare llegó hasta el origen, pero la conexión no llegó a establecerse." },
+  "523": { "description": "Cloudflare no encontró ruta hasta el origen, normalmente un problema de DNS o de enrutado." },
+  "524": { "description": "Cloudflare conectó con el origen, pero éste tardó demasiado en contestar." },
+  "525": { "description": "El apretón de manos TLS entre Cloudflare y el origen no salió bien." },
+  "526": { "description": "El certificado TLS del origen no se pudo validar." },
+  "530": { "description": "Siempre viene acompañado de un error 1xxx de Cloudflare, que es donde está la causa de verdad." },
+  "598": { "description": "Lo usan algunos proxies cuando se les agota el tiempo leyendo del servidor de detrás." },
+  "599": { "description": "Lo usan algunos proxies cuando no consiguen conectar con el servidor de detrás." }
+}

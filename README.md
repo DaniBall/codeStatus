@@ -140,7 +140,9 @@ body` es un dato, no una advertencia, y va discreta.
 Una insignia sola es jerga: `No body` lo entiende quien ya sabe que una
 respuesta HTTP son cabeceras más cuerpo, que es justo quien no necesitaba la
 insignia. Así que en la ficha cada una viene con **lo que significa**, sacado de
-`src/tags.js`.
+`src/data/textos.<idioma>.json`. En `src/tags.js` sólo quedan la lista y de qué
+tipo es cada una: el nombre que sale ahí es la clave interna, no se traduce, y
+es lo que usan el filtro y las pruebas.
 
 En la tarjeta el significado no cabe, así que va en el `title`. En la portada
 sólo está ahí, en hover: **en móvil la insignia de la tarjeta no se explica**, y
@@ -211,7 +213,55 @@ palabras tienen que aparecer todas. Para filtrar por insignia con precisión
 está la leyenda, que mira el dato en vez del texto.
 
 La puntuación se ignora a los dos lados: `timeout` encuentra `Login Time-out`
-y `im a teapot` encuentra `I'm a teapot`.
+y `im a teapot` encuentra `I'm a teapot`. Las tildes también, y en los dos
+sentidos: `codigo` encuentra `Código`. Eso se hace separando la letra de su
+acento y tirando el acento, no borrando la letra entera; si se borrara,
+`Código` quedaría en `cdigo` y escribir sin tilde no encontraría nada.
+
+Se busca **en el idioma que se está viendo**: en español, `tetera` encuentra el
+418. El catálogo se traduce antes de filtrar, así que el buscador no sabe de
+idiomas.
+
+## Idiomas
+
+La web está en **inglés y español**. Sin tocar nada sale en el idioma del
+navegador (`navigator.languages`); si no es ninguno de los dos, en inglés. El
+botón `ES`/`EN` de la barra lo cambia, y la elección se recuerda y manda sobre
+lo que diga el navegador. Es el mismo patrón que el modo claro/oscuro.
+
+Al cambiar de idioma también cambian el `<html lang>` —de ahí sale la
+pronunciación de un lector de pantalla y la oferta de traducir del navegador— y
+el título de la pestaña.
+
+**Los nombres de los códigos no se traducen.** `404 Not Found` se queda igual:
+es lo que devuelve el protocolo y lo que ves en las herramientas del navegador,
+así que traducirlo haría la web menos útil como referencia. Lo que se traduce es
+la descripción, la nota, las familias, las insignias y la interfaz.
+
+Dónde está cada cosa:
+
+| Fichero | Qué lleva |
+| --- | --- |
+| `src/status_codes.json` | El catálogo, con el texto en inglés. Es la fuente de la estructura |
+| `src/data/textos.en.json` | Interfaz, familias e insignias en inglés |
+| `src/data/textos.es.json` | Lo mismo en español |
+| `src/data/codigos.es.json` | Las 85 descripciones y las 8 notas en español |
+
+El español es una **capa encima** del inglés, no una copia: si algún día falta
+una traducción se ve el inglés en vez de un hueco. `catalogoEn(lang)` mezcla las
+dos cosas una sola vez, y a partir de ahí el buscador, las tarjetas y la ficha
+trabajan con el texto ya resuelto sin saber de idiomas.
+
+Hay pruebas que lo sostienen: los dos idiomas tienen las mismas claves, ninguna
+cadena está vacía, los huecos de las plantillas (`{n}`, `{total}`) coinciden
+entre idiomas, los 85 códigos están traducidos, no sobra ninguno, y ninguna
+descripción española es idéntica a la inglesa —que es el descuido típico de
+copiar el fichero y traducir sólo la mitad.
+
+El enlace a MDN va siempre a la versión en inglés: no todas las páginas están
+traducidas y un enlace roto es peor que una página en otro idioma. Las etiquetas
+`og:` de `index.html` también se quedan en inglés, porque las lee un robot que
+no ejecuta JavaScript.
 
 ## Volver arriba
 
@@ -294,7 +344,7 @@ Los cinco acentos pasan el contraste AA de WCAG sobre blanco (el peor está en
 ## Comprobaciones
 
 ```bash
-npm test    # 70 pruebas
+npm test    # 93 pruebas
 npm run build
 ```
 

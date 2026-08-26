@@ -127,7 +127,7 @@
   flex-wrap: wrap;
   gap: 0.4em;
 }
-.topBar > .themeToggle{ flex: none; }
+.topBar > .topBar-controls{ flex: none; }
 
 /* ---- Buscador ---- */
 
@@ -160,7 +160,7 @@
     max-width: none;
     margin: 0;
   }
-  .topBar > .themeToggle{
+  .topBar > .topBar-controls{
     order: 2;
     margin-left: auto;
   }
@@ -245,10 +245,16 @@
   text-decoration: none;
 }
 .topBar-link:hover{ border-color: var(--accent); }
-.themeToggle{
+/* Idioma y tema juntos: los dos cambian cómo se ve la web, no qué se ve. */
+.topBar-controls{
+  display: flex;
+  flex: none;
+  gap: 0.4em;
+}
+.themeToggle,
+.langToggle{
   display: grid;
   place-items: center;
-  width: 2em;
   height: 2em;
   color: var(--ink-soft);
   padding: 0;
@@ -259,7 +265,18 @@
   line-height: 1;
   cursor: pointer;
 }
-.themeToggle:hover{
+.themeToggle{ width: 2em; }
+/* El de idioma lleva texto, así que se le da aire a los lados en vez de
+   cuadrarlo: "ES" y "EN" no ocupan lo mismo en todas las tipografías. */
+.langToggle{
+  padding: 0 0.55em;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+.themeToggle:hover,
+.langToggle:hover{
   border-color: var(--ink-soft);
   color: var(--ink);
 }

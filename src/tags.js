@@ -1,22 +1,12 @@
 /**
- * Qué significa cada insignia.
+ * Las insignias de estado.
  *
- * La insignia sola es jerga: "No body" lo entiende quien ya sabe que una
- * respuesta HTTP son cabeceras más cuerpo, que es justo quien no necesitaba la
- * insignia. Aquí está lo que quiere decir, y se enseña en la ficha.
- *
- * Aparte de esto, cada código puede llevar su propia nota con lo suyo: esto
- * explica la etiqueta, la nota explica el caso.
+ * Aquí sólo viven la lista y de qué tipo es cada una. El texto que se ve —la
+ * etiqueta y su significado— está en data/textos.<idioma>.json, porque cambia
+ * con el idioma. El nombre que sale aquí es la clave interna, y no se traduce:
+ * es lo que guarda status_codes.json y lo que usan el filtro y las pruebas.
  */
-export const TAG_MEANINGS = {
-    Deprecated: 'Retired from the standard. Nothing new should use it.',
-    Reserved: 'The number is taken, but no server sends it.',
-    Experimental: 'Not settled yet: support is patchy and details may change.',
-    Joke: 'Never meant seriously. The number stays reserved anyway.',
-    'No body': 'Headers only. There is no content to read or parse.',
-}
-
-export const tagMeaning = tag => TAG_MEANINGS[tag] || ''
+export const TAGS = ['Deprecated', 'Reserved', 'Experimental', 'Joke', 'No body']
 
 /**
  * Avisos frente a datos.

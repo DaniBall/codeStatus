@@ -1,7 +1,8 @@
 import { render, screen, fireEvent, within } from '@testing-library/react';
 import App from './App';
 import codeStatus from './status_codes.json';
-import { TAG_MEANINGS } from './tags';
+import { TAGS } from './tags';
+import en from './data/textos.en.json';
 
 const allCodes = codeStatus.flatMap(category => category.codes);
 
@@ -97,6 +98,93 @@ describe('volver arriba', () => {
   });
 });
 
+describe('idioma', () => {
+  const conNavegador = idiomas => {
+    Object.defineProperty(window.navigator, 'languages', {
+      value: idiomas,
+      configurable: true,
+    });
+  };
+
+  afterEach(() => {
+    window.localStorage.clear();
+    conNavegador(['en-US']);
+    document.documentElement.lang = 'en';
+  });
+
+  test('sale en el idioma del navegador sin tocar nada', () => {
+    conNavegador(['es-ES']);
+    render(<App />);
+
+    expect(screen.getByRole('status')).toHaveTextContent('85 códigos de estado');
+    expect(screen.getByLabelText(/buscar códigos de estado/i)).toBeInTheDocument();
+    // El <html lang> también, que de ahí sale la pronunciación de un lector.
+    expect(document.documentElement.lang).toBe('es');
+  });
+
+  test('un idioma que no tenemos cae en inglés', () => {
+    conNavegador(['fr-FR']);
+    render(<App />);
+
+    expect(screen.getByRole('status')).toHaveTextContent('85 status codes');
+    expect(document.documentElement.lang).toBe('en');
+  });
+
+  test('el botón cambia de idioma y la elección manda sobre el navegador', () => {
+    render(<App />);
+    expect(screen.getByRole('status')).toHaveTextContent('85 status codes');
+
+    fireEvent.click(screen.getByRole('button', { name: /ver en español/i }));
+
+    expect(screen.getByRole('status')).toHaveTextContent('85 códigos de estado');
+    expect(document.documentElement.lang).toBe('es');
+    // Y se recuerda, para que no haya que elegirlo en cada visita.
+    expect(window.localStorage.getItem('codestatus-lang')).toBe('es');
+  });
+
+  test('en español se traducen las secciones, las insignias y las fichas', () => {
+    conNavegador(['es']);
+    render(<App />);
+
+    expect(screen.getByRole('heading', { name: 'En la práctica' })).toBeInTheDocument();
+    const tarjeta = screen.getByRole('heading', { name: '102' }).closest('article');
+    expect(within(tarjeta).getByText('Obsoleto')).toBeInTheDocument();
+    expect(within(tarjeta).getByText('Sin cuerpo')).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('heading', { name: '102' }).closest('a'));
+    expect(screen.getByText(/venía de webdav/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /todos los códigos/i })).toBeInTheDocument();
+  });
+
+  test('el nombre del código no se traduce: es lo que devuelve el protocolo', () => {
+    conNavegador(['es']);
+    render(<App />);
+
+    const tarjeta = screen.getByRole('heading', { name: '404' }).closest('article');
+    expect(within(tarjeta).getByText('Not Found')).toBeInTheDocument();
+  });
+
+  test('en español se busca en español, con tilde o sin ella', () => {
+    conNavegador(['es']);
+    render(<App />);
+    const escribir = valor =>
+      fireEvent.change(screen.getByLabelText(/buscar códigos de estado/i), {
+        target: { value: valor },
+      });
+
+    escribir('tetera');
+    expect(screen.getByRole('heading', { name: '418' })).toBeInTheDocument();
+    expect(screen.getAllByRole('img')).toHaveLength(1);
+
+    // Sin tilde tiene que encontrar lo mismo que con ella.
+    escribir('codigo');
+    const sinTilde = screen.getAllByRole('img').length;
+    escribir('código');
+    expect(screen.getAllByRole('img')).toHaveLength(sinTilde);
+    expect(sinTilde).toBeGreaterThan(0);
+  });
+});
+
 describe('estado de los códigos', () => {
   const filtros = () => screen.getByRole('group', { name: /filter by badge/i });
 
@@ -110,11 +198,11 @@ describe('estado de los códigos', () => {
     render(<App />);
     const botones = within(filtros()).getAllByRole('button');
 
-    expect(botones.map(b => b.textContent)).toEqual(Object.keys(TAG_MEANINGS));
+    expect(botones.map(b => b.textContent)).toEqual(TAGS);
     // En la portada el significado sólo está aquí, y en hover: la explicación
     // entera vive en la ficha.
     botones.forEach(boton => {
-      expect(boton).toHaveAttribute('title', TAG_MEANINGS[boton.textContent]);
+      expect(boton).toHaveAttribute('title', en.insignias[boton.textContent].significado);
     });
   });
 
@@ -123,8 +211,8 @@ describe('estado de los códigos', () => {
     fireEvent.click(screen.getByRole('heading', { name: '102' }).closest('a'));
 
     // La de la etiqueta y la del código: explican cosas distintas.
-    expect(screen.getByText(TAG_MEANINGS['No body'])).toBeInTheDocument();
-    expect(screen.getByText(TAG_MEANINGS.Deprecated)).toBeInTheDocument();
+    expect(screen.getByText(en.insignias['No body'].significado)).toBeInTheDocument();
+    expect(screen.getByText(en.insignias.Deprecated.significado)).toBeInTheDocument();
     expect(screen.getByText(/dropped in RFC 4918/i)).toBeInTheDocument();
   });
 

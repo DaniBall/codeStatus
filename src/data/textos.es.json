@@ -1,0 +1,49 @@
+{
+  "ui": {
+    "buscar": "Buscar códigos de estado",
+    "buscarPista": "Busca: 404, timeout, nginx…",
+    "familias": "Familias de códigos de estado",
+    "filtrar": "Filtrar por insignia",
+    "total": "{n} códigos de estado",
+    "encontrados": "{n} de {total} códigos de estado para {criterios}",
+    "yCriterios": "y",
+    "criterioInsignia": "la insignia {tag}",
+    "limpiarFiltro": "Quitar filtro",
+    "sinResultados": "Ningún código de estado coincide con",
+    "limpiarBusqueda": "Limpiar búsqueda",
+    "arriba": "Volver arriba",
+    "volver": "← Todos los códigos",
+    "noExiste": "Código de estado no encontrado",
+    "noExisteDetalle": "No existe el código de estado HTTP",
+    "docsMDN": "Leer la documentación en MDN",
+    "definidoEn": "Definido en",
+    "noEstandar": "No es un código estándar.",
+    "soloDe": "Sólo te lo vas a encontrar en",
+    "aOscuro": "Cambiar a modo oscuro",
+    "aClaro": "Cambiar a modo claro",
+    "idioma": "View in English",
+    "idiomaCodigo": "EN",
+    "altFoto": "Foto de un pato ilustrando el código HTTP {code} {name}",
+    "altRespaldo": "Dibujo de respaldo para el código HTTP {code} {name}",
+    "pieDerechos": "Todos los derechos reservados.",
+    "pieRepo": "Código en GitHub",
+    "pieFuentes": "Las definiciones de los códigos salen del registro de códigos de estado HTTP de la IANA y de los RFC correspondientes. Las fotos de patos están generadas con IA.",
+    "pieAnalitica": "Las visitas se cuentan de forma anónima con GoatCounter. Sin cookies.",
+    "titulo": "codeStatus: los códigos de estado HTTP explicados con patos"
+  },
+  "categorias": {
+    "1": { "nombre": "1xx", "descripcion": "Respuestas informativas. La petición se ha recibido y el proceso sigue en marcha." },
+    "2": { "nombre": "2xx", "descripcion": "Respuestas correctas. La petición se ha recibido, entendido y aceptado." },
+    "3": { "nombre": "3xx", "descripcion": "Redirecciones. Hace falta algo más para completar la petición." },
+    "4": { "nombre": "4xx", "descripcion": "Errores del cliente. La petición trae algún fallo o el cliente no puede completarla." },
+    "5": { "nombre": "5xx", "descripcion": "Errores del servidor. El servidor no ha sabido responder a una petición válida." },
+    "wild": { "nombre": "En la práctica", "descripcion": "No están en el registro oficial. Cada uno sale de un servidor, un CDN o un framework concreto, y sólo te lo encuentras detrás de ese software." }
+  },
+  "insignias": {
+    "Deprecated": { "etiqueta": "Obsoleto", "significado": "Retirado del estándar. Nada nuevo debería usarlo." },
+    "Reserved": { "etiqueta": "Reservado", "significado": "El número está cogido, pero ningún servidor lo envía." },
+    "Experimental": { "etiqueta": "Experimental", "significado": "Sin cerrar del todo: el soporte es irregular y puede cambiar." },
+    "Joke": { "etiqueta": "Broma", "significado": "Nunca fue en serio. Aun así el número queda reservado." },
+    "No body": { "etiqueta": "Sin cuerpo", "significado": "Sólo cabeceras. No viene contenido que leer." }
+  }
+}

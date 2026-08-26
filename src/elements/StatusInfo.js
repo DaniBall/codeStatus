@@ -1,15 +1,16 @@
 import '../App.css'
-import codeStatus from '../status_codes.json'
 import { useParams, Link } from 'react-router-dom'
 import DuckImage from './DuckImage.js'
 import Footer from './Footer.js'
 import TagGlossary from './TagGlossary.js'
 import { specUrl } from '../spec.js'
+import { useLang } from '../i18n.js'
 
 export default function StatusInfo() {
     const { code } = useParams();
-    // Busca en el JSON el código correspondiente
-    const category = codeStatus.find(cat =>
+    const { t, catalogo } = useLang()
+    // Busca en el catálogo ya traducido el código correspondiente
+    const category = catalogo.find(cat =>
         cat.codes.some(c => String(c.code) === code)
     )
     const statusCode = category?.codes.find(c => String(c.code) === code)
@@ -18,9 +19,9 @@ export default function StatusInfo() {
         return (
             <div className='App'>
                 <div className='statusInfo-missing'>
-                    <h1>Status code not found</h1>
-                    <p>There is no HTTP status code <strong>{code}</strong>.</p>
-                    <Link className='statusInfo-back' to='/'>← All status codes</Link>
+                    <h1>{t('noExiste')}</h1>
+                    <p>{t('noExisteDetalle')} <strong>{code}</strong>.</p>
+                    <Link className='statusInfo-back' to='/'>{t('volver')}</Link>
                 </div>
                 <Footer />
             </div>
@@ -28,15 +29,17 @@ export default function StatusInfo() {
     }
 
     // Los códigos no oficiales no están en MDN: cada uno apunta a su fuente.
+    // El enlace va siempre a la versión en inglés: no todas las páginas están
+    // traducidas y un enlace roto es peor que una página en otro idioma.
     const docs = statusCode.docs
         || `https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/${statusCode.code}`
-    const docsLabel = statusCode.docsLabel || 'Read the docs on MDN'
+    const docsLabel = statusCode.docsLabel || t('docsMDN')
     const rfc = specUrl(statusCode.spec)
 
     return (
         <div className='App statusInfo-page' data-family={category.family}>
             <div className='statusInfo'>
-                <Link className='statusInfo-back' to='/'>← All status codes</Link>
+                <Link className='statusInfo-back' to='/'>{t('volver')}</Link>
 
                 <article className='statusInfo-card'>
                     <DuckImage statusCode={statusCode} family={category.family} />
@@ -50,8 +53,8 @@ export default function StatusInfo() {
 
                         {statusCode.source && (
                             <p className='statusInfo-source'>
-                                <strong>Not a standard code.</strong> You will only
-                                see it coming from <strong>{statusCode.source}</strong>.
+                                <strong>{t('noEstandar')}</strong> {t('soloDe')}{' '}
+                                <strong>{statusCode.source}</strong>.
                             </p>
                         )}
 
@@ -74,7 +77,7 @@ export default function StatusInfo() {
 
                         {rfc && (
                             <p className='statusInfo-spec'>
-                                Defined in{' '}
+                                {t('definidoEn')}{' '}
                                 <a href={rfc} target="_blank" rel="noopener noreferrer">
                                     {statusCode.spec}
                                 </a>

@@ -4,7 +4,10 @@ import codeStatus from './status_codes.json';
 import duckData from './data/duckScenes.json';
 import { buildDuckFallback, duckImagePath, getDuckScene, resolveDuckImage } from './duckImage';
 import { specUrl } from './spec';
-import { TAG_MEANINGS, tagMeaning } from './tags';
+import { TAGS } from './tags';
+import en from './data/textos.en.json';
+import es from './data/textos.es.json';
+import codigosEs from './data/codigos.es.json';
 
 const allCodes = codeStatus.flatMap(category => category.codes);
 
@@ -88,7 +91,7 @@ describe('estado y especificación de cada código', () => {
     test('las insignias salen de una lista corta y conocida', () => {
         // Abierta a mano: una etiqueta suelta y mal escrita se quedaría sin
         // estilo y sin significar nada.
-        const validas = ['Deprecated', 'Experimental', 'Reserved', 'Joke', 'No body'];
+        const validas = TAGS;
         allCodes.forEach(item => {
             if (!item.tags) return;
             expect(Array.isArray(item.tags)).toBe(true);
@@ -97,20 +100,26 @@ describe('estado y especificación de cada código', () => {
         });
     });
 
-    test('toda insignia explica qué quiere decir', () => {
+    test('toda insignia explica qué quiere decir, en los dos idiomas', () => {
         // Sin esto se puede colar una etiqueta nueva que en la ficha saldría
         // muda, que es justo lo que se venía a arreglar.
         const usadas = new Set(allCodes.flatMap(item => item.tags || []));
         expect(usadas.size).toBeGreaterThan(0);
         usadas.forEach(tag => {
-            expect(TAG_MEANINGS[tag]).toBeTruthy();
-            expect(tagMeaning(tag).split(/\s+/).length).toBeLessThanOrEqual(16);
+            [en, es].forEach(idioma => {
+                const insignia = idioma.insignias[tag];
+                expect(insignia?.etiqueta).toBeTruthy();
+                expect(insignia?.significado).toBeTruthy();
+                expect(insignia.significado.split(/\s+/).length).toBeLessThanOrEqual(16);
+            });
         });
     });
 
     test('no sobra ningún significado sin insignia que lo use', () => {
         const usadas = new Set(allCodes.flatMap(item => item.tags || []));
-        Object.keys(TAG_MEANINGS).forEach(tag => expect(usadas.has(tag)).toBe(true));
+        [en, es].forEach(idioma => {
+            Object.keys(idioma.insignias).forEach(tag => expect(usadas.has(tag)).toBe(true));
+        });
     });
 
     test('los códigos retirados están marcados', () => {
