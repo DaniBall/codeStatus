@@ -9,7 +9,8 @@ import Footer from './elements/Footer.js'
 import BackToTop from './elements/BackToTop.js'
 import { ThemeProvider, ThemeToggle } from './theme.js'
 import { countCodes, filterCatalogue } from './search.js'
-import { tagMeaning } from './tags.js'
+import TagGlossary from './elements/TagGlossary.js'
+import { TAG_MEANINGS, tagMeaning } from './tags.js'
 import Analytics from './analytics.js'
 
 const TOTAL = countCodes(codeStatus)
@@ -64,6 +65,13 @@ function Home() {
           ? `Showing ${encontrados} of ${TOTAL} status codes for ${query.trim()}`
           : `${TOTAL} status codes`}
       </p>
+
+      {/* En la tarjeta el significado va en el title, y en un móvil no hay
+          hover que lo saque. Aquí está a un toque, sin ocupar sitio cerrado. */}
+      <details className='tagLegend'>
+        <summary>What do the badges mean?</summary>
+        <TagGlossary tags={Object.keys(TAG_MEANINGS)} />
+      </details>
 
       {visible.map(category => (
         <section

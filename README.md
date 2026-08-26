@@ -140,7 +140,12 @@ body` es un dato, no una advertencia, y va discreta.
 Una insignia sola es jerga: `No body` lo entiende quien ya sabe que una
 respuesta HTTP son cabeceras más cuerpo, que es justo quien no necesitaba la
 insignia. Así que en la ficha cada una viene con **lo que significa**, sacado de
-`src/tags.js`. En la tarjeta, donde no cabe, va en el `title`.
+`src/tags.js`.
+
+En la tarjeta el significado no cabe, así que va en el `title`. Pero **en un
+móvil no hay hover**: ahí el `title` no se puede sacar de ninguna manera y la
+insignia se quedaba muda. Por eso la portada lleva un desplegable con el
+glosario entero, que cerrado ocupa una línea y se abre con un toque.
 
 Hay dos pruebas que lo sostienen: ninguna insignia puede quedarse sin
 significado, y ningún significado puede sobrar sin insignia que lo use. Sin eso
@@ -256,7 +261,7 @@ Los cinco acentos pasan el contraste AA de WCAG sobre blanco (el peor está en
 ## Comprobaciones
 
 ```bash
-npm test    # 64 pruebas
+npm test    # 65 pruebas
 npm run build
 ```
 

@@ -104,6 +104,17 @@ describe('estado de los códigos', () => {
     expect(within(tarjeta).getByText('Deprecated')).toBeInTheDocument();
   });
 
+  test('la portada explica las insignias sin depender del hover', () => {
+    // En un móvil el title de la tarjeta no se puede sacar de ninguna manera.
+    render(<App />);
+    const leyenda = screen.getByText(/what do the badges mean/i).closest('details');
+
+    Object.entries(TAG_MEANINGS).forEach(([tag, significado]) => {
+      expect(within(leyenda).getByText(tag)).toBeInTheDocument();
+      expect(within(leyenda).getByText(significado)).toBeInTheDocument();
+    });
+  });
+
   test('la ficha dice qué quiere decir cada insignia', () => {
     render(<App />);
     fireEvent.click(screen.getByRole('heading', { name: '102' }).closest('a'));
