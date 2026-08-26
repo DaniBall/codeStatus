@@ -9,7 +9,6 @@ import Footer from './elements/Footer.js'
 import BackToTop from './elements/BackToTop.js'
 import { ThemeProvider, ThemeToggle } from './theme.js'
 import { countCodes, filterCatalogue } from './search.js'
-import TagGlossary from './elements/TagGlossary.js'
 import { TAG_MEANINGS, tagKind, tagMeaning } from './tags.js'
 import { subirArriba } from './scroll.js'
 import Analytics from './analytics.js'
@@ -76,6 +75,25 @@ function Home() {
             </a>
           ))}
         </nav>
+
+        {/* Filtran, así que van con el resto de lo que filtra y no en un
+            glosario aparte. Los de arriba saltan a una sección; estos quitan
+            códigos de en medio, y por eso son botones y no enlaces. */}
+        <div className='topBar-filters' role='group' aria-label='Filter by badge'>
+          {Object.keys(TAG_MEANINGS).map(nombre => (
+            <button
+              type='button'
+              className='tag'
+              key={nombre}
+              data-kind={tagKind(nombre)}
+              aria-pressed={tag === nombre}
+              title={tagMeaning(nombre)}
+              onClick={() => alternarTag(nombre)}
+            >
+              {nombre}
+            </button>
+          ))}
+        </div>
       </header>
 
       <div className='searchStatus'>
@@ -150,18 +168,6 @@ function Home() {
           </button>
         </div>
       )}
-
-      {/* Material de consulta, y va al final como tal: en la tarjeta el
-          significado está en el title, y en un móvil no hay hover que lo
-          saque. Cerrado ocupa una línea y no le quita sitio al pie. */}
-      <details className='tagLegend'>
-        <summary>What do the badges mean?</summary>
-        <TagGlossary
-          tags={Object.keys(TAG_MEANINGS)}
-          activo={tag}
-          onFiltrar={alternarTag}
-        />
-      </details>
 
       <Footer />
       <BackToTop />

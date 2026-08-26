@@ -98,7 +98,7 @@ describe('volver arriba', () => {
 });
 
 describe('estado de los códigos', () => {
-  const leyenda = () => screen.getByText(/what do the badges mean/i).closest('details');
+  const filtros = () => screen.getByRole('group', { name: /filter by badge/i });
 
   test('un código retirado lo dice en su tarjeta', () => {
     render(<App />);
@@ -106,14 +106,15 @@ describe('estado de los códigos', () => {
     expect(within(tarjeta).getByText('Deprecated')).toBeInTheDocument();
   });
 
-  test('la portada explica las insignias sin depender del hover', () => {
-    // En un móvil el title de la tarjeta no se puede sacar de ninguna manera.
+  test('el índice lleva un filtro por cada insignia', () => {
     render(<App />);
-    const leyenda = screen.getByText(/what do the badges mean/i).closest('details');
+    const botones = within(filtros()).getAllByRole('button');
 
-    Object.entries(TAG_MEANINGS).forEach(([tag, significado]) => {
-      expect(within(leyenda).getByText(tag)).toBeInTheDocument();
-      expect(within(leyenda).getByText(significado)).toBeInTheDocument();
+    expect(botones.map(b => b.textContent)).toEqual(Object.keys(TAG_MEANINGS));
+    // En la portada el significado sólo está aquí, y en hover: la explicación
+    // entera vive en la ficha.
+    botones.forEach(boton => {
+      expect(boton).toHaveAttribute('title', TAG_MEANINGS[boton.textContent]);
     });
   });
 
@@ -127,9 +128,9 @@ describe('estado de los códigos', () => {
     expect(screen.getByText(/dropped in RFC 4918/i)).toBeInTheDocument();
   });
 
-  test('pulsar una insignia de la leyenda filtra el catálogo', () => {
+  test('pulsar una insignia del índice filtra el catálogo', () => {
     render(<App />);
-    fireEvent.click(within(leyenda()).getByRole('button', { name: 'Deprecated' }));
+    fireEvent.click(within(filtros()).getByRole('button', { name: 'Deprecated' }));
 
     expect(screen.getAllByRole('img')).toHaveLength(3);
     [102, 305, 510].forEach(code => {
@@ -140,7 +141,7 @@ describe('estado de los códigos', () => {
 
   test('el filtro se quita desde arriba o volviendo a pulsarlo', () => {
     render(<App />);
-    const pulsar = () => fireEvent.click(within(leyenda()).getByRole('button', { name: 'Joke' }));
+    const pulsar = () => fireEvent.click(within(filtros()).getByRole('button', { name: 'Joke' }));
 
     pulsar();
     expect(screen.getAllByRole('img')).toHaveLength(1);
@@ -156,9 +157,9 @@ describe('estado de los códigos', () => {
 
   test('la insignia activa se distingue de las demás', () => {
     render(<App />);
-    fireEvent.click(within(leyenda()).getByRole('button', { name: 'Reserved' }));
+    fireEvent.click(within(filtros()).getByRole('button', { name: 'Reserved' }));
 
-    const botones = within(leyenda()).getAllByRole('button');
+    const botones = within(filtros()).getAllByRole('button');
     const pulsadas = botones.filter(b => b.getAttribute('aria-pressed') === 'true');
     expect(pulsadas.map(b => b.textContent)).toEqual(['Reserved']);
   });
@@ -167,7 +168,7 @@ describe('estado de los códigos', () => {
     // "Reserved" sale en la descripción del 402 y del 306, pero sólo el 306
     // lleva la insignia. Buscando por texto saldrían los dos.
     render(<App />);
-    fireEvent.click(within(leyenda()).getByRole('button', { name: 'Reserved' }));
+    fireEvent.click(within(filtros()).getByRole('button', { name: 'Reserved' }));
 
     expect(screen.getByRole('heading', { name: '306' })).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: '402' })).not.toBeInTheDocument();
@@ -175,7 +176,7 @@ describe('estado de los códigos', () => {
 
   test('insignia y búsqueda se acumulan', () => {
     render(<App />);
-    fireEvent.click(within(leyenda()).getByRole('button', { name: 'No body' }));
+    fireEvent.click(within(filtros()).getByRole('button', { name: 'No body' }));
     fireEvent.change(screen.getByLabelText(/search status codes/i), {
       target: { value: '304' },
     });

@@ -142,33 +142,35 @@ respuesta HTTP son cabeceras más cuerpo, que es justo quien no necesitaba la
 insignia. Así que en la ficha cada una viene con **lo que significa**, sacado de
 `src/tags.js`.
 
-En la tarjeta el significado no cabe, así que va en el `title`. Pero **en un
-móvil no hay hover**: ahí el `title` no se puede sacar de ninguna manera y la
-insignia se quedaba muda. Por eso hay un desplegable con el glosario entero
-**al final de la portada**, justo antes del pie, que cerrado ocupa una línea.
-Va al final porque es material de consulta, no algo que haga falta leer para
-entender las tarjetas.
+En la tarjeta el significado no cabe, así que va en el `title`. En la portada
+sólo está ahí, en hover: **en móvil la insignia de la tarjeta no se explica**, y
+para eso está la ficha, a un toque.
 
 Hay dos pruebas que lo sostienen: ninguna insignia puede quedarse sin
-significado, y ningún significado puede sobrar sin insignia que lo use. Sin eso
-una etiqueta nueva saldría muda en la ficha, que es lo que se venía a arreglar.
+significado, y ningún significado puede sobrar sin insignia que lo use.
 
 ### Filtrar por insignia
 
-Las insignias de la leyenda **son botones**: pulsar `DEPRECATED` deja la portada
-con esos tres, y volver a pulsarla lo quita. Se puede ahí porque la leyenda no
-cuelga de ningún enlace; en la tarjeta, que entera es un enlace a la ficha, un
-botón dentro no sería HTML válido.
+Las insignias viven en el índice de la barra, en su propia fila bajo las
+familias, y **son botones**: pulsar `DEPRECATED` deja la portada con esos tres, y
+volver a pulsarla lo quita. Están ahí porque son filtros y ese es el sitio de lo
+que filtra; en la tarjeta no podrían serlo, que entera es un enlace a la ficha y
+un botón dentro de un enlace no es HTML válido.
 
 El filtro mira `tags`, **no el texto**. Buscar `reserved` encuentra lo que *diga*
 esa palabra, y el `402` la lleva en su descripción sin tener la insignia; si
 esto filtrase por texto traería códigos de más y nadie se enteraría el día que
 una descripción cambie. Hay una prueba con ese par exacto.
 
-Al filtrar se sube arriba: la leyenda está al final y los resultados están
-arriba, así que quedarse abajo sería filtrar a ciegas. El filtro activo se ve
-en el recuento, con un `Clear filter` al lado para quitarlo sin volver a bajar.
-Se acumula con la búsqueda de texto.
+Al filtrar se sube arriba: la barra va pegada, así que se puede filtrar desde
+el final de la página y los resultados empiezan arriba. El filtro activo se ve
+en el recuento, con un `Clear filter` al lado. Se acumula con la búsqueda.
+
+En móvil las dos filas del índice **no envuelven, se deslizan de lado**. Con
+seis familias y cinco insignias partidas en cuatro filas, la barra pegada se
+comía 222px de 640, un tercio de la pantalla; en una fila cada una se queda en
+162px. El `scroll-margin-top` de las secciones está medido contra esa altura,
+para que saltar desde el índice no deje el encabezado debajo de la barra.
 
 ### Notas por código
 
