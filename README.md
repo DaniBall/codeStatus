@@ -166,11 +166,17 @@ Al filtrar se sube arriba: la barra va pegada, así que se puede filtrar desde
 el final de la página y los resultados empiezan arriba. El filtro activo se ve
 en el recuento, con un `Clear filter` al lado. Se acumula con la búsqueda.
 
-En móvil las dos filas del índice **no envuelven, se deslizan de lado**. Con
-seis familias y cinco insignias partidas en cuatro filas, la barra pegada se
-comía 222px de 640, un tercio de la pantalla; en una fila cada una se queda en
-162px. El `scroll-margin-top` de las secciones está medido contra esa altura,
-para que saltar desde el índice no deje el encabezado debajo de la barra.
+En móvil las dos filas del índice **no envuelven, se deslizan de lado**, y sin
+barra de scroll a la vista. Con seis familias y cinco insignias partidas en
+cuatro filas, la barra pegada se comía 222px de 640, un tercio de la pantalla;
+en una fila cada una se queda en 162px. De que hay más ya avisa la última ficha,
+que se ve cortada por el borde.
+
+Caber en una fila sin deslizar no es opción: medido a 360px, las familias piden
+355px y los filtros 398px, y sólo hay 334px de hueco. A 320px faltan 104px.
+
+El `scroll-margin-top` de las secciones está medido contra esa altura, para que
+saltar desde el índice no deje el encabezado debajo de la barra.
 
 ### Notas por código
 

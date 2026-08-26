@@ -166,15 +166,22 @@
   }
   /* En vez de envolver: la barra va pegada arriba y con las dos filas
      partidas en cuatro se comía un tercio de la pantalla. En una fila cada
-     una y se desliza de lado, que es lo que se espera de unos filtros. */
+     una y se desliza de lado, que es lo que se espera de unos filtros.
+     Sin barra de scroll a la vista: encima de una fila de fichas de 30px de
+     alto es más ruido que ayuda, y de que hay más ya avisa la última ficha,
+     que se ve cortada por el borde. */
   .topBar-nav,
   .topBar-filters{
     flex-wrap: nowrap;
     overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     /* Sitio para el borde del foco, que si no lo recorta el overflow. */
     padding: 3px;
     margin: -3px;
   }
+  .topBar-nav::-webkit-scrollbar,
+  .topBar-filters::-webkit-scrollbar{ display: none; }
   .topBar-link,
   .topBar-filters .tag{ flex: none; }
 }
