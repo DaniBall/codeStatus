@@ -384,13 +384,22 @@
  * sección se leería como decoración.
  */
 
-.tagList{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4em;
+/* Insignia y significado en dos columnas: la etiqueta manda el ancho y el
+   texto se queda con lo que sobra, así que en móvil envuelve en vez de
+   apretarse. */
+.tagGlossary{
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: 0.5em 0.7em;
   margin: 0 0 1.25em;
-  padding: 0;
-  list-style: none;
+}
+.tagGlossary dt{ justify-self: start; }
+.tagGlossary-meaning{
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.45;
 }
 .tag{
   padding: 0.15em 0.6em;
@@ -565,7 +574,14 @@
     margin-bottom: 1em;
     font-size: 1rem;
   }
-  .tagList{ margin-bottom: 0.9em; }
+  .tagGlossary{
+    gap: 0.4em 0.6em;
+    margin-bottom: 0.9em;
+  }
+  .tagGlossary-meaning{
+    font-size: 0.82rem;
+    line-height: 1.35;
+  }
   .statusInfo-note{
     margin-bottom: 1em;
     font-size: 0.9rem;

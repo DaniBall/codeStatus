@@ -137,9 +137,19 @@ Las cuatro primeras son avisos y van en color de aviso, que no es el de ninguna
 familia a propósito: con el color de su sección se leerían como decoración. `No
 body` es un dato, no una advertencia, y va discreta.
 
-Una insignia sola deja al lector sabiendo que pasa algo pero no qué, así que
-todas las de aviso llevan una **nota** que lo explica en la ficha, y hay una
-prueba que lo exige. También la llevan el `413` y el `422`, que no están
+Una insignia sola es jerga: `No body` lo entiende quien ya sabe que una
+respuesta HTTP son cabeceras más cuerpo, que es justo quien no necesitaba la
+insignia. Así que en la ficha cada una viene con **lo que significa**, sacado de
+`src/tags.js`. En la tarjeta, donde no cabe, va en el `title`.
+
+Hay dos pruebas que lo sostienen: ninguna insignia puede quedarse sin
+significado, y ningún significado puede sobrar sin insignia que lo use. Sin eso
+una etiqueta nueva saldría muda en la ficha, que es lo que se venía a arreglar.
+
+Aparte del significado de la etiqueta, cada código puede llevar su propia
+**nota** con lo suyo: la etiqueta dice qué es `Deprecated`, la nota dice por qué
+lo está *este* código. Todas las de aviso la llevan, y una prueba lo exige.
+También la llevan el `413` y el `422`, que no están
 deprecados pero sí **renombrados** por RFC 9110 (`Payload Too Large` pasó a
 `Content Too Large`, y `Unprocessable Entity` a `Unprocessable Content`): aquí
 salen con el nombre nuevo, avisando del viejo, que es el que sigue devolviendo
@@ -246,7 +256,7 @@ Los cinco acentos pasan el contraste AA de WCAG sobre blanco (el peor está en
 ## Comprobaciones
 
 ```bash
-npm test    # 61 pruebas
+npm test    # 64 pruebas
 npm run build
 ```
 

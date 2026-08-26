@@ -1,9 +1,11 @@
 import '../App.css'
+import { Fragment } from 'react'
 import codeStatus from '../status_codes.json'
 import { useParams, Link } from 'react-router-dom'
 import DuckImage from './DuckImage.js'
 import Footer from './Footer.js'
 import { specUrl } from '../spec.js'
+import { tagMeaning } from '../tags.js'
 
 export default function StatusInfo() {
     const { code } = useParams();
@@ -43,12 +45,17 @@ export default function StatusInfo() {
                         <h1 className='statusInfo-code'>{statusCode.code}</h1>
                         <p className='statusInfo-name'>{statusCode.name}</p>
 
+                        {/* La insignia y lo que quiere decir, juntas: sola es
+                            jerga que sólo entiende quien no la necesitaba. */}
                         {statusCode.tags && (
-                            <ul className='tagList'>
+                            <dl className='tagGlossary'>
                                 {statusCode.tags.map(tag => (
-                                    <li className='tag' key={tag} data-tag={tag}>{tag}</li>
+                                    <Fragment key={tag}>
+                                        <dt className='tag' data-tag={tag}>{tag}</dt>
+                                        <dd className='tagGlossary-meaning'>{tagMeaning(tag)}</dd>
+                                    </Fragment>
                                 ))}
-                            </ul>
+                            </dl>
                         )}
 
                         {statusCode.source && (

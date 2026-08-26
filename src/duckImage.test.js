@@ -4,6 +4,7 @@ import codeStatus from './status_codes.json';
 import duckData from './data/duckScenes.json';
 import { buildDuckFallback, duckImagePath, getDuckScene, resolveDuckImage } from './duckImage';
 import { specUrl } from './spec';
+import { TAG_MEANINGS, tagMeaning } from './tags';
 
 const allCodes = codeStatus.flatMap(category => category.codes);
 
@@ -94,6 +95,22 @@ describe('estado y especificación de cada código', () => {
             expect(new Set(item.tags).size).toBe(item.tags.length);
             item.tags.forEach(tag => expect(validas).toContain(tag));
         });
+    });
+
+    test('toda insignia explica qué quiere decir', () => {
+        // Sin esto se puede colar una etiqueta nueva que en la ficha saldría
+        // muda, que es justo lo que se venía a arreglar.
+        const usadas = new Set(allCodes.flatMap(item => item.tags || []));
+        expect(usadas.size).toBeGreaterThan(0);
+        usadas.forEach(tag => {
+            expect(TAG_MEANINGS[tag]).toBeTruthy();
+            expect(tagMeaning(tag).split(/\s+/).length).toBeLessThanOrEqual(16);
+        });
+    });
+
+    test('no sobra ningún significado sin insignia que lo use', () => {
+        const usadas = new Set(allCodes.flatMap(item => item.tags || []));
+        Object.keys(TAG_MEANINGS).forEach(tag => expect(usadas.has(tag)).toBe(true));
     });
 
     test('los códigos retirados están marcados', () => {

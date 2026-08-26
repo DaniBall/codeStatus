@@ -9,6 +9,7 @@ import Footer from './elements/Footer.js'
 import BackToTop from './elements/BackToTop.js'
 import { ThemeProvider, ThemeToggle } from './theme.js'
 import { countCodes, filterCatalogue } from './search.js'
+import { tagMeaning } from './tags.js'
 import Analytics from './analytics.js'
 
 const TOTAL = countCodes(codeStatus)
@@ -90,8 +91,12 @@ function Home() {
                         {item.source && (
                           <span className='codeStatusCard-source'>{item.source}</span>
                         )}
+                        {/* En la tarjeta sólo cabe la insignia; el significado
+                            va en el title y, entero, en la ficha. */}
                         {item.tags?.map(tag => (
-                          <span className='tag' key={tag} data-tag={tag}>{tag}</span>
+                          <span className='tag' key={tag} data-tag={tag} title={tagMeaning(tag)}>
+                            {tag}
+                          </span>
                         ))}
                       </div>
                     )}

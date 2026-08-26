@@ -1,8 +1,13 @@
 import { render, screen, fireEvent, within } from '@testing-library/react';
 import App from './App';
 import codeStatus from './status_codes.json';
+import { TAG_MEANINGS } from './tags';
 
 const allCodes = codeStatus.flatMap(category => category.codes);
+
+// El router lee la URL de verdad, así que una prueba que navega deja a la
+// siguiente empezando en la ficha en vez de en la portada.
+beforeEach(() => window.history.pushState({}, '', '/'));
 
 test('la home pinta una tarjeta por cada código de estado', () => {
   render(<App />);
@@ -97,6 +102,16 @@ describe('estado de los códigos', () => {
     render(<App />);
     const tarjeta = screen.getByRole('heading', { name: '102' }).closest('article');
     expect(within(tarjeta).getByText('Deprecated')).toBeInTheDocument();
+  });
+
+  test('la ficha dice qué quiere decir cada insignia', () => {
+    render(<App />);
+    fireEvent.click(screen.getByRole('heading', { name: '102' }).closest('a'));
+
+    // La de la etiqueta y la del código: explican cosas distintas.
+    expect(screen.getByText(TAG_MEANINGS['No body'])).toBeInTheDocument();
+    expect(screen.getByText(TAG_MEANINGS.Deprecated)).toBeInTheDocument();
+    expect(screen.getByText(/dropped in RFC 4918/i)).toBeInTheDocument();
   });
 
   test('se puede buscar por estado', () => {
