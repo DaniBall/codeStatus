@@ -144,8 +144,10 @@ insignia. Así que en la ficha cada una viene con **lo que significa**, sacado d
 
 En la tarjeta el significado no cabe, así que va en el `title`. Pero **en un
 móvil no hay hover**: ahí el `title` no se puede sacar de ninguna manera y la
-insignia se quedaba muda. Por eso la portada lleva un desplegable con el
-glosario entero, que cerrado ocupa una línea y se abre con un toque.
+insignia se quedaba muda. Por eso hay un desplegable con el glosario entero
+**al final de la portada**, justo antes del pie, que cerrado ocupa una línea.
+Va al final porque es material de consulta, no algo que haga falta leer para
+entender las tarjetas.
 
 Hay dos pruebas que lo sostienen: ninguna insignia puede quedarse sin
 significado, y ningún significado puede sobrar sin insignia que lo use. Sin eso

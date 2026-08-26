@@ -66,13 +66,6 @@ function Home() {
           : `${TOTAL} status codes`}
       </p>
 
-      {/* En la tarjeta el significado va en el title, y en un móvil no hay
-          hover que lo saque. Aquí está a un toque, sin ocupar sitio cerrado. */}
-      <details className='tagLegend'>
-        <summary>What do the badges mean?</summary>
-        <TagGlossary tags={Object.keys(TAG_MEANINGS)} />
-      </details>
-
       {visible.map(category => (
         <section
           key={category.category}
@@ -124,6 +117,14 @@ function Home() {
           </button>
         </div>
       )}
+
+      {/* Material de consulta, y va al final como tal: en la tarjeta el
+          significado está en el title, y en un móvil no hay hover que lo
+          saque. Cerrado ocupa una línea y no le quita sitio al pie. */}
+      <details className='tagLegend'>
+        <summary>What do the badges mean?</summary>
+        <TagGlossary tags={Object.keys(TAG_MEANINGS)} />
+      </details>
 
       <Footer />
       <BackToTop />
