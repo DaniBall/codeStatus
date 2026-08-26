@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import './App.css';
 import codeStatus from './status_codes.json'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
@@ -39,9 +39,28 @@ function Home() {
     setTag(null)
   }
 
+  // La barra va pegada arriba, así que al saltar a una familia hay que dejarle
+  // su hueco. No es un número fijo: cambia con el ancho, según envuelvan las
+  // fichas, y al filtrar, que el índice se queda con menos familias. Lo mide y
+  // el CSS lo usa en scroll-margin-top.
+  const barra = useRef(null)
+  useEffect(() => {
+    const nodo = barra.current
+    if (!nodo) return undefined
+
+    const medir = () =>
+      document.documentElement.style.setProperty('--topBar', `${nodo.offsetHeight}px`)
+    medir()
+
+    if (typeof ResizeObserver === 'undefined') return undefined
+    const observador = new ResizeObserver(medir)
+    observador.observe(nodo)
+    return () => observador.disconnect()
+  })
+
   return (
     <div className="App">
-      <header className='topBar'>
+      <header className='topBar' ref={barra}>
         <h1 className='topBar-title'>
           <Mark />
           codeStatus

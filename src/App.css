@@ -164,26 +164,6 @@
     order: 2;
     margin-left: auto;
   }
-  /* En vez de envolver: la barra va pegada arriba y con las dos filas
-     partidas en cuatro se comía un tercio de la pantalla. En una fila cada
-     una y se desliza de lado, que es lo que se espera de unos filtros.
-     Sin barra de scroll a la vista: encima de una fila de fichas de 30px de
-     alto es más ruido que ayuda, y de que hay más ya avisa la última ficha,
-     que se ve cortada por el borde. */
-  .topBar-nav,
-  .topBar-filters{
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    /* Sitio para el borde del foco, que si no lo recorta el overflow. */
-    padding: 3px;
-    margin: -3px;
-  }
-  .topBar-nav::-webkit-scrollbar,
-  .topBar-filters::-webkit-scrollbar{ display: none; }
-  .topBar-link,
-  .topBar-filters .tag{ flex: none; }
 }
 
 .searchStatus{
@@ -319,14 +299,11 @@
 
 .category{
   padding: 0 clamp(1em, 4vw, 2.5em) 2.5em;
-  /* Deja sitio a la barra pegajosa al saltar desde el índice. Medido contra la
-     barra real: 124px en escritorio, 162px en móvil, más un respiro. */
-  scroll-margin-top: 9em;
-}
-/* Aquí y no en el bloque de móvil de más arriba: una media query no suma
-   especificidad, así que allí perdía contra la regla de encima por orden. */
-@media (max-width: 40em){
-  .category{ scroll-margin-top: 12em; }
+  /* Deja sitio a la barra pegajosa al saltar desde el índice. La altura la
+     mide el propio componente en --topBar: cambia con el ancho (las fichas
+     envuelven o no) y también al filtrar, porque el índice se queda con menos
+     familias. El 9em es para el primer pintado, antes de la medición. */
+  scroll-margin-top: calc(var(--topBar, 9em) + 1rem);
 }
 .category-header{
   display: flex;
@@ -491,6 +468,27 @@ button.tag[data-kind="warn"][aria-pressed="true"]{
   border-color: var(--warn);
   background-color: var(--warn);
   color: var(--on-accent);
+}
+
+/* Fichas de la barra apretadas en móvil, para que quepan sin deslizar de lado.
+ *
+ * Los valores salen de medir, no de tantear: así el índice de familias entra en
+ * una fila desde 320px y la barra pegada se queda en 183px en vez de los 222px
+ * que ocupaba envolviendo a dos filas. La fuente es mono, así que el ancho sale
+ * de cuántas letras hay; poner o quitar mayúsculas no ahorra ni un píxel.
+ *
+ * Va aquí abajo y no en el bloque de móvil de la barra: .topBar-link y .tag se
+ * declaran más arriba con la misma especificidad, y allí estas reglas perdían
+ * por orden sin dar ningún aviso.
+ */
+@media (max-width: 40em){
+  .topBar-nav,
+  .topBar-filters{ gap: 0.25em; }
+  .topBar-link{
+    padding: 0.2em 0.28em;
+    font-size: 0.8rem;
+  }
+  .topBar-filters .tag{ padding: 0.15em 0.4em; }
 }
 
 /* ---- Ficha de un código ---- */
