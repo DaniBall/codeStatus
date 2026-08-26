@@ -157,13 +157,32 @@
   }
 }
 
-.search-count{
+.searchStatus{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3em 0.9em;
   max-width: 78em;
   margin: 1.5em auto -0.5em;
   padding: 0 clamp(1em, 4vw, 2.5em);
+}
+.search-count{
+  margin: 0;
   color: var(--ink-soft);
   font-size: 0.9rem;
 }
+.searchStatus-clear{
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink-soft);
+  font: inherit;
+  font-size: 0.9rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+.searchStatus-clear:hover{ color: var(--ink); }
 /* Al final de la portada, justo antes del pie: es material de consulta, no
    algo que haya que leer para entender las tarjetas. */
 .tagLegend{
@@ -414,7 +433,7 @@
   gap: 0.5em 0.7em;
   margin: 0 0 1.25em;
 }
-.tagGlossary dt{ justify-self: start; }
+.tagGlossary-term{ justify-self: start; }
 .tagGlossary-meaning{
   margin: 0;
   color: var(--ink-soft);
@@ -425,6 +444,9 @@
   padding: 0.15em 0.6em;
   border: 1px solid var(--line);
   border-radius: var(--radius);
+  /* Explícito: de insignia hace también un <button>, y sin esto el navegador
+     le pone su gris de botón. */
+  background-color: transparent;
   color: var(--ink-soft);
   font-family: var(--mono);
   font-size: 0.72rem;
@@ -432,13 +454,27 @@
   letter-spacing: 0.02em;
   text-transform: uppercase;
 }
-.tag[data-tag="Deprecated"],
-.tag[data-tag="Reserved"],
-.tag[data-tag="Experimental"],
-.tag[data-tag="Joke"]{
+.tag[data-kind="warn"]{
   border-color: var(--warn);
   background-color: var(--warn-soft);
   color: var(--warn);
+}
+
+/* Insignia que filtra, sólo en la leyenda. */
+button.tag{ cursor: pointer; }
+button.tag:hover{ border-color: var(--ink-soft); }
+button.tag[data-kind="warn"]:hover{ border-color: var(--warn); }
+/* Filtrando: se invierte, que a este hay que distinguirlo de los otros cuatro
+   de un vistazo y desde el otro extremo de la página. */
+button.tag[aria-pressed="true"]{
+  border-color: var(--ink);
+  background-color: var(--ink);
+  color: var(--bg);
+}
+button.tag[data-kind="warn"][aria-pressed="true"]{
+  border-color: var(--warn);
+  background-color: var(--warn);
+  color: var(--on-accent);
 }
 
 /* ---- Ficha de un código ---- */

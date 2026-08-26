@@ -34,15 +34,30 @@ export function matchesQuery(item, query) {
 }
 
 /**
- * Devuelve el catálogo con sólo los códigos que encajan, quitando las
- * secciones que se quedan vacías.
+ * Filtro por insignia.
+ *
+ * Aparte de la búsqueda por texto a propósito: buscar "deprecated" encuentra lo
+ * que *diga* esa palabra, y el día que una descripción la mencione el filtro
+ * empezaría a traer códigos de más sin que nadie se entere. Esto mira la
+ * etiqueta, que es un dato, no prosa.
  */
-export function filterCatalogue(catalogue, query) {
-    if (!query.trim()) return catalogue
+export function matchesTag(item, tag) {
+    if (!tag) return true
+    return Boolean(item.tags?.includes(tag))
+}
+
+/**
+ * Devuelve el catálogo con sólo los códigos que encajan, quitando las
+ * secciones que se quedan vacías. Texto e insignia se acumulan.
+ */
+export function filterCatalogue(catalogue, query, tag) {
+    if (!query.trim() && !tag) return catalogue
     return catalogue
         .map(category => ({
             ...category,
-            codes: category.codes.filter(item => matchesQuery(item, query)),
+            codes: category.codes.filter(
+                item => matchesQuery(item, query) && matchesTag(item, tag)
+            ),
         }))
         .filter(category => category.codes.length > 0)
 }

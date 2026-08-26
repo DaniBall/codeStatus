@@ -17,3 +17,14 @@ export const TAG_MEANINGS = {
 }
 
 export const tagMeaning = tag => TAG_MEANINGS[tag] || ''
+
+/**
+ * Avisos frente a datos.
+ *
+ * Las cuatro primeras dicen "no cuentes con esto"; "No body" sólo describe cómo
+ * es la respuesta. Se marca en el HTML con data-kind en vez de que el CSS liste
+ * las cuatro etiquetas: cada estado (normal, filtrando) las necesitaría todas.
+ */
+const AVISOS = ['Deprecated', 'Reserved', 'Experimental', 'Joke']
+
+export const tagKind = tag => (AVISOS.includes(tag) ? 'warn' : 'info')

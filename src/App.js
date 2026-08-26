@@ -10,16 +10,35 @@ import BackToTop from './elements/BackToTop.js'
 import { ThemeProvider, ThemeToggle } from './theme.js'
 import { countCodes, filterCatalogue } from './search.js'
 import TagGlossary from './elements/TagGlossary.js'
-import { TAG_MEANINGS, tagMeaning } from './tags.js'
+import { TAG_MEANINGS, tagKind, tagMeaning } from './tags.js'
+import { subirArriba } from './scroll.js'
 import Analytics from './analytics.js'
 
 const TOTAL = countCodes(codeStatus)
 
 function Home() {
   const [query, setQuery] = useState('')
-  const visible = useMemo(() => filterCatalogue(codeStatus, query), [query])
+  const [tag, setTag] = useState(null)
+  const visible = useMemo(() => filterCatalogue(codeStatus, query, tag), [query, tag])
   const encontrados = countCodes(visible)
   const buscando = query.trim().length > 0
+
+  // Qué se está filtrando, para el recuento y para el aviso de "nada encaja".
+  const criterios = [buscando ? query.trim() : null, tag ? `the ${tag} badge` : null]
+    .filter(Boolean)
+    .join(' and ')
+
+  // La leyenda vive al final y los resultados están arriba: pulsar y quedarse
+  // abajo sería filtrar a ciegas.
+  const alternarTag = pulsado => {
+    setTag(actual => (actual === pulsado ? null : pulsado))
+    subirArriba()
+  }
+
+  const limpiar = () => {
+    setQuery('')
+    setTag(null)
+  }
 
   return (
     <div className="App">
@@ -59,12 +78,21 @@ function Home() {
         </nav>
       </header>
 
-      {/* El recuento se anuncia solo, para quien no ve desaparecer las tarjetas. */}
-      <p id='search-count' className='search-count' role='status'>
-        {buscando
-          ? `Showing ${encontrados} of ${TOTAL} status codes for ${query.trim()}`
-          : `${TOTAL} status codes`}
-      </p>
+      <div className='searchStatus'>
+        {/* El recuento se anuncia solo, para quien no ve desaparecer las tarjetas. */}
+        <p id='search-count' className='search-count' role='status'>
+          {criterios
+            ? `Showing ${encontrados} of ${TOTAL} status codes for ${criterios}`
+            : `${TOTAL} status codes`}
+        </p>
+        {/* El filtro se pulsa al final de la página; quitarlo tiene que poder
+            hacerse desde aquí arriba, que es donde se ve el resultado. */}
+        {tag && (
+          <button type='button' className='searchStatus-clear' onClick={() => setTag(null)}>
+            Clear filter
+          </button>
+        )}
+      </div>
 
       {visible.map(category => (
         <section
@@ -94,9 +122,14 @@ function Home() {
                         )}
                         {/* En la tarjeta sólo cabe la insignia; el significado
                             va en el title y, entero, en la ficha. */}
-                        {item.tags?.map(tag => (
-                          <span className='tag' key={tag} data-tag={tag} title={tagMeaning(tag)}>
-                            {tag}
+                        {item.tags?.map(nombre => (
+                          <span
+                            className='tag'
+                            key={nombre}
+                            data-kind={tagKind(nombre)}
+                            title={tagMeaning(nombre)}
+                          >
+                            {nombre}
                           </span>
                         ))}
                       </div>
@@ -111,8 +144,8 @@ function Home() {
 
       {encontrados === 0 && (
         <div className='emptyState'>
-          <p>No status code matches <strong>{query.trim()}</strong>.</p>
-          <button type='button' className='emptyState-clear' onClick={() => setQuery('')}>
+          <p>No status code matches <strong>{criterios}</strong>.</p>
+          <button type='button' className='emptyState-clear' onClick={limpiar}>
             Clear search
           </button>
         </div>
@@ -123,7 +156,11 @@ function Home() {
           saque. Cerrado ocupa una línea y no le quita sitio al pie. */}
       <details className='tagLegend'>
         <summary>What do the badges mean?</summary>
-        <TagGlossary tags={Object.keys(TAG_MEANINGS)} />
+        <TagGlossary
+          tags={Object.keys(TAG_MEANINGS)}
+          activo={tag}
+          onFiltrar={alternarTag}
+        />
       </details>
 
       <Footer />

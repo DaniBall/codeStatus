@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { subirArriba } from '../scroll.js'
 
 const UMBRAL = 600
 
@@ -24,13 +25,11 @@ export default function BackToTop() {
 
     if (!visible) return null
 
-    const suave = !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
-
     return (
         <button
             type='button'
             className='backToTop'
-            onClick={() => window.scrollTo({ top: 0, behavior: suave ? 'smooth' : 'auto' })}
+            onClick={subirArriba}
             title='Back to top'
         >
             <Arriba />

@@ -153,6 +153,25 @@ Hay dos pruebas que lo sostienen: ninguna insignia puede quedarse sin
 significado, y ningún significado puede sobrar sin insignia que lo use. Sin eso
 una etiqueta nueva saldría muda en la ficha, que es lo que se venía a arreglar.
 
+### Filtrar por insignia
+
+Las insignias de la leyenda **son botones**: pulsar `DEPRECATED` deja la portada
+con esos tres, y volver a pulsarla lo quita. Se puede ahí porque la leyenda no
+cuelga de ningún enlace; en la tarjeta, que entera es un enlace a la ficha, un
+botón dentro no sería HTML válido.
+
+El filtro mira `tags`, **no el texto**. Buscar `reserved` encuentra lo que *diga*
+esa palabra, y el `402` la lleva en su descripción sin tener la insignia; si
+esto filtrase por texto traería códigos de más y nadie se enteraría el día que
+una descripción cambie. Hay una prueba con ese par exacto.
+
+Al filtrar se sube arriba: la leyenda está al final y los resultados están
+arriba, así que quedarse abajo sería filtrar a ciegas. El filtro activo se ve
+en el recuento, con un `Clear filter` al lado para quitarlo sin volver a bajar.
+Se acumula con la búsqueda de texto.
+
+### Notas por código
+
 Aparte del significado de la etiqueta, cada código puede llevar su propia
 **nota** con lo suyo: la etiqueta dice qué es `Deprecated`, la nota dice por qué
 lo está *este* código. Todas las de aviso la llevan, y una prueba lo exige.
@@ -177,7 +196,8 @@ y así la ficha sigue cabiendo entera sin scroll.
 La barra lleva un buscador que filtra según escribes. Busca contra el número,
 el nombre, la procedencia, el estado, el RFC y la descripción, así que valen
 `404`, `timeout`, `nginx`, `csrf`, `deprecated` o `rfc 6585`. Con varias
-palabras tienen que aparecer todas.
+palabras tienen que aparecer todas. Para filtrar por insignia con precisión
+está la leyenda, que mira el dato en vez del texto.
 
 La puntuación se ignora a los dos lados: `timeout` encuentra `Login Time-out`
 y `im a teapot` encuentra `I'm a teapot`.
@@ -263,7 +283,7 @@ Los cinco acentos pasan el contraste AA de WCAG sobre blanco (el peor está en
 ## Comprobaciones
 
 ```bash
-npm test    # 65 pruebas
+npm test    # 70 pruebas
 npm run build
 ```
 

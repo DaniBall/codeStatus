@@ -98,6 +98,8 @@ describe('volver arriba', () => {
 });
 
 describe('estado de los códigos', () => {
+  const leyenda = () => screen.getByText(/what do the badges mean/i).closest('details');
+
   test('un código retirado lo dice en su tarjeta', () => {
     render(<App />);
     const tarjeta = screen.getByRole('heading', { name: '102' }).closest('article');
@@ -123,6 +125,63 @@ describe('estado de los códigos', () => {
     expect(screen.getByText(TAG_MEANINGS['No body'])).toBeInTheDocument();
     expect(screen.getByText(TAG_MEANINGS.Deprecated)).toBeInTheDocument();
     expect(screen.getByText(/dropped in RFC 4918/i)).toBeInTheDocument();
+  });
+
+  test('pulsar una insignia de la leyenda filtra el catálogo', () => {
+    render(<App />);
+    fireEvent.click(within(leyenda()).getByRole('button', { name: 'Deprecated' }));
+
+    expect(screen.getAllByRole('img')).toHaveLength(3);
+    [102, 305, 510].forEach(code => {
+      expect(screen.getByRole('heading', { name: String(code) })).toBeInTheDocument();
+    });
+    expect(screen.getByRole('status')).toHaveTextContent('Showing 3 of 85');
+  });
+
+  test('el filtro se quita desde arriba o volviendo a pulsarlo', () => {
+    render(<App />);
+    const pulsar = () => fireEvent.click(within(leyenda()).getByRole('button', { name: 'Joke' }));
+
+    pulsar();
+    expect(screen.getAllByRole('img')).toHaveLength(1);
+
+    pulsar(); // La misma insignia otra vez lo desactiva.
+    expect(screen.getAllByRole('img')).toHaveLength(allCodes.length);
+
+    pulsar();
+    fireEvent.click(screen.getByRole('button', { name: /clear filter/i }));
+    expect(screen.getAllByRole('img')).toHaveLength(allCodes.length);
+    expect(screen.queryByRole('button', { name: /clear filter/i })).not.toBeInTheDocument();
+  });
+
+  test('la insignia activa se distingue de las demás', () => {
+    render(<App />);
+    fireEvent.click(within(leyenda()).getByRole('button', { name: 'Reserved' }));
+
+    const botones = within(leyenda()).getAllByRole('button');
+    const pulsadas = botones.filter(b => b.getAttribute('aria-pressed') === 'true');
+    expect(pulsadas.map(b => b.textContent)).toEqual(['Reserved']);
+  });
+
+  test('el filtro mira la etiqueta, no el texto', () => {
+    // "Reserved" sale en la descripción del 402 y del 306, pero sólo el 306
+    // lleva la insignia. Buscando por texto saldrían los dos.
+    render(<App />);
+    fireEvent.click(within(leyenda()).getByRole('button', { name: 'Reserved' }));
+
+    expect(screen.getByRole('heading', { name: '306' })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: '402' })).not.toBeInTheDocument();
+  });
+
+  test('insignia y búsqueda se acumulan', () => {
+    render(<App />);
+    fireEvent.click(within(leyenda()).getByRole('button', { name: 'No body' }));
+    fireEvent.change(screen.getByLabelText(/search status codes/i), {
+      target: { value: '304' },
+    });
+
+    expect(screen.getAllByRole('img')).toHaveLength(1);
+    expect(screen.getByRole('heading', { name: '304' })).toBeInTheDocument();
   });
 
   test('se puede buscar por estado', () => {
