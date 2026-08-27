@@ -251,11 +251,14 @@
   flex: none;
   gap: 0.4em;
 }
+/* La altura en rem, no en em: el de idioma lleva la letra más pequeña, y con
+   em cada uno la resolvía contra su propio font-size. Salían 25px y 30px, uno
+   al lado del otro. */
 .themeToggle,
 .langToggle{
   display: grid;
   place-items: center;
-  height: 2em;
+  height: 1.9rem;
   color: var(--ink-soft);
   padding: 0;
   border: 1px solid var(--line);
@@ -265,10 +268,12 @@
   line-height: 1;
   cursor: pointer;
 }
-.themeToggle{ width: 2em; }
+.themeToggle{ width: 1.9rem; }
 /* El de idioma lleva texto, así que se le da aire a los lados en vez de
-   cuadrarlo: "ES" y "EN" no ocupan lo mismo en todas las tipografías. */
+   cuadrarlo: "ES" y "EN" no ocupan lo mismo en todas las tipografías. El
+   min-width impide que quede más estrecho que el de al lado. */
 .langToggle{
+  min-width: 1.9rem;
   padding: 0 0.55em;
   font-family: var(--mono);
   font-size: 0.78rem;
