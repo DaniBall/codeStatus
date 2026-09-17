@@ -96,6 +96,27 @@ se borró— la tarjeta enseña un pato SVG dibujado en local con el número del
 código. Nunca aparece una imagen rota, y la web funciona sin haber ejecutado el
 script.
 
+### Generarlas a mano, sin el script
+
+Si en vez del script prefieres usar un generador de los de chatear, hay dos
+documentos con los prompts ya preparados:
+
+- **[`docs/prompts-chatgpt.md`](docs/prompts-chatgpt.md)** — los 85 prompts uno
+  a uno, listos para copiar y pegar en ChatGPT. Cada uno es independiente, así
+  que vale aunque abras una conversación nueva a mitad.
+- **[`docs/prompt-generacion.md`](docs/prompt-generacion.md)** — una sola
+  instrucción para pasarle junto con el JSON entero, pensada para Gemini.
+
+El de ChatGPT se genera, no se escribe:
+
+```bash
+node scripts/gen-prompts-chatgpt.js
+```
+
+Ojo con el formato: estos generadores entregan **PNG**, y la prueba del
+repositorio mira los bytes de cabecera del fichero. Renombrar un `.png` a
+`.jpg` no cuela, hay que convertirlo de verdad.
+
 ### Poner una foto a mano
 
 Basta con dejar tu propio `public/ducks/<código>.jpg`: el script sólo genera
