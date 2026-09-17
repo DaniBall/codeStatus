@@ -101,21 +101,27 @@ script.
 Si en vez del script prefieres usar un generador de los de chatear, hay dos
 documentos con los prompts ya preparados:
 
-- **[`docs/prompts-chatgpt.md`](docs/prompts-chatgpt.md)** — los 85 prompts uno
-  a uno, listos para copiar y pegar en ChatGPT. Cada uno es independiente, así
-  que vale aunque abras una conversación nueva a mitad.
-- **[`docs/prompt-generacion.md`](docs/prompt-generacion.md)** — una sola
-  instrucción para pasarle junto con el JSON entero, pensada para Gemini.
+- **[`docs/prompts-chatgpt.md`](docs/prompts-chatgpt.md)** — la instrucción para
+  ChatGPT, que se pega junto con
+  [`docs/prompts-chatgpt.json`](docs/prompts-chatgpt.json): ahí van los 85
+  prompts ya montados, el formato y las reglas. Al final del documento están
+  además los prompts sueltos, por si hay que rehacer uno concreto.
+- **[`docs/prompt-generacion.md`](docs/prompt-generacion.md)** — lo mismo para
+  Gemini, que fue lo primero que se probó.
 
-El de ChatGPT se genera, no se escribe:
+Los dos ficheros de ChatGPT se generan, no se escriben:
 
 ```bash
 node scripts/gen-prompts-chatgpt.js
 ```
 
-Ojo con el formato: estos generadores entregan **PNG**, y la prueba del
-repositorio mira los bytes de cabecera del fichero. Renombrar un `.png` a
-`.jpg` no cuela, hay que convertirlo de verdad.
+Lo que más se tuerce es **que salgan cuadradas**: la web las recorta al cuadrado,
+así que una apaisada pierde media escena. Por eso va pedido en tres sitios —la
+instrucción, el `formato` del JSON y el principio y el final de cada prompt.
+
+Y ojo con el formato de fichero: la prueba del repositorio mira los bytes de
+cabecera, así que renombrar un `.png` a `.jpg` no cuela. Hay que pedirle **JPEG**
+de verdad, que es lo que dice la instrucción.
 
 ### Poner una foto a mano
 

@@ -1,0 +1,618 @@
+{
+  "proyecto": "codeStatus",
+  "descripcion": "Una foto por cada código de estado HTTP, protagonizada por patos. Cada imagen tiene que hacer entender de un vistazo qué significa su código, y tiene que hacer gracia.",
+  "formato": {
+    "relacionDeAspecto": "1:1",
+    "tamano": "1024x1024",
+    "formatoDeArchivo": "JPEG",
+    "nombreDeArchivo": "el campo \"archivo\" de cada entrada, tal cual",
+    "importante": "TODAS las imágenes son cuadradas, sin excepción. Si alguna sale apaisada o vertical, se rehace. La web las recorta al cuadrado, así que una apaisada pierde media escena."
+  },
+  "reglas": [
+    "Fotografía real hecha con cámara. Nada de ilustración, cómic, render 3D, pintura ni estilo Pixar.",
+    "Ánade real con anatomía correcta: pico, alas y patas palmeadas. Nada de patas de más, alas fundidas, picos torcidos ni dos cabezas.",
+    "Los patos no tienen manos: ni dedos, ni un pato agarrando algo como una persona. El objeto está en la escena, no sujeto por el pato.",
+    "Un solo pato, salvo que la escena diga expresamente que hay más.",
+    "Sin texto, salvo en los tres códigos cuyo prompt lo pide (403, 503 y 509).",
+    "Sin marcas de agua, sin bordes, sin collages ni viñetas partidas.",
+    "Tiene que entenderse en miniatura: la web las enseña a 300px de lado."
+  ],
+  "total": 85,
+  "imagenes": [
+    {
+      "archivo": "100.jpg",
+      "codigo": 100,
+      "nombre": "Continue",
+      "familia": "1xx",
+      "prompt": "Square 1:1 image, 1024x1024. a mallard duck crouched in a sprinter starting block on a red running track, muscles tensed the instant before the gun, empty lanes stretching ahead in low morning sun. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "101.jpg",
+      "codigo": 101,
+      "nombre": "Switching Protocols",
+      "familia": "1xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck in an open changing-room doorway mid-change, a hanging business suit on one side of the frame and a wetsuit with flippers on the other. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "102.jpg",
+      "codigo": 102,
+      "nombre": "Processing",
+      "familia": "1xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck lit blue by a laptop screen at three in the morning, an endless spinning loading wheel on it, a ring of cold coffee cups across the cluttered desk. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "103.jpg",
+      "codigo": 103,
+      "nombre": "Early Hints",
+      "familia": "1xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck peering through a gap in heavy red theatre curtains before the show, the seats beyond still dark and empty, warm stage light across its face. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "200.jpg",
+      "codigo": 200,
+      "nombre": "OK",
+      "familia": "2xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck in mirrored sunglasses floating on a pink inflatable ring in a sunlit pool, one wing raised in a confident thumbs-up, a cocktail glass drifting beside it. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "201.jpg",
+      "codigo": 201,
+      "nombre": "Created",
+      "familia": "2xx",
+      "prompt": "Square 1:1 image, 1024x1024. a mother duck in a nest of soft down beside a newly hatched duckling, still wet, broken eggshell in the foreground, morning light coming through the reeds. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "202.jpg",
+      "codigo": 202,
+      "nombre": "Accepted",
+      "familia": "2xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck behind a grey government counter under flat fluorescent light, a freshly stamped form on the desk, an endless queue of ducks blurred into the distance behind. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "203.jpg",
+      "codigo": 203,
+      "nombre": "Non-Authoritative Information",
+      "familia": "2xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck whispering from behind an open newspaper on a park bench, eyes darting sideways, autumn leaves on the ground, second-hand gossip going somewhere it should not. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "204.jpg",
+      "codigo": 204,
+      "nombre": "No Content",
+      "familia": "2xx",
+      "prompt": "Square 1:1 image, 1024x1024. a single duck standing in the exact centre of a completely empty white gallery room, bare walls, polished concrete floor, absolutely nothing else in the frame. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "205.jpg",
+      "codigo": 205,
+      "nombre": "Reset Content",
+      "familia": "2xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck standing squarely on an enormous red reset button set into a control panel, loose papers still fluttering down around it in the aftermath. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "206.jpg",
+      "codigo": 206,
+      "nombre": "Partial Content",
+      "familia": "2xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck upended in a still pond with only its tail and orange webbed feet above the waterline, the rest hidden underwater, ripples spreading outward. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "207.jpg",
+      "codigo": 207,
+      "nombre": "Multi-Status",
+      "familia": "2xx",
+      "prompt": "Square 1:1 image, 1024x1024. five rubber ducks lined up on a bathroom shelf, each with a completely different painted expression from delighted to appalled, soft window light on the tiles. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "208.jpg",
+      "codigo": 208,
+      "nombre": "Already Reported",
+      "familia": "2xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck with one wing over its face in weary resignation while another duck beside it retells the very same story again, both perched on a garden wall. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "226.jpg",
+      "codigo": 226,
+      "nombre": "IM Used",
+      "familia": "2xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck vacuum-sealed inside a transparent compression bag on a bedroom floor, comically flattened but perfectly calm and dignified, folded clothes stacked beside it. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "300.jpg",
+      "codigo": 300,
+      "nombre": "Multiple Choices",
+      "familia": "3xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck standing at a muddy crossroads where five weathered signposts point in five different directions, not one of them legible, heavy overcast sky. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "301.jpg",
+      "codigo": 301,
+      "nombre": "Moved Permanently",
+      "familia": "3xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck family walking away down a dirt path from a cracked dry pond, stacked cardboard moving boxes left behind them, long late-afternoon shadows. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "302.jpg",
+      "codigo": 302,
+      "nombre": "Found",
+      "familia": "3xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck sitting in a small blue plastic paddling pool on a lawn, right beside its own proper pond which sits drained and empty behind it. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "303.jpg",
+      "codigo": 303,
+      "nombre": "See Other",
+      "familia": "3xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck turned firmly away from the camera, its whole body angled toward a different duck across the water, refusing to be the one you look at. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "304.jpg",
+      "codigo": 304,
+      "nombre": "Not Modified",
+      "familia": "3xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck sitting on a nest draped in dust sheets and cobwebs, a thick grey layer of dust on the unbroken eggs, everything exactly as it was left. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "305.jpg",
+      "codigo": 305,
+      "nombre": "Use Proxy",
+      "familia": "3xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck wearing an obviously fake plastic nose and glasses disguise, standing in for someone else at a wooden lectern, unconvincing and entirely unbothered. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "306.jpg",
+      "codigo": 306,
+      "nombre": "Unused",
+      "familia": "3xx",
+      "prompt": "Square 1:1 image, 1024x1024. a single dusty rubber duck alone inside a glass museum case, velvet rope in front and a small brass plaque below, the room silent and empty. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "307.jpg",
+      "codigo": 307,
+      "nombre": "Temporary Redirect",
+      "familia": "3xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck in a hi-vis vest beside one orange traffic cone that diverts a muddy path around a puddle, temporary and slightly absurd. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "308.jpg",
+      "codigo": 308,
+      "nombre": "Permanent Redirect",
+      "familia": "3xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck in a hard hat beside a metal detour arrow set into fresh wet concrete, the old path behind it filled in for good. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "400.jpg",
+      "codigo": 400,
+      "nombre": "Bad Request",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck leaning out of a car window quacking incomprehensible nonsense into a drive-through speaker, the cashier duck inside staring back completely baffled. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "401.jpg",
+      "codigo": 401,
+      "nombre": "Unauthorized",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a heavy-set bouncer duck in a black bomber jacket blocking a velvet rope at night, a small duck in front with no wristband, neon reflections on wet pavement. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "402.jpg",
+      "codigo": 402,
+      "nombre": "Payment Required",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck at a shop counter beside an empty open wallet, a single moth caught in mid-flight above it, the card machine glowing red behind. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "403.jpg",
+      "codigo": 403,
+      "nombre": "Forbidden",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a stern security duck in mirrored sunglasses in front of a padlocked chain-link gate, wings crossed, a bolted NO ENTRY sign on the fence behind. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. The only readable text anywhere in the image is a sign reading \"NO ENTRY\". no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "404.jpg",
+      "codigo": 404,
+      "nombre": "Not Found",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck staring into a completely empty nest at night, lit only by a narrow torch beam from off-frame, dark woods behind, nothing there at all. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "405.jpg",
+      "codigo": 405,
+      "nombre": "Method Not Allowed",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck at a table with a steaming bowl of soup and only a fork beside it, a referee whistle lying on the tablecloth, entirely the wrong tool. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "406.jpg",
+      "codigo": 406,
+      "nombre": "Not Acceptable",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck in a monocle grimacing at a plate of food pushed firmly aside, starched white tablecloth, a sweating waiter duck blurred in the background. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "407.jpg",
+      "codigo": 407,
+      "nombre": "Proxy Authentication Required",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck in a wooden tollbooth on a narrow bridge with the barrier still down, waiting for a badge that has not appeared, mist over the water below. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "408.jpg",
+      "codigo": 408,
+      "nombre": "Request Timeout",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck asleep face-down at a restaurant table with cobwebs strung between its beak and the untouched cutlery, the waiter never came. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "409.jpg",
+      "codigo": 409,
+      "nombre": "Conflict",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. two ducks in a violent tug-of-war over the same slice of bread on a pond bank, feathers exploding into the air between them, water flying. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "410.jpg",
+      "codigo": 410,
+      "nombre": "Gone",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a lone duck standing in a cracked dry pond bed at sunset, one feather beside it and a small weathered headstone, dust hanging in the light. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "411.jpg",
+      "codigo": 411,
+      "nombre": "Length Required",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck beside a measuring tape stretched taut across a doorway, nothing getting through until it has been measured first. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "412.jpg",
+      "codigo": 412,
+      "nombre": "Precondition Failed",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a small duck on tiptoes against a fairground height requirement sign and still hopelessly short, the ride operator duck shaking its head behind. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "413.jpg",
+      "codigo": 413,
+      "nombre": "Content Too Large",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a tiny duckling buckling under an enormous watermelon balanced on its back, legs splayed and eyes wide with regret, on a sunlit picnic lawn. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "414.jpg",
+      "codigo": 414,
+      "nombre": "URI Too Long",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck standing on an endless paper receipt that unrolls out of shot across a shop floor, down the steps and around the corner. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "415.jpg",
+      "codigo": 415,
+      "nombre": "Unsupported Media Type",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck staring at a chrome toaster with a floppy disk jammed halfway into the slot, a thin wisp of smoke rising from it, kitchen counter. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "416.jpg",
+      "codigo": 416,
+      "nombre": "Range Not Satisfiable",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck stretched off the very edge of a picnic table, straining toward a slice of bread that is far beyond any possible reach. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "417.jpg",
+      "codigo": 417,
+      "nombre": "Expectation Failed",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck in a paper party hat staring at a birthday cake collapsed into a puddle of frosting, one candle still bravely alight. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "418.jpg",
+      "codigo": 418,
+      "nombre": "I'm a teapot",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck with a porcelain teapot balanced on its head and real steam pouring from the spout, a cup of coffee pushed firmly away across the table. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "421.jpg",
+      "codigo": 421,
+      "nombre": "Misdirected Request",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a postal worker duck beside a parcel left at entirely the wrong pond, the resident duck staring at it with visible irritation. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "422.jpg",
+      "codigo": 422,
+      "nombre": "Unprocessable Content",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck surrounded by unidentifiable flat-pack furniture parts on a living room floor, assembly instructions in an alien alphabet spread out beside it. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "423.jpg",
+      "codigo": 423,
+      "nombre": "Locked",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck shut out of its own nest by an absurdly large brass padlock, a snapped key on the ground below, cold grey light. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "424.jpg",
+      "codigo": 424,
+      "nombre": "Failed Dependency",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck at the end of a long line of fallen dominoes stretching away across a wooden floor, the very last one still tipping over. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "425.jpg",
+      "codigo": 425,
+      "nombre": "Too Early",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck in a paper party hat alone in a fully decorated empty hall, streamers and balloons everywhere, the wall clock reading six in the morning. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "426.jpg",
+      "codigo": 426,
+      "nombre": "Upgrade Required",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck between an ancient scratched flip phone and a gleaming new smartphone on a shop counter, the choice already made for it. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "428.jpg",
+      "codigo": 428,
+      "nombre": "Precondition Required",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck guarding a doorway beside a clipboard with one blank unsigned form on it, nobody getting through until that page is filled in. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "429.jpg",
+      "codigo": 429,
+      "nombre": "Too Many Requests",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. one exhausted duck almost buried under a heaving pile of ducklings all begging for food at once, an empty bread bag on the grass. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "431.jpg",
+      "codigo": 431,
+      "nombre": "Request Header Fields Too Large",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck wearing an absurdly enormous ornate hat ten times its own size, neck bent sideways under the weight, everything else in the frame dwarfed. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "451.jpg",
+      "codigo": 451,
+      "nombre": "Unavailable For Legal Reasons",
+      "familia": "4xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck in a courtroom beside a judge gavel and a sealed evidence box stamped in red, dark wood panelling, nothing to be said. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "500.jpg",
+      "codigo": 500,
+      "nombre": "Internal Server Error",
+      "familia": "5xx",
+      "prompt": "Square 1:1 image, 1024x1024. a singed duck standing in a smoking server room with sparks raining down from an open rack, feathers slightly alight, red emergency light everywhere. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "501.jpg",
+      "codigo": 501,
+      "nombre": "Not Implemented",
+      "familia": "5xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck staring at a completely blank instruction manual open on a workbench, an unfinished machine behind it still under a dust sheet. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "502.jpg",
+      "codigo": 502,
+      "nombre": "Bad Gateway",
+      "familia": "5xx",
+      "prompt": "Square 1:1 image, 1024x1024. two ducks on opposite rooftops with a snapped string hanging between two tin cans, both still shouting into them, city skyline at dusk. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "503.jpg",
+      "codigo": 503,
+      "nombre": "Service Unavailable",
+      "familia": "5xx",
+      "prompt": "Square 1:1 image, 1024x1024. a queue of ducks waiting outside a locked gate with a hand-painted CLOSED sign, an empty lifeguard chair beside a drained pond behind. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. The only readable text anywhere in the image is a sign reading \"CLOSED\". no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "504.jpg",
+      "codigo": 504,
+      "nombre": "Gateway Timeout",
+      "familia": "5xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck waiting at a rural mailbox in a snowstorm, snow piled on its head and shoulders, calendar pages blowing past, nothing ever arriving. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "505.jpg",
+      "codigo": 505,
+      "nombre": "HTTP Version Not Supported",
+      "familia": "5xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck staring at a vinyl record resting on an open laptop keyboard, waiting for a sound that is never going to come. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "506.jpg",
+      "codigo": 506,
+      "nombre": "Variant Also Negotiates",
+      "familia": "5xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck facing its own reflection between two opposing mirrors, the same duck repeating away into infinity, not one of them able to decide. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "507.jpg",
+      "codigo": 507,
+      "nombre": "Insufficient Storage",
+      "familia": "5xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck perched precariously on a nest catastrophically overflowing with far too many eggs, more spilling down the tree and piling on the ground below. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "508.jpg",
+      "codigo": 508,
+      "nombre": "Loop Detected",
+      "familia": "5xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck chasing its own tail in a perfect circle with heavy motion blur, the pond water beneath it spun into a spiral. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "510.jpg",
+      "codigo": 510,
+      "nombre": "Not Extended",
+      "familia": "5xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck at the foot of a stepladder comically too short for the loaf of bread on the very top shelf, deep pantry shadows. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "511.jpg",
+      "codigo": 511,
+      "nombre": "Network Authentication Required",
+      "familia": "5xx",
+      "prompt": "Square 1:1 image, 1024x1024. a duck at an airport café table glaring at a tablet showing a hostile wifi login portal, cold coffee and a boarding pass beside it. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "419.jpg",
+      "codigo": 419,
+      "nombre": "Page Expired",
+      "familia": "In the wild",
+      "prompt": "Square 1:1 image, 1024x1024. a duck at a theatre door beside a completely faded ticket, the print long gone from it, the usher entirely unmoved. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "420.jpg",
+      "codigo": 420,
+      "nombre": "Enhance Your Calm",
+      "familia": "In the wild",
+      "prompt": "Square 1:1 image, 1024x1024. a duck sitting in a perfect lotus position on a meditation cushion while a phone buzzes furiously beside it, incense smoke curling upward. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "440.jpg",
+      "codigo": 440,
+      "nombre": "Login Time-out",
+      "familia": "In the wild",
+      "prompt": "Square 1:1 image, 1024x1024. a duck locked out of a dark office at night, its access badge dead on the floor, the card reader glowing red beside the door. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "444.jpg",
+      "codigo": 444,
+      "nombre": "No Response",
+      "familia": "In the wild",
+      "prompt": "Square 1:1 image, 1024x1024. a duck turning its back and walking away mid-conversation, the other duck left mid-sentence behind it on a gravel path. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "449.jpg",
+      "codigo": 449,
+      "nombre": "Retry With",
+      "familia": "In the wild",
+      "prompt": "Square 1:1 image, 1024x1024. a duck at a counter with a half-filled form pushed back across it, the clerk duck waiting for the rest, rubber stamp untouched. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "450.jpg",
+      "codigo": 450,
+      "nombre": "Blocked by Windows Parental Controls",
+      "familia": "In the wild",
+      "prompt": "Square 1:1 image, 1024x1024. a duckling straining toward a tablet placed high on a shelf far out of reach, a parent duck standing guard below, living room lamplight. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "494.jpg",
+      "codigo": 494,
+      "nombre": "Request Header Too Large",
+      "familia": "In the wild",
+      "prompt": "Square 1:1 image, 1024x1024. a duck wedged immovably in a narrow doorway by an absurdly oversized backpack, legs still pedalling uselessly in the air. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "495.jpg",
+      "codigo": 495,
+      "nombre": "SSL Certificate Error",
+      "familia": "In the wild",
+      "prompt": "Square 1:1 image, 1024x1024. a duck squinting suspiciously at an obviously forged passport lying open on a desk, the photograph in it clearly wrong. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "496.jpg",
+      "codigo": 496,
+      "nombre": "SSL Certificate Required",
+      "familia": "In the wild",
+      "prompt": "Square 1:1 image, 1024x1024. a duck at a border checkpoint with empty wings spread wide and no papers at all, the guard duck thoroughly unimpressed. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "497.jpg",
+      "codigo": 497,
+      "nombre": "HTTP Request Sent to HTTPS Port",
+      "familia": "In the wild",
+      "prompt": "Square 1:1 image, 1024x1024. a duck in swimming trunks and a snorkel at the door of a black-tie gala, the doorman duck visibly horrified. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "499.jpg",
+      "codigo": 499,
+      "nombre": "Client Closed Request",
+      "familia": "In the wild",
+      "prompt": "Square 1:1 image, 1024x1024. an empty chair at a restaurant table with a half-finished glass on it, the duck already gone, its coat still over the chair back. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "509.jpg",
+      "codigo": 509,
+      "nombre": "Bandwidth Limit Exceeded",
+      "familia": "In the wild",
+      "prompt": "Square 1:1 image, 1024x1024. a duck at a buffet counter picked completely clean, empty trays under warming lamps and a small handwritten SORRY sign. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. The only readable text anywhere in the image is a sign reading \"SORRY\". no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "520.jpg",
+      "codigo": 520,
+      "nombre": "Web Server Returned an Unknown Error",
+      "familia": "In the wild",
+      "prompt": "Square 1:1 image, 1024x1024. a duck shrugging at a control panel covered in unlabelled blinking lights, no idea at all which one is the problem. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "521.jpg",
+      "codigo": 521,
+      "nombre": "Web Server Is Down",
+      "familia": "In the wild",
+      "prompt": "Square 1:1 image, 1024x1024. a duck standing at a boarded-up shop with every light off, shutters down, a faded sign swinging in the wind. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "522.jpg",
+      "codigo": 522,
+      "nombre": "Connection Timed Out",
+      "familia": "In the wild",
+      "prompt": "Square 1:1 image, 1024x1024. a duck at one end of a rope bridge that simply stops halfway across a deep canyon, the planks ending in open air, fog below. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "523.jpg",
+      "codigo": 523,
+      "nombre": "Origin Is Unreachable",
+      "familia": "In the wild",
+      "prompt": "Square 1:1 image, 1024x1024. a duck at a signpost pointing straight across an open ocean, with no road, no boat and no bridge anywhere in sight. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "524.jpg",
+      "codigo": 524,
+      "nombre": "A Timeout Occurred",
+      "familia": "In the wild",
+      "prompt": "Square 1:1 image, 1024x1024. a duck asleep in a waiting room chair beneath a ticket display that has not changed in hours, strip lighting overhead. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "525.jpg",
+      "codigo": 525,
+      "nombre": "SSL Handshake Failed",
+      "familia": "In the wild",
+      "prompt": "Square 1:1 image, 1024x1024. a duck facing a padlock with two keys lying on the ground below it, neither of them anywhere near the right shape. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "526.jpg",
+      "codigo": 526,
+      "nombre": "Invalid SSL Certificate",
+      "familia": "In the wild",
+      "prompt": "Square 1:1 image, 1024x1024. a duck beside an official-looking certificate stamped with an enormous seal drawn in crayon, entirely unconvincing. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "530.jpg",
+      "codigo": 530,
+      "nombre": "Site Frozen",
+      "familia": "In the wild",
+      "prompt": "Square 1:1 image, 1024x1024. a duck frozen solid inside a clear block of ice, its expression completely calm, cold blue light coming through. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "598.jpg",
+      "codigo": 598,
+      "nombre": "Network Read Timeout Error",
+      "familia": "In the wild",
+      "prompt": "Square 1:1 image, 1024x1024. a duck beside an old telephone receiver left off the hook, listening to nothing but silence in an empty room. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    },
+    {
+      "archivo": "599.jpg",
+      "codigo": 599,
+      "nombre": "Network Connect Timeout Error",
+      "familia": "In the wild",
+      "prompt": "Square 1:1 image, 1024x1024. a duck staring at an old rotary phone that never rings, dust settled on the dial, the line long dead. funny wildlife photograph, real mallard duck, natural anatomy, sharp focus, highly detailed. real photograph, not an illustration. the duck never grips or holds anything with hand-like limbs. No text, no lettering, no numbers, no watermark. no borders, no collage, no split frames. square 1:1 aspect ratio."
+    }
+  ]
+}
