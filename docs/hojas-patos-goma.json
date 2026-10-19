@@ -321,7 +321,7 @@
           "columna": 2,
           "codigo": 411,
           "nombre": "Length Required",
-          "escena": "a rubber duck beside a measuring tape stretched taut across a doorway, nothing getting through until it has been measured first"
+          "escena": "a small rubber duck on tiptoes against a fairground height requirement sign and still hopelessly short, the ride operator rubber duck shaking its head behind"
         },
         {
           "celda": 9,
@@ -329,7 +329,7 @@
           "columna": 3,
           "codigo": 412,
           "nombre": "Precondition Failed",
-          "escena": "a small rubber duck on tiptoes against a fairground height requirement sign and still hopelessly short, the ride operator rubber duck shaking its head behind"
+          "escena": "a rubber duck at the edge of a bathtub dipping a thermometer into the water and flatly refusing to get in, because the water is not exactly as it demanded"
         }
       ]
     },
