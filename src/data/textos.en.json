@@ -29,6 +29,11 @@
     "pieRepo": "Source on GitHub",
     "pieFuentes": "Status code definitions come from the IANA HTTP Status Code Registry and the relevant RFCs. Duck photos are AI-generated.",
     "pieAnalitica": "Visits are counted anonymously with GoatCounter. No cookies.",
+    "ampliar": "View the image larger",
+    "cerrar": "Close",
+    "paginaNoExiste": "This page doesn't exist",
+    "paginaNoExisteDetalle": "The duck looked everywhere and there's nothing here.",
+    "sinResultadosPato": "Not a duck in sight.",
     "titulo": "codeStatus: HTTP status codes explained by ducks"
   },
   "categorias": {

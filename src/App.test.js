@@ -297,3 +297,49 @@ describe('analítica', () => {
     expect(screen.queryByText(/goatcounter/i)).not.toBeInTheDocument();
   });
 });
+
+describe('patos fuera del catálogo', () => {
+  test('una ruta que no existe enseña el pato del 404', () => {
+    window.history.pushState({}, '', '/esto/no/existe');
+    render(<App />);
+    expect(screen.getByRole('heading', { name: en.ui.paginaNoExiste })).toBeInTheDocument();
+    expect(screen.getByRole('img')).toHaveAttribute('src', '/ducks/404.jpg');
+  });
+
+  test('un código que no existe también', () => {
+    window.history.pushState({}, '', '/999');
+    render(<App />);
+    expect(screen.getByRole('heading', { name: en.ui.noExiste })).toBeInTheDocument();
+    expect(screen.getByRole('img')).toHaveAttribute('src', '/ducks/404.jpg');
+  });
+
+  test('sin resultados sale la sala vacía del 204', () => {
+    const { container } = render(<App />);
+    fireEvent.change(screen.getByLabelText(/search status codes/i), { target: { value: 'zzzz' } });
+    expect(screen.getByText(en.ui.sinResultadosPato)).toBeInTheDocument();
+    expect(container.querySelector('.emptyState-duck')).toHaveAttribute('src', '/ducks/204.jpg');
+  });
+});
+
+describe('foto en grande', () => {
+  test('se abre al pulsar la foto y se cierra con Escape', () => {
+    window.history.pushState({}, '', '/418');
+    render(<App />);
+    fireEvent.click(screen.getByRole('button', { name: en.ui.ampliar }));
+
+    const dialogo = screen.getByRole('dialog');
+    expect(within(dialogo).getByRole('img')).toHaveAttribute('src', '/ducks/418.jpg');
+    expect(within(dialogo).getByRole('button', { name: en.ui.cerrar })).toHaveFocus();
+
+    fireEvent.keyDown(document, { key: 'Escape' });
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  });
+
+  test('pulsar fuera de la foto también la cierra', () => {
+    window.history.pushState({}, '', '/418');
+    render(<App />);
+    fireEvent.click(screen.getByRole('button', { name: en.ui.ampliar }));
+    fireEvent.click(screen.getByRole('dialog'));
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  });
+});

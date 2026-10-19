@@ -7,12 +7,14 @@ import DuckImage from './elements/DuckImage.js'
 import Mark from './elements/Mark.js'
 import Footer from './elements/Footer.js'
 import BackToTop from './elements/BackToTop.js'
+import NotFound from './elements/NotFound.js'
 import { ThemeProvider, ThemeToggle } from './theme.js'
 import { LanguageProvider, LanguageToggle, useLang } from './i18n.js'
 import { countCodes, filterCatalogue } from './search.js'
 import { TAGS, tagKind } from './tags.js'
 import { subirArriba } from './scroll.js'
 import Analytics from './analytics.js'
+import { duckImagePath } from './duckImage.js'
 
 const TOTAL = countCodes(codeStatus)
 
@@ -155,9 +157,13 @@ function Home() {
             {category.codes.map(item => (
               <Link to={`/${item.code}`} key={item.code} className='cardLink'>
                 <article className='codeStatusCard'>
-                  <DuckImage statusCode={item} family={category.family} />
-                  <div className='codeStatusCard-body'>
+                  {/* El número va encima de la foto, como una pegatina: la
+                      tarjeta es la imagen, y el texto se queda en lo justo. */}
+                  <div className='codeStatusCard-media'>
+                    <DuckImage statusCode={item} family={category.family} />
                     <h3 className='codeStatusCard-code'>{item.code}</h3>
+                  </div>
+                  <div className='codeStatusCard-body'>
                     <p className='codeStatusCard-name'>{item.name}</p>
                     {/* De dónde sale, y en qué estado está: sin esto un 521
                         parece tan estándar como un 404, y un 102 tan vigente. */}
@@ -190,6 +196,15 @@ function Home() {
 
       {encontrados === 0 && (
         <div className='emptyState'>
+          {/* El 204, la sala vacía: no hay contenido, y el pato lo sabe. */}
+          <img
+            className='emptyState-duck'
+            src={duckImagePath(204)}
+            alt=''
+            width='240'
+            height='240'
+          />
+          <p className='emptyState-title'>{t('sinResultadosPato')}</p>
           <p>{t('sinResultados')} <strong>{criterios}</strong>.</p>
           <button type='button' className='emptyState-clear' onClick={limpiar}>
             {t('limpiarBusqueda')}
@@ -213,6 +228,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/:code" element={<StatusInfo />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
