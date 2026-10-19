@@ -3,7 +3,8 @@ import { useLang } from '../i18n.js'
 
 const AÑO = new Date().getFullYear()
 const REPO = 'https://github.com/DaniBall/codeStatus'
-const HILVAN = 'https://hilvanhoy.es'
+// Con noreferrer el navegador no dice de dónde viene la visita; el ref sí.
+const HILVAN = 'https://hilvanhoy.es/?ref=codestatus'
 
 export default function Footer() {
     const { t, lang } = useLang()

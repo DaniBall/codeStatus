@@ -30,7 +30,7 @@ describe('hilvanhoy.es', () => {
         window.localStorage.setItem('codestatus-lang', 'es');
         render(<LanguageProvider><Footer /></LanguageProvider>);
         const enlace = screen.getByRole('link', { name: 'hilvanhoy.es' });
-        expect(enlace).toHaveAttribute('href', 'https://hilvanhoy.es');
+        expect(enlace).toHaveAttribute('href', 'https://hilvanhoy.es/?ref=codestatus');
         expect(enlace).toHaveAttribute('target', '_blank');
     });
 
