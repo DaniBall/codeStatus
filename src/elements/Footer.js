@@ -28,7 +28,7 @@ export default function Footer() {
                             className='siteFooter-link'
                             href={HILVAN}
                             target='_blank'
-                            rel='noopener'
+                            rel='noopener noreferrer'
                         >
                             hilvanhoy.es
                         </a>
