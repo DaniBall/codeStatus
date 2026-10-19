@@ -96,6 +96,27 @@ se borró— la tarjeta enseña un pato SVG dibujado en local con el número del
 código. Nunca aparece una imagen rota, y la web funciona sin haber ejecutado el
 script.
 
+### Patos de goma, por hojas
+
+El tema pasa de ánades reales a **patos de goma**. Las imágenes se piden a
+ChatGPT en **10 hojas de 3×3** y se cortan aquí:
+
+- [`docs/hojas-patos-goma.md`](docs/hojas-patos-goma.md) — el paso a paso: primero
+  un pato de referencia que fija el juguete, luego las hojas en la misma
+  conversación.
+- [`docs/hojas-patos-goma.json`](docs/hojas-patos-goma.json) — lo que lee el
+  modelo: qué código va en cada celda y su escena ya pasada a pato de goma.
+
+```bash
+node scripts/gen-hojas-patos-goma.js              # regenera los dos ficheros
+node scripts/recortar-hojas.js 1 hoja-01.jpg      # corta la hoja 1 en public/ducks/
+```
+
+El recorte no parte la hoja en tercios exactos, porque el modelo no dibuja la
+cuadrícula al píxel: busca las franjas blancas reales entre celdas y, dentro de
+cada celda, dónde empieza y acaba la imagen. Probado con una hoja de franjas
+torcidas y anchos distintos: orden correcto y ningún recorte arrastra blanco.
+
 ### Generarlas a mano, sin el script
 
 Si en vez del script prefieres usar un generador de los de chatear, hay dos
