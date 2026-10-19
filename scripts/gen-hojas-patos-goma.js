@@ -224,17 +224,19 @@ así que el recorte es el de siempre: \`node scripts/recortar-hojas.js <hoja> <i
 
 ## Paso 1 · Arrancar con el pato de siempre
 
-Abre una conversación nueva, sube **la imagen del pato de referencia** y
-\`hojas-patos-goma-pendientes.json\`, y pega:
+Abre una conversación nueva y sube \`hojas-patos-goma-pendientes.json\` y
+**una de las imágenes ya hechas** como referencia del pato (vale
+\`public/ducks/200.jpg\`, o cualquier otra que te guste). Luego pega:
 
 \`\`\`text
-Te he subido un JSON y la imagen de un pato de goma. Es para una web que
+Te he subido un JSON y una imagen ya terminada de esta serie. Es para una web que
 explica los códigos de estado HTTP con patos de goma: cada imagen tiene que
 hacer entender su código y hacer gracia.
 
-La imagen es el pato de referencia: úsalo tal cual en todas las imágenes,
-mismo juguete, mismo amarillo, mismo pico. Sólo cambian la cara pintada y lo
-que lleve puesto.
+El pato de goma de esa imagen es el protagonista de toda la serie: úsalo tal
+cual en todas las imágenes, mismo juguete, mismo amarillo, mismo pico, y el
+mismo estilo de foto. Sólo cambian la cara pintada, lo que lleve puesto y la
+escena. No copies su escena, sólo el pato y el estilo.
 
 Haz la hoja ${DESDE} del JSON:
 - Una imagen cuadrada, en JPEG, con una cuadrícula de 3x3: 9 celdas exactamente
@@ -261,7 +263,7 @@ Hoja N, con las mismas reglas y el mismo pato. Primero la lista de escenas, lueg
 \`\`\`
 
 Si vuelve a salirse del JSON: «Esa hoja no sigue el campo "escena". Repítela.»
-Cada 3 hojas, súbele otra vez la imagen del pato.
+Cada 3 hojas, súbele otra vez la imagen de referencia.
 
 ## Qué va en cada hoja
 
