@@ -236,6 +236,29 @@
   text-align: center;
 }
 .siteFooter-line{ margin: 0; }
+/* Un proyecto hermano, con su propio hueco: un enlace más en la línea del
+   copyright pasaba desapercibido. */
+.siteFooter-promo{
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.2em 0.5em;
+  margin-bottom: 1.2em;
+  padding: 0.7em 1.3em;
+  border: 2px solid #f2b800;
+  border-radius: 999px;
+  background-color: rgba(255, 210, 63, 0.18);
+  color: var(--ink);
+  font-size: 1rem;
+  text-decoration: none;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+.siteFooter-promo:hover{
+  background-color: rgba(255, 210, 63, 0.35);
+  transform: translateY(-1px);
+}
+.siteFooter-promoName{ font-size: 1.1rem; }
 .siteFooter-link{
   color: inherit;
   text-decoration: underline;

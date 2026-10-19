@@ -10,6 +10,18 @@ export default function Footer() {
     const { t, lang } = useLang()
     return (
         <footer className='siteFooter'>
+            {/* Es un juego en español: a quien lee en inglés no le sirve. */}
+            {lang === 'es' && (
+                <a
+                    className='siteFooter-promo'
+                    href={HILVAN}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                >
+                    <span className='siteFooter-promoText'>También hice un juego</span>
+                    <strong className='siteFooter-promoName'>hilvanhoy.es →</strong>
+                </a>
+            )}
             <p className='siteFooter-line'>
                 © {AÑO} Daniel Bola Martínez. {t('pieDerechos')}{' '}
                 <a
@@ -20,21 +32,6 @@ export default function Footer() {
                 >
                     {t('pieRepo')}
                 </a>
-                {/* Es un juego en español: a quien lee en inglés no le sirve. */}
-                {lang === 'es' && (
-                    <>
-                        {' · '}
-                        También hice{' '}
-                        <a
-                            className='siteFooter-link'
-                            href={HILVAN}
-                            target='_blank'
-                            rel='noopener noreferrer'
-                        >
-                            hilvanhoy.es
-                        </a>
-                    </>
-                )}
             </p>
             <p className='siteFooter-line siteFooter-note'>
                 {t('pieFuentes')}

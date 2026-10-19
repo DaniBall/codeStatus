@@ -29,7 +29,7 @@ describe('hilvanhoy.es', () => {
     test('sale en español', () => {
         window.localStorage.setItem('codestatus-lang', 'es');
         render(<LanguageProvider><Footer /></LanguageProvider>);
-        const enlace = screen.getByRole('link', { name: 'hilvanhoy.es' });
+        const enlace = screen.getByRole('link', { name: /hilvanhoy\.es/ });
         expect(enlace).toHaveAttribute('href', 'https://hilvanhoy.es/?ref=codestatus');
         expect(enlace).toHaveAttribute('target', '_blank');
     });
@@ -37,6 +37,6 @@ describe('hilvanhoy.es', () => {
     test('en inglés no, que el juego es en español', () => {
         window.localStorage.setItem('codestatus-lang', 'en');
         render(<LanguageProvider><Footer /></LanguageProvider>);
-        expect(screen.queryByRole('link', { name: 'hilvanhoy.es' })).not.toBeInTheDocument();
+        expect(screen.queryByRole('link', { name: /hilvanhoy\.es/ })).not.toBeInTheDocument();
     });
 });
