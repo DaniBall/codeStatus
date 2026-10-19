@@ -6,7 +6,7 @@ const REPO = 'https://github.com/DaniBall/codeStatus'
 const HILVAN = 'https://hilvanhoy.es'
 
 export default function Footer() {
-    const { t } = useLang()
+    const { t, lang } = useLang()
     return (
         <footer className='siteFooter'>
             <p className='siteFooter-line'>
@@ -19,16 +19,21 @@ export default function Footer() {
                 >
                     {t('pieRepo')}
                 </a>
-                {' · '}
-                {t('pieOtro')}{' '}
-                <a
-                    className='siteFooter-link'
-                    href={HILVAN}
-                    target='_blank'
-                    rel='noopener'
-                >
-                    hilvanhoy.es
-                </a>
+                {/* Es un juego en español: a quien lee en inglés no le sirve. */}
+                {lang === 'es' && (
+                    <>
+                        {' · '}
+                        También hice{' '}
+                        <a
+                            className='siteFooter-link'
+                            href={HILVAN}
+                            target='_blank'
+                            rel='noopener'
+                        >
+                            hilvanhoy.es
+                        </a>
+                    </>
+                )}
             </p>
             <p className='siteFooter-line siteFooter-note'>
                 {t('pieFuentes')}

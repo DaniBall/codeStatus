@@ -26,7 +26,6 @@
     "altFoto": "Foto de un pato ilustrando el código HTTP {code} {name}",
     "altRespaldo": "Dibujo de respaldo para el código HTTP {code} {name}",
     "pieDerechos": "Todos los derechos reservados.",
-    "pieOtro": "También hice",
     "pieRepo": "Código en GitHub",
     "pieFuentes": "Las definiciones de los códigos salen del registro de códigos de estado HTTP de la IANA y de los RFC correspondientes. Las fotos de patos están generadas con IA.",
     "pieAnalitica": "Las visitas se cuentan de forma anónima con GoatCounter. Sin cookies.",

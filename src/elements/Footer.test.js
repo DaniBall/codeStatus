@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import Footer from './Footer';
+import { LanguageProvider } from '../i18n';
 
 test('lleva el aviso de copyright con el año en curso', () => {
     render(<Footer />);
@@ -22,9 +23,20 @@ test('dice de dónde salen los datos y las fotos', () => {
     expect(screen.getByText(/AI-generated/)).toBeInTheDocument();
 });
 
-test('enlaza a hilvanhoy.es', () => {
-    render(<Footer />);
-    const enlace = screen.getByRole('link', { name: 'hilvanhoy.es' });
-    expect(enlace).toHaveAttribute('href', 'https://hilvanhoy.es');
-    expect(enlace).toHaveAttribute('target', '_blank');
+describe('hilvanhoy.es', () => {
+    afterEach(() => window.localStorage.clear());
+
+    test('sale en español', () => {
+        window.localStorage.setItem('codestatus-lang', 'es');
+        render(<LanguageProvider><Footer /></LanguageProvider>);
+        const enlace = screen.getByRole('link', { name: 'hilvanhoy.es' });
+        expect(enlace).toHaveAttribute('href', 'https://hilvanhoy.es');
+        expect(enlace).toHaveAttribute('target', '_blank');
+    });
+
+    test('en inglés no, que el juego es en español', () => {
+        window.localStorage.setItem('codestatus-lang', 'en');
+        render(<LanguageProvider><Footer /></LanguageProvider>);
+        expect(screen.queryByRole('link', { name: 'hilvanhoy.es' })).not.toBeInTheDocument();
+    });
 });
