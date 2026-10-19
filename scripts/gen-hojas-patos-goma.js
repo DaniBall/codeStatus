@@ -25,12 +25,14 @@ const CARTELES = { 403: 'NO ENTRY', 503: 'CLOSED', 509: 'SORRY' }
 
 /** El pato de todas las hojas. Si cambia, cambia aquí y en ningún otro sitio. */
 const PATO =
-    'a classic glossy yellow rubber bath duck toy with an orange beak and small black ' +
-    'painted eyes, the same toy in every image'
+    'a classic glossy yellow rubber bath duck toy with an orange beak, the same toy ' +
+    'shape and colour in every image, but with a painted face whose expression changes ' +
+    'to fit each joke (smug, panicked, exhausted, offended, deadpan)'
 
 const ESTILO =
-    'Studio product photography of toys, soft natural light, shallow depth of field, ' +
-    'realistic miniature props and sets at rubber-duck scale, colourful and playful'
+    'Comedic toy photography: a funny, over-the-top staged scene at rubber-duck scale, ' +
+    'shot like a dramatic movie still, with tiny props and costumes, exaggerated ' +
+    'expressions, clear visual punchline, bright colours, sharp focus'
 
 /**
  * La escena de duckScenes.json, pasada a pato de goma.
@@ -84,8 +86,10 @@ const json = {
     reglas: [
         'Cada celda es una imagen cuadrada independiente, con su propia escena completa dentro.',
         'Nada se sale de su celda ni invade la de al lado.',
-        'El pato de goma es siempre el mismo juguete: mismo amarillo, mismo pico, mismos ojos.',
-        'Es un juguete: no tiene alas que se muevan ni manos. Se cuenta el chiste con dónde está colocado y con los objetos de alrededor.',
+        'El pato de goma es siempre el mismo juguete: misma forma, mismo amarillo, mismo pico. Lo único que cambia es la cara pintada y lo que lleva puesto.',
+        'TIENE QUE HACER GRACIA. Cada celda es un chiste visual: exagera la situación, dale al pato una cara pintada que lo cuente (pánico, chulería, agotamiento, ofensa) y vístelo si ayuda (gafas, gorro, corbata, chaleco). Mejor pasarse que quedarse corto.',
+        'Un chiste por celda, y que se pille en un segundo: nada de escenas bonitas que no cuentan nada.',
+        'Es un juguete: no tiene manos ni alas que agarren. El chiste se cuenta con dónde está colocado, su cara, lo que lleva puesto y lo que pasa alrededor.',
         'Sin números, sin códigos, sin texto ni rótulos. La única excepción son los carteles que trae el campo "cartel".',
         'Sin marcas de agua.',
         'Tiene que entenderse en miniatura: la web enseña cada imagen a 300px de lado.',
@@ -129,13 +133,15 @@ Te he subido un JSON para una web que explica los códigos de estado HTTP con
 patos de goma. Antes de las hojas necesito el pato de referencia.
 
 Genera una sola imagen cuadrada: el pato descrito en "pato", solo, de perfil
-tres cuartos, sobre fondo blanco liso, con el estilo de "estilo". Nada más en
-la imagen.
+tres cuartos, sobre fondo blanco liso, con cara de pato que sabe algo que tú
+no sabes. Nada más en la imagen.
 
 Ese será el pato de las 85 imágenes, así que tómate tu tiempo.
 \`\`\`
 
-Si no te convence, pídele otro hasta que sí. **Ese es el ejemplo** que fija el
+Si no te convence, pídele otro hasta que sí. Ojo a que la cara sea **pintada,
+de juguete**, no un pato con ojos de dibujo animado: es lo que deja cambiarle
+la expresión en cada escena sin que deje de ser el mismo pato. **Ese es el ejemplo** que fija el
 aspecto de todos los demás; si cambias de idea más tarde, toca rehacer las
 hojas.
 
@@ -153,6 +159,9 @@ Perfecto, ese es el pato. Ahora la hoja 1 del JSON.
   derecha, en el orden del JSON.
 - En cada celda, la escena de esa celda, protagonizada por el pato de
   referencia. El mismo juguete en las nueve.
+- Que haga gracia. Cada celda es un chiste visual: exagéralo, ponle al pato
+  la cara que toca (pánico, chulería, agotamiento, ofensa) y vístelo si
+  ayuda. Si una celda queda simplemente bonita, no vale.
 - Respeta "formatoDeHoja" y "reglas".
 
 Cuando la tengas, dime qué código va en cada celda para comprobarlo.

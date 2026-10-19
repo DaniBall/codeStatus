@@ -26,13 +26,15 @@ Te he subido un JSON para una web que explica los códigos de estado HTTP con
 patos de goma. Antes de las hojas necesito el pato de referencia.
 
 Genera una sola imagen cuadrada: el pato descrito en "pato", solo, de perfil
-tres cuartos, sobre fondo blanco liso, con el estilo de "estilo". Nada más en
-la imagen.
+tres cuartos, sobre fondo blanco liso, con cara de pato que sabe algo que tú
+no sabes. Nada más en la imagen.
 
 Ese será el pato de las 85 imágenes, así que tómate tu tiempo.
 ```
 
-Si no te convence, pídele otro hasta que sí. **Ese es el ejemplo** que fija el
+Si no te convence, pídele otro hasta que sí. Ojo a que la cara sea **pintada,
+de juguete**, no un pato con ojos de dibujo animado: es lo que deja cambiarle
+la expresión en cada escena sin que deje de ser el mismo pato. **Ese es el ejemplo** que fija el
 aspecto de todos los demás; si cambias de idea más tarde, toca rehacer las
 hojas.
 
@@ -50,6 +52,9 @@ Perfecto, ese es el pato. Ahora la hoja 1 del JSON.
   derecha, en el orden del JSON.
 - En cada celda, la escena de esa celda, protagonizada por el pato de
   referencia. El mismo juguete en las nueve.
+- Que haga gracia. Cada celda es un chiste visual: exagéralo, ponle al pato
+  la cara que toca (pánico, chulería, agotamiento, ofensa) y vístelo si
+  ayuda. Si una celda queda simplemente bonita, no vale.
 - Respeta "formatoDeHoja" y "reglas".
 
 Cuando la tengas, dime qué código va en cada celda para comprobarlo.
