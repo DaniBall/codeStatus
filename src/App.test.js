@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, within } from '@testing-library/react';
+import { render, screen, fireEvent, within, waitFor } from '@testing-library/react';
 import App from './App';
 import codeStatus from './status_codes.json';
 import { TAGS } from './tags';
@@ -153,7 +153,7 @@ describe('idioma', () => {
 
     fireEvent.click(screen.getByRole('heading', { name: '102' }).closest('a'));
     expect(screen.getByText(/venía de webdav/i)).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /todos los códigos/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Cerrar' })).toBeInTheDocument();
   });
 
   test('el nombre del código no se traduce: es lo que devuelve el protocolo', () => {
@@ -327,19 +327,63 @@ describe('foto en grande', () => {
     render(<App />);
     fireEvent.click(screen.getByRole('button', { name: en.ui.ampliar }));
 
-    const dialogo = screen.getByRole('dialog');
+    const dialogo = screen.getByRole('dialog', { name: "418 I'm a teapot" });
     expect(within(dialogo).getByRole('img')).toHaveAttribute('src', '/ducks/418.jpg');
     expect(within(dialogo).getByRole('button', { name: en.ui.cerrar })).toHaveFocus();
 
+    // El primer Escape cierra sólo la foto; la ficha sigue abierta debajo.
     fireEvent.keyDown(document, { key: 'Escape' });
-    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    expect(screen.queryByRole('dialog', { name: "418 I'm a teapot" })).not.toBeInTheDocument();
+    expect(screen.getByRole('dialog', { name: '418' })).toBeInTheDocument();
   });
 
   test('pulsar fuera de la foto también la cierra', () => {
     window.history.pushState({}, '', '/418');
     render(<App />);
     fireEvent.click(screen.getByRole('button', { name: en.ui.ampliar }));
-    fireEvent.click(screen.getByRole('dialog'));
+    fireEvent.click(screen.getByRole('dialog', { name: "418 I'm a teapot" }));
+    expect(screen.queryByRole('dialog', { name: "418 I'm a teapot" })).not.toBeInTheDocument();
+    expect(screen.getByRole('dialog', { name: '418' })).toBeInTheDocument();
+  });
+});
+
+describe('ficha encima del catálogo', () => {
+  const abrir = code =>
+    fireEvent.click(screen.getByRole('heading', { name: String(code) }).closest('a'));
+
+  test('se abre encima, con su URL, y el catálogo sigue debajo', () => {
+    render(<App />);
+    abrir(418);
+    expect(window.location.pathname).toBe('/418');
+    expect(screen.getByRole('dialog', { name: '418' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: '404' })).toBeInTheDocument();
+  });
+
+  // Cerrar después de abrir desde el catálogo es volver atrás en el
+  // historial, y eso llega en un popstate: hay que esperarlo.
+  test('la X la cierra y deja la búsqueda como estaba', async () => {
+    render(<App />);
+    fireEvent.change(screen.getByLabelText(/search status codes/i), { target: { value: 'teapot' } });
+    abrir(418);
+    fireEvent.click(screen.getByRole('button', { name: en.ui.cerrar }));
+    await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+    expect(window.location.pathname).toBe('/');
+    expect(screen.getByLabelText(/search status codes/i)).toHaveValue('teapot');
+  });
+
+  test('Escape también la cierra', async () => {
+    render(<App />);
+    abrir(503);
+    fireEvent.keyDown(document, { key: 'Escape' });
+    await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+  });
+
+  test('entrando directo por la URL se abre igual, y al cerrar queda la portada', () => {
+    window.history.pushState({}, '', '/503');
+    render(<App />);
+    expect(screen.getByRole('dialog', { name: '503' })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: en.ui.cerrar }));
+    expect(window.location.pathname).toBe('/');
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   });
 });

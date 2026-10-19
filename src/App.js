@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import './App.css';
 import codeStatus from './status_codes.json'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link, useLocation, useParams } from 'react-router-dom'
 import StatusInfo from './elements/StatusInfo.js'
 import DuckImage from './elements/DuckImage.js'
 import Mark from './elements/Mark.js'
@@ -20,6 +20,7 @@ const TOTAL = countCodes(codeStatus)
 
 function Home() {
   const { t, textos, catalogo } = useLang()
+  const location = useLocation()
   const [query, setQuery] = useState('')
   const [tag, setTag] = useState(null)
   const visible = useMemo(() => filterCatalogue(catalogo, query, tag), [catalogo, query, tag])
@@ -155,7 +156,14 @@ function Home() {
           </div>
           <div className='codeStatusSpace'>
             {category.codes.map(item => (
-              <Link to={`/${item.code}`} key={item.code} className='cardLink'>
+              <Link
+                to={`/${item.code}`}
+                key={item.code}
+                className='cardLink'
+                // Con esto la ficha sabe que se abre encima del catálogo, y el
+                // catálogo se queda debajo tal cual, sin volver a montarse.
+                state={{ fondo: location }}
+              >
                 <article className='codeStatusCard'>
                   {/* El número va encima de la foto, como una pegatina: la
                       tarjeta es la imagen, y el texto se queda en lo justo. */}
@@ -218,6 +226,45 @@ function Home() {
   );
 }
 
+/** /418 abierto directamente: el catálogo, y la ficha encima. */
+function FichaDirecta() {
+  const { code } = useParams()
+  const existe = codeStatus.some(cat => cat.codes.some(c => String(c.code) === code))
+  if (!existe) return <NotFound code={code} />
+  return (
+    <>
+      <Home />
+      <StatusInfo />
+    </>
+  )
+}
+
+/**
+ * Las rutas. Una ficha (/418) se pinta siempre encima del catálogo: si se
+ * abrió desde él, el catálogo de debajo es el mismo que ya estaba montado
+ * (el de `fondo`), con su búsqueda y su scroll; si se entra directo por la
+ * URL, debajo va el catálogo recién abierto.
+ */
+function Rutas() {
+  const location = useLocation()
+  const fondo = location.state?.fondo
+
+  return (
+    <>
+      <Routes location={fondo || location}>
+        <Route path="/" element={<Home />} />
+        <Route path="/:code" element={<FichaDirecta />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      {fondo && (
+        <Routes>
+          <Route path="/:code" element={<StatusInfo />} />
+        </Routes>
+      )}
+    </>
+  )
+}
+
 export default function App() {
   return (
     <LanguageProvider>
@@ -225,11 +272,7 @@ export default function App() {
         <BrowserRouter basename={process.env.PUBLIC_URL}>
           {/* Dentro del router: es quien sabe cuándo cambia la ruta sin recargar. */}
           <Analytics />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/:code" element={<StatusInfo />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <Rutas />
         </BrowserRouter>
       </ThemeProvider>
     </LanguageProvider>
