@@ -21,7 +21,7 @@ const duck = require(`${RAIZ}/src/data/duckScenes.json`)
 const catalogo = require(`${RAIZ}/src/status_codes.json`)
 
 const POR_HOJA = 9
-const CARTELES = { 403: 'NO ENTRY', 503: 'CLOSED', 509: 'SORRY' }
+const CARTELES = { 403: 'NO ENTRY', 444: 'MIMIMI', 503: 'CLOSED', 509: 'SORRY' }
 
 /** El pato de todas las hojas. Si cambia, cambia aquí y en ningún otro sitio. */
 const PATO =
