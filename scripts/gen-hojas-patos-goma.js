@@ -84,6 +84,7 @@ const json = {
         archivo: 'JPEG',
     },
     reglas: [
+        'La escena de cada celda es OBLIGATORIA: dibuja exactamente lo que dice su campo "escena", con sus objetos y su situación. No inventes escenas genéricas (pato detective, pato en la playa, pato chef…): si no se reconoce la escena del JSON, la celda no vale.',
         'Cada celda es una imagen cuadrada independiente, con su propia escena completa dentro.',
         'Nada se sale de su celda ni invade la de al lado.',
         'El pato de goma es siempre el mismo juguete: misma forma, mismo amarillo, mismo pico. Lo único que cambia es la cara pintada y lo que lleva puesto.',
@@ -203,5 +204,72 @@ La hoja 10 sólo usa las cuatro primeras celdas; las otras cinco van en blanco.
 `
 
 fs.writeFileSync(`${RAIZ}/docs/hojas-patos-goma.md`, md)
+
+/* ---------- lo pendiente, para una conversación nueva ---------- */
+
+const DESDE = 5
+const pendientes = { ...json, hojas: hojas.filter(h => h.hoja >= DESDE) }
+fs.writeFileSync(`${RAIZ}/docs/hojas-patos-goma-pendientes.json`, JSON.stringify(pendientes, null, 2) + '\n')
+
+const tablaP = pendientes.hojas
+    .map(h => `| ${h.hoja} | ${h.celdas.map(c => c.codigo).join(', ')} |`)
+    .join('\n')
+
+fs.writeFileSync(`${RAIZ}/docs/hojas-patos-goma-pendientes.md`, `# Patos de goma: hojas pendientes (de la ${DESDE} a la 10)
+
+Para seguir en una conversación nueva de ChatGPT. Las hojas conservan su número,
+así que el recorte es el de siempre: \`node scripts/recortar-hojas.js <hoja> <imagen>\`.
+
+> **No se edita a mano.** Se genera con \`node scripts/gen-hojas-patos-goma.js\`.
+
+## Paso 1 · Arrancar con el pato de siempre
+
+Abre una conversación nueva, sube **la imagen del pato de referencia** y
+\`hojas-patos-goma-pendientes.json\`, y pega:
+
+\`\`\`text
+Te he subido un JSON y la imagen de un pato de goma. Es para una web que
+explica los códigos de estado HTTP con patos de goma: cada imagen tiene que
+hacer entender su código y hacer gracia.
+
+La imagen es el pato de referencia: úsalo tal cual en todas las imágenes,
+mismo juguete, mismo amarillo, mismo pico. Sólo cambian la cara pintada y lo
+que lleve puesto.
+
+Haz la hoja ${DESDE} del JSON:
+- Una imagen cuadrada, en JPEG, con una cuadrícula de 3x3: 9 celdas exactamente
+  iguales, separadas por una franja de fondo blanco liso. Sin líneas, sin
+  marcos, sin números ni texto.
+- Celda 1 arriba a la izquierda, por filas, hasta la 9 abajo a la derecha, en
+  el orden del JSON.
+- MUY IMPORTANTE: en cada celda dibuja exactamente la escena de su campo
+  "escena". No inventes escenas genéricas (detective, playa, chef, mago…).
+  Si alguien lee la escena del JSON, tiene que reconocerla en la celda.
+- Que haga gracia: exagera, ponle la cara que toca y vístelo si ayuda.
+- Respeta "formatoDeHoja" y "reglas".
+
+Antes de dibujar, escríbeme en una línea por celda qué vas a poner en cada una.
+\`\`\`
+
+Lo de «escríbeme antes qué vas a poner» es a propósito: si se va a inventar las
+escenas, se le ve en la lista y lo corriges antes de que dibuje.
+
+## Paso 2 · Las siguientes
+
+\`\`\`text
+Hoja N, con las mismas reglas y el mismo pato. Primero la lista de escenas, luego la imagen.
+\`\`\`
+
+Si vuelve a salirse del JSON: «Esa hoja no sigue el campo "escena". Repítela.»
+Cada 3 hojas, súbele otra vez la imagen del pato.
+
+## Qué va en cada hoja
+
+| Hoja | Códigos, celda 1 → 9 |
+| --- | --- |
+${tablaP}
+
+La hoja 10 sólo usa las cuatro primeras celdas; las otras cinco van en blanco.
+`)
 
 console.log('hojas:', hojas.length, '| celdas:', hojas.reduce((t, h) => t + h.celdas.length, 0))

@@ -1,0 +1,452 @@
+{
+  "proyecto": "codeStatus",
+  "descripcion": "Una imagen por cada código de estado HTTP, protagonizada por un pato de goma. Cada imagen tiene que hacer entender de un vistazo qué significa su código, y hacer gracia.",
+  "pato": "a classic glossy yellow rubber bath duck toy with an orange beak, the same toy shape and colour in every image, but with a painted face whose expression changes to fit each joke (smug, panicked, exhausted, offended, deadpan)",
+  "estilo": "Comedic toy photography: a funny, over-the-top staged scene at rubber-duck scale, shot like a dramatic movie still, with tiny props and costumes, exaggerated expressions, clear visual punchline, bright colours, sharp focus",
+  "formatoDeHoja": {
+    "lienzo": "cuadrado 1:1, el tamaño más grande que permitas",
+    "cuadricula": "3 columnas x 3 filas, 9 celdas exactamente iguales",
+    "orden": "celda 1 arriba a la izquierda, se sigue por filas, celda 9 abajo a la derecha",
+    "separacion": "una franja lisa de fondo blanco entre celdas, sin líneas ni marcos dibujados",
+    "celdasVacias": "si una hoja trae menos de 9, las celdas sobrantes van en blanco liso",
+    "archivo": "JPEG"
+  },
+  "reglas": [
+    "La escena de cada celda es OBLIGATORIA: dibuja exactamente lo que dice su campo \"escena\", con sus objetos y su situación. No inventes escenas genéricas (pato detective, pato en la playa, pato chef…): si no se reconoce la escena del JSON, la celda no vale.",
+    "Cada celda es una imagen cuadrada independiente, con su propia escena completa dentro.",
+    "Nada se sale de su celda ni invade la de al lado.",
+    "El pato de goma es siempre el mismo juguete: misma forma, mismo amarillo, mismo pico. Lo único que cambia es la cara pintada y lo que lleva puesto.",
+    "TIENE QUE HACER GRACIA. Cada celda es un chiste visual: exagera la situación, dale al pato una cara pintada que lo cuente (pánico, chulería, agotamiento, ofensa) y vístelo si ayuda (gafas, gorro, corbata, chaleco). Mejor pasarse que quedarse corto.",
+    "Un chiste por celda, y que se pille en un segundo: nada de escenas bonitas que no cuentan nada.",
+    "Es un juguete y todo vale: puede sujetar cosas con las alas, llevar disfraz o hacer lo que pida el chiste. Lo surrealista suma.",
+    "Sin números, sin códigos, sin texto ni rótulos. La única excepción son los carteles que trae el campo \"cartel\".",
+    "Sin marcas de agua.",
+    "Tiene que entenderse en miniatura: la web enseña cada imagen a 300px de lado."
+  ],
+  "hojas": [
+    {
+      "hoja": 5,
+      "celdas": [
+        {
+          "celda": 1,
+          "fila": 1,
+          "columna": 1,
+          "codigo": 413,
+          "nombre": "Content Too Large",
+          "escena": "a tiny duckling buckling under an enormous watermelon balanced on its back, legs splayed and eyes wide with regret, on a sunlit picnic lawn"
+        },
+        {
+          "celda": 2,
+          "fila": 1,
+          "columna": 2,
+          "codigo": 414,
+          "nombre": "URI Too Long",
+          "escena": "a rubber duck standing on an endless paper receipt that unrolls out of shot across a shop floor, down the steps and around the corner"
+        },
+        {
+          "celda": 3,
+          "fila": 1,
+          "columna": 3,
+          "codigo": 415,
+          "nombre": "Unsupported Media Type",
+          "escena": "a rubber duck staring at a chrome toaster with a floppy disk jammed halfway into the slot, a thin wisp of smoke rising from it, kitchen counter"
+        },
+        {
+          "celda": 4,
+          "fila": 2,
+          "columna": 1,
+          "codigo": 416,
+          "nombre": "Range Not Satisfiable",
+          "escena": "a rubber duck stretched off the very edge of a picnic table, straining toward a slice of bread that is far beyond any possible reach"
+        },
+        {
+          "celda": 5,
+          "fila": 2,
+          "columna": 2,
+          "codigo": 417,
+          "nombre": "Expectation Failed",
+          "escena": "a rubber duck in a paper party hat staring at a birthday cake collapsed into a puddle of frosting, one candle still bravely alight"
+        },
+        {
+          "celda": 6,
+          "fila": 2,
+          "columna": 3,
+          "codigo": 418,
+          "nombre": "I'm a teapot",
+          "escena": "a rubber duck with a porcelain teapot balanced on its head and real steam pouring from the spout, a cup of coffee pushed firmly away across the table"
+        },
+        {
+          "celda": 7,
+          "fila": 3,
+          "columna": 1,
+          "codigo": 421,
+          "nombre": "Misdirected Request",
+          "escena": "a postal worker rubber duck beside a parcel left at entirely the wrong pond, the resident rubber duck staring at it with visible irritation"
+        },
+        {
+          "celda": 8,
+          "fila": 3,
+          "columna": 2,
+          "codigo": 422,
+          "nombre": "Unprocessable Content",
+          "escena": "a rubber duck surrounded by unidentifiable flat-pack furniture parts on a living room floor, assembly instructions in an alien alphabet spread out beside it"
+        },
+        {
+          "celda": 9,
+          "fila": 3,
+          "columna": 3,
+          "codigo": 423,
+          "nombre": "Locked",
+          "escena": "a rubber duck shut out of its own nest by an absurdly large brass padlock, a snapped key on the ground below, cold grey light"
+        }
+      ]
+    },
+    {
+      "hoja": 6,
+      "celdas": [
+        {
+          "celda": 1,
+          "fila": 1,
+          "columna": 1,
+          "codigo": 424,
+          "nombre": "Failed Dependency",
+          "escena": "a rubber duck at the end of a long line of fallen dominoes stretching away across a wooden floor, the very last one still tipping over"
+        },
+        {
+          "celda": 2,
+          "fila": 1,
+          "columna": 2,
+          "codigo": 425,
+          "nombre": "Too Early",
+          "escena": "a rubber duck in a paper party hat alone in a fully decorated empty hall, streamers and balloons everywhere, the wall clock reading six in the morning"
+        },
+        {
+          "celda": 3,
+          "fila": 1,
+          "columna": 3,
+          "codigo": 426,
+          "nombre": "Upgrade Required",
+          "escena": "a rubber duck between an ancient scratched flip phone and a gleaming new smartphone on a shop counter, the choice already made for it"
+        },
+        {
+          "celda": 4,
+          "fila": 2,
+          "columna": 1,
+          "codigo": 428,
+          "nombre": "Precondition Required",
+          "escena": "a rubber duck guarding a doorway beside a clipboard with one blank unsigned form on it, nobody getting through until that page is filled in"
+        },
+        {
+          "celda": 5,
+          "fila": 2,
+          "columna": 2,
+          "codigo": 429,
+          "nombre": "Too Many Requests",
+          "escena": "one exhausted rubber duck almost buried under a heaving pile of tiny rubber ducklings all begging for food at once, an empty bread bag on the grass"
+        },
+        {
+          "celda": 6,
+          "fila": 2,
+          "columna": 3,
+          "codigo": 431,
+          "nombre": "Request Header Fields Too Large",
+          "escena": "a rubber duck wearing an absurdly enormous ornate hat ten times its own size, neck bent sideways under the weight, everything else in the frame dwarfed"
+        },
+        {
+          "celda": 7,
+          "fila": 3,
+          "columna": 1,
+          "codigo": 451,
+          "nombre": "Unavailable For Legal Reasons",
+          "escena": "a rubber duck in a courtroom beside a judge gavel and a sealed evidence box stamped in red, dark wood panelling, nothing to be said"
+        },
+        {
+          "celda": 8,
+          "fila": 3,
+          "columna": 2,
+          "codigo": 500,
+          "nombre": "Internal Server Error",
+          "escena": "a singed rubber duck standing in a smoking server room with sparks raining down from an open rack, feathers slightly alight, red emergency light everywhere"
+        },
+        {
+          "celda": 9,
+          "fila": 3,
+          "columna": 3,
+          "codigo": 501,
+          "nombre": "Not Implemented",
+          "escena": "a rubber duck staring at a completely blank instruction manual open on a workbench, an unfinished machine behind it still under a dust sheet"
+        }
+      ]
+    },
+    {
+      "hoja": 7,
+      "celdas": [
+        {
+          "celda": 1,
+          "fila": 1,
+          "columna": 1,
+          "codigo": 502,
+          "nombre": "Bad Gateway",
+          "escena": "two rubber ducks on opposite rooftops with a snapped string hanging between two tin cans, both still shouting into them, city skyline at dusk"
+        },
+        {
+          "celda": 2,
+          "fila": 1,
+          "columna": 2,
+          "codigo": 503,
+          "nombre": "Service Unavailable",
+          "escena": "a queue of rubber ducks waiting outside a locked gate with a hand-painted CLOSED sign, an empty lifeguard chair beside a drained pond behind",
+          "cartel": "CLOSED"
+        },
+        {
+          "celda": 3,
+          "fila": 1,
+          "columna": 3,
+          "codigo": 504,
+          "nombre": "Gateway Timeout",
+          "escena": "a rubber duck waiting at a rural mailbox in a snowstorm, snow piled on its head and shoulders, calendar pages blowing past, nothing ever arriving"
+        },
+        {
+          "celda": 4,
+          "fila": 2,
+          "columna": 1,
+          "codigo": 505,
+          "nombre": "HTTP Version Not Supported",
+          "escena": "a rubber duck staring at a vinyl record resting on an open laptop keyboard, waiting for a sound that is never going to come"
+        },
+        {
+          "celda": 5,
+          "fila": 2,
+          "columna": 2,
+          "codigo": 506,
+          "nombre": "Variant Also Negotiates",
+          "escena": "a rubber duck facing its own reflection between two opposing mirrors, the same rubber duck repeating away into infinity, not one of them able to decide"
+        },
+        {
+          "celda": 6,
+          "fila": 2,
+          "columna": 3,
+          "codigo": 507,
+          "nombre": "Insufficient Storage",
+          "escena": "a rubber duck perched precariously on a nest catastrophically overflowing with far too many eggs, more spilling down the tree and piling on the ground below"
+        },
+        {
+          "celda": 7,
+          "fila": 3,
+          "columna": 1,
+          "codigo": 508,
+          "nombre": "Loop Detected",
+          "escena": "a rubber duck chasing its own tail in a perfect circle with heavy motion blur, the pond water beneath it spun into a spiral"
+        },
+        {
+          "celda": 8,
+          "fila": 3,
+          "columna": 2,
+          "codigo": 510,
+          "nombre": "Not Extended",
+          "escena": "a rubber duck at the foot of a stepladder comically too short for the loaf of bread on the very top shelf, deep pantry shadows"
+        },
+        {
+          "celda": 9,
+          "fila": 3,
+          "columna": 3,
+          "codigo": 511,
+          "nombre": "Network Authentication Required",
+          "escena": "a rubber duck at an airport café table glaring at a tablet showing a hostile wifi login portal, cold coffee and a boarding pass beside it"
+        }
+      ]
+    },
+    {
+      "hoja": 8,
+      "celdas": [
+        {
+          "celda": 1,
+          "fila": 1,
+          "columna": 1,
+          "codigo": 419,
+          "nombre": "Page Expired",
+          "escena": "a rubber duck at a theatre door beside a completely faded ticket, the print long gone from it, the usher entirely unmoved"
+        },
+        {
+          "celda": 2,
+          "fila": 1,
+          "columna": 2,
+          "codigo": 420,
+          "nombre": "Enhance Your Calm",
+          "escena": "a rubber duck sitting in a perfect lotus position on a meditation cushion while a phone buzzes furiously beside it, incense smoke curling upward"
+        },
+        {
+          "celda": 3,
+          "fila": 1,
+          "columna": 3,
+          "codigo": 440,
+          "nombre": "Login Time-out",
+          "escena": "a rubber duck locked out of a dark office at night, its access badge dead on the floor, the card reader glowing red beside the door"
+        },
+        {
+          "celda": 4,
+          "fila": 2,
+          "columna": 1,
+          "codigo": 444,
+          "nombre": "No Response",
+          "escena": "a rubber duck turning its back and walking away mid-conversation, the other rubber duck left mid-sentence behind it on a gravel path"
+        },
+        {
+          "celda": 5,
+          "fila": 2,
+          "columna": 2,
+          "codigo": 449,
+          "nombre": "Retry With",
+          "escena": "a rubber duck at a counter with a half-filled form pushed back across it, the clerk rubber duck waiting for the rest, rubber stamp untouched"
+        },
+        {
+          "celda": 6,
+          "fila": 2,
+          "columna": 3,
+          "codigo": 450,
+          "nombre": "Blocked by Windows Parental Controls",
+          "escena": "a duckling straining toward a tablet placed high on a shelf far out of reach, a parent rubber duck standing guard below, living room lamplight"
+        },
+        {
+          "celda": 7,
+          "fila": 3,
+          "columna": 1,
+          "codigo": 494,
+          "nombre": "Request Header Too Large",
+          "escena": "a rubber duck wedged immovably in a narrow doorway by an absurdly oversized backpack, legs still pedalling uselessly in the air"
+        },
+        {
+          "celda": 8,
+          "fila": 3,
+          "columna": 2,
+          "codigo": 495,
+          "nombre": "SSL Certificate Error",
+          "escena": "a rubber duck squinting suspiciously at an obviously forged passport lying open on a desk, the photograph in it clearly wrong"
+        },
+        {
+          "celda": 9,
+          "fila": 3,
+          "columna": 3,
+          "codigo": 496,
+          "nombre": "SSL Certificate Required",
+          "escena": "a rubber duck at a border checkpoint with empty wings spread wide and no papers at all, the guard rubber duck thoroughly unimpressed"
+        }
+      ]
+    },
+    {
+      "hoja": 9,
+      "celdas": [
+        {
+          "celda": 1,
+          "fila": 1,
+          "columna": 1,
+          "codigo": 497,
+          "nombre": "HTTP Request Sent to HTTPS Port",
+          "escena": "a rubber duck in swimming trunks and a snorkel at the door of a black-tie gala, the doorman rubber duck visibly horrified"
+        },
+        {
+          "celda": 2,
+          "fila": 1,
+          "columna": 2,
+          "codigo": 499,
+          "nombre": "Client Closed Request",
+          "escena": "an empty chair at a restaurant table with a half-finished glass on it, the rubber duck already gone, its coat still over the chair back"
+        },
+        {
+          "celda": 3,
+          "fila": 1,
+          "columna": 3,
+          "codigo": 509,
+          "nombre": "Bandwidth Limit Exceeded",
+          "escena": "a rubber duck at a buffet counter picked completely clean, empty trays under warming lamps and a small handwritten SORRY sign",
+          "cartel": "SORRY"
+        },
+        {
+          "celda": 4,
+          "fila": 2,
+          "columna": 1,
+          "codigo": 520,
+          "nombre": "Web Server Returned an Unknown Error",
+          "escena": "a rubber duck shrugging at a control panel covered in unlabelled blinking lights, no idea at all which one is the problem"
+        },
+        {
+          "celda": 5,
+          "fila": 2,
+          "columna": 2,
+          "codigo": 521,
+          "nombre": "Web Server Is Down",
+          "escena": "a rubber duck standing at a boarded-up shop with every light off, shutters down, a faded sign swinging in the wind"
+        },
+        {
+          "celda": 6,
+          "fila": 2,
+          "columna": 3,
+          "codigo": 522,
+          "nombre": "Connection Timed Out",
+          "escena": "a rubber duck at one end of a rope bridge that simply stops halfway across a deep canyon, the planks ending in open air, fog below"
+        },
+        {
+          "celda": 7,
+          "fila": 3,
+          "columna": 1,
+          "codigo": 523,
+          "nombre": "Origin Is Unreachable",
+          "escena": "a rubber duck at a signpost pointing straight across an open ocean, with no road, no boat and no bridge anywhere in sight"
+        },
+        {
+          "celda": 8,
+          "fila": 3,
+          "columna": 2,
+          "codigo": 524,
+          "nombre": "A Timeout Occurred",
+          "escena": "a rubber duck asleep in a waiting room chair beneath a ticket display that has not changed in hours, strip lighting overhead"
+        },
+        {
+          "celda": 9,
+          "fila": 3,
+          "columna": 3,
+          "codigo": 525,
+          "nombre": "SSL Handshake Failed",
+          "escena": "a rubber duck facing a padlock with two keys lying on the ground below it, neither of them anywhere near the right shape"
+        }
+      ]
+    },
+    {
+      "hoja": 10,
+      "celdas": [
+        {
+          "celda": 1,
+          "fila": 1,
+          "columna": 1,
+          "codigo": 526,
+          "nombre": "Invalid SSL Certificate",
+          "escena": "a rubber duck beside an official-looking certificate stamped with an enormous seal drawn in crayon, entirely unconvincing"
+        },
+        {
+          "celda": 2,
+          "fila": 1,
+          "columna": 2,
+          "codigo": 530,
+          "nombre": "Site Frozen",
+          "escena": "a rubber duck frozen solid inside a clear block of ice, its expression completely calm, cold blue light coming through"
+        },
+        {
+          "celda": 3,
+          "fila": 1,
+          "columna": 3,
+          "codigo": 598,
+          "nombre": "Network Read Timeout Error",
+          "escena": "a rubber duck beside an old telephone receiver left off the hook, listening to nothing but silence in an empty room"
+        },
+        {
+          "celda": 4,
+          "fila": 2,
+          "columna": 1,
+          "codigo": 599,
+          "nombre": "Network Connect Timeout Error",
+          "escena": "a rubber duck staring at an old rotary phone that never rings, dust settled on the dial, the line long dead"
+        }
+      ]
+    }
+  ]
+}

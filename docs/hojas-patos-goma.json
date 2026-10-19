@@ -12,6 +12,7 @@
     "archivo": "JPEG"
   },
   "reglas": [
+    "La escena de cada celda es OBLIGATORIA: dibuja exactamente lo que dice su campo \"escena\", con sus objetos y su situación. No inventes escenas genéricas (pato detective, pato en la playa, pato chef…): si no se reconoce la escena del JSON, la celda no vale.",
     "Cada celda es una imagen cuadrada independiente, con su propia escena completa dentro.",
     "Nada se sale de su celda ni invade la de al lado.",
     "El pato de goma es siempre el mismo juguete: misma forma, mismo amarillo, mismo pico. Lo único que cambia es la cara pintada y lo que lleva puesto.",
