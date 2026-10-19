@@ -89,7 +89,7 @@ const json = {
         'El pato de goma es siempre el mismo juguete: misma forma, mismo amarillo, mismo pico. Lo único que cambia es la cara pintada y lo que lleva puesto.',
         'TIENE QUE HACER GRACIA. Cada celda es un chiste visual: exagera la situación, dale al pato una cara pintada que lo cuente (pánico, chulería, agotamiento, ofensa) y vístelo si ayuda (gafas, gorro, corbata, chaleco). Mejor pasarse que quedarse corto.',
         'Un chiste por celda, y que se pille en un segundo: nada de escenas bonitas que no cuentan nada.',
-        'Es un juguete: no tiene manos ni alas que agarren. El chiste se cuenta con dónde está colocado, su cara, lo que lleva puesto y lo que pasa alrededor.',
+        'Es un juguete y todo vale: puede sujetar cosas con las alas, llevar disfraz o hacer lo que pida el chiste. Lo surrealista suma.',
         'Sin números, sin códigos, sin texto ni rótulos. La única excepción son los carteles que trae el campo "cartel".',
         'Sin marcas de agua.',
         'Tiene que entenderse en miniatura: la web enseña cada imagen a 300px de lado.',
