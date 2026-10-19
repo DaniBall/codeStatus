@@ -8,18 +8,19 @@ así que el recorte es el de siempre: `node scripts/recortar-hojas.js <hoja> <im
 ## Paso 1 · Arrancar con el pato de siempre
 
 Abre una conversación nueva y sube `hojas-patos-goma-pendientes.json` y
-**una de las imágenes ya hechas** como referencia del pato (vale
-`public/ducks/200.jpg`, o cualquier otra que te guste). Luego pega:
+**una de las hojas ya hechas** (la 4 va bien: sigue el JSON al pie de la
+letra). Luego pega:
 
 ```text
-Te he subido un JSON y una imagen ya terminada de esta serie. Es para una web que
+Te he subido un JSON y una hoja ya terminada de esta serie, la hoja 4. Es para una web que
 explica los códigos de estado HTTP con patos de goma: cada imagen tiene que
 hacer entender su código y hacer gracia.
 
-El pato de goma de esa imagen es el protagonista de toda la serie: úsalo tal
-cual en todas las imágenes, mismo juguete, mismo amarillo, mismo pico, y el
-mismo estilo de foto. Sólo cambian la cara pintada, lo que lleve puesto y la
-escena. No copies su escena, sólo el pato y el estilo.
+Esa hoja es la referencia: el mismo pato de goma (mismo juguete, mismo
+amarillo, mismo pico), el mismo estilo de foto, el mismo formato de cuadrícula
+y el mismo nivel de humor. Fíjate en que cada celda cuenta exactamente la
+escena que le tocaba en el JSON: así tienen que ser las nuevas. No repitas sus
+escenas; las nuevas salen del JSON.
 
 Haz la hoja 5 del JSON:
 - Una imagen cuadrada, en JPEG, con una cuadrícula de 3x3: 9 celdas exactamente
@@ -46,7 +47,7 @@ Hoja N, con las mismas reglas y el mismo pato. Primero la lista de escenas, lueg
 ```
 
 Si vuelve a salirse del JSON: «Esa hoja no sigue el campo "escena". Repítela.»
-Cada 3 hojas, súbele otra vez la imagen de referencia.
+Cada 3 hojas, súbele otra vez la hoja de referencia.
 
 ## Qué va en cada hoja
 
