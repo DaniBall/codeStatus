@@ -18,10 +18,11 @@ describe('idioma del navegador', () => {
         expect(idiomaDelNavegador({})).toBe('en');
     });
 
-    test('respeta el orden de preferencia del navegador', () => {
-        // Si pide francés primero y español después, el que tenemos es español.
+    test('con el español en cualquier puesto de la lista, entra en español', () => {
         expect(idiomaDelNavegador({ languages: ['fr', 'es-AR'] })).toBe('es');
-        expect(idiomaDelNavegador({ languages: ['en-GB', 'es'] })).toBe('en');
+        // El caso que importa: móvil en español con el inglés delante.
+        expect(idiomaDelNavegador({ languages: ['en-US', 'en', 'es-ES'] })).toBe('es');
+        expect(idiomaDelNavegador({ languages: ['en-GB', 'fr'] })).toBe('en');
     });
 
     test('vale con navigator.language si no hay lista', () => {

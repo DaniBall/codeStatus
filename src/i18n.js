@@ -23,15 +23,19 @@ const STORAGE_KEY = 'codestatus-lang'
 const IDIOMAS = { en, es }
 export const DISPONIBLES = ['en', 'es']
 
-/** El idioma del navegador, si lo tenemos; si no, inglés. */
+/**
+ * El idioma del dispositivo: español si el español está en cualquier parte de
+ * su lista de idiomas, y si no, inglés.
+ *
+ * No sólo el primero: mucha gente con el móvil en español tiene el inglés
+ * delante en la lista del navegador sin saberlo, y esa gente quiere la web en
+ * español.
+ */
 export function idiomaDelNavegador(nav = typeof navigator === 'undefined' ? {} : navigator) {
     const lista = nav.languages?.length ? nav.languages : [nav.language].filter(Boolean)
-    for (const etiqueta of lista) {
-        // "es-ES", "es_MX" o "es" valen todos; sólo miramos la parte de delante.
-        const base = String(etiqueta).toLowerCase().split(/[-_]/)[0]
-        if (DISPONIBLES.includes(base)) return base
-    }
-    return 'en'
+    // "es-ES", "es_MX" o "es" valen todos; sólo miramos la parte de delante.
+    const bases = lista.map(etiqueta => String(etiqueta).toLowerCase().split(/[-_]/)[0])
+    return bases.includes('es') ? 'es' : 'en'
 }
 
 /** Lo guardado, o null si no hay nada (o si el navegador no deja leer). */
