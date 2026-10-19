@@ -3,6 +3,7 @@ import { useLang } from '../i18n.js'
 
 const AÑO = new Date().getFullYear()
 const REPO = 'https://github.com/DaniBall/codeStatus'
+const HILVAN = 'https://hilvanhoy.es'
 
 export default function Footer() {
     const { t } = useLang()
@@ -17,6 +18,16 @@ export default function Footer() {
                     rel='noopener noreferrer'
                 >
                     {t('pieRepo')}
+                </a>
+                {' · '}
+                {t('pieOtro')}{' '}
+                <a
+                    className='siteFooter-link'
+                    href={HILVAN}
+                    target='_blank'
+                    rel='noopener'
+                >
+                    hilvanhoy.es
                 </a>
             </p>
             <p className='siteFooter-line siteFooter-note'>

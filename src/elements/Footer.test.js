@@ -21,3 +21,10 @@ test('dice de dónde salen los datos y las fotos', () => {
     expect(screen.getByText(/IANA HTTP Status Code Registry/)).toBeInTheDocument();
     expect(screen.getByText(/AI-generated/)).toBeInTheDocument();
 });
+
+test('enlaza a hilvanhoy.es', () => {
+    render(<Footer />);
+    const enlace = screen.getByRole('link', { name: 'hilvanhoy.es' });
+    expect(enlace).toHaveAttribute('href', 'https://hilvanhoy.es');
+    expect(enlace).toHaveAttribute('target', '_blank');
+});

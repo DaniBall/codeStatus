@@ -26,6 +26,7 @@
     "altFoto": "Duck photo illustrating HTTP {code} {name}",
     "altRespaldo": "Placeholder duck illustration for HTTP {code} {name}",
     "pieDerechos": "All rights reserved.",
+    "pieOtro": "I also made",
     "pieRepo": "Source on GitHub",
     "pieFuentes": "Status code definitions come from the IANA HTTP Status Code Registry and the relevant RFCs. Duck photos are AI-generated.",
     "pieAnalitica": "Visits are counted anonymously with GoatCounter. No cookies.",
